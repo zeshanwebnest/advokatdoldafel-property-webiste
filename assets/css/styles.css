@@ -702,8 +702,15 @@ address { font-style: normal; }
    ========================================================================== */
 .brand { display: inline-flex; align-items: center; text-decoration: none; flex: none; }
 .brand img { block-size: 34px; inline-size: auto; }
-/* On dark grounds the logo is the light artwork — the same lockup and the same
-   size as the header, sitting straight on the dark ground with no plate behind it. */
+/* On dark grounds the logo is the same artwork and the same 34px height as the
+   header. The black wordmark cannot read on the dark ground on its own, so it sits
+   on a light plate — the plate is the ground, the logo itself is unchanged. */
+.brand--inverse {
+  align-self: start;
+  background: #fff;
+  padding: .55rem .95rem;
+  border-radius: var(--r);
+}
 .brand--inverse img { block-size: 34px; inline-size: auto; filter: none; }
 
 .topbar { background: var(--ink); color: var(--text-inverse-mu); font-size: var(--fs-xs); }
@@ -1595,7 +1602,7 @@ address { font-style: normal; }
 /* The same hand at the head of the footer, as a rule rather than a picture. */
 .site-footer {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 60' fill='none' stroke='%23ffffff' stroke-opacity='.10' stroke-width='1.4' stroke-linejoin='round'%3E%3Cpath d='M0 58h480'/%3E%3Cpath d='M24 58V30l20-14 20 14v28'/%3E%3Cpath d='M92 58V22h32v36M92 22h32'/%3E%3Cpath d='M150 58V34l18-12 18 12v24'/%3E%3Cpath d='M214 58V14h28v44M214 14h28'/%3E%3Cpath d='M270 58V32h24v26'/%3E%3Cpath d='M322 58V24l20-13 20 13v34'/%3E%3Cpath d='M390 58V20h30v38M390 20h30'/%3E%3Cpath d='M446 58V36h22v22'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 60' fill='none' stroke='%23ffffff' stroke-opacity='.045' stroke-width='1.4' stroke-linejoin='round'%3E%3Cpath d='M0 58h480'/%3E%3Cpath d='M24 58V30l20-14 20 14v28'/%3E%3Cpath d='M92 58V22h32v36M92 22h32'/%3E%3Cpath d='M150 58V34l18-12 18 12v24'/%3E%3Cpath d='M214 58V14h28v44M214 14h28'/%3E%3Cpath d='M270 58V32h24v26'/%3E%3Cpath d='M322 58V24l20-13 20 13v34'/%3E%3Cpath d='M390 58V20h30v38M390 20h30'/%3E%3Cpath d='M446 58V36h22v22'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: min(1400px, 130%) auto;
