@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Advantage">
+  <rect width="64" height="64" fill="#12100E"/>
+  <rect x="4" y="4" width="56" height="56" fill="none" stroke="#F4EDE3" stroke-width="1.5"/>
+  <path fill="#F4EDE3" d="M31.05 13h1.9l11.2 32.1h3.6v1.6h-13.1v-1.6h4.05l-2.72-8.05H23.9l-2.6 8.05h4.1v1.6H15.5v-1.6h3.6ZM24.45 35.3h10.9l-5.35-15.9Z"/>
+</svg>
