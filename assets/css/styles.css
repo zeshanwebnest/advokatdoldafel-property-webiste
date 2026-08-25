@@ -702,14 +702,9 @@ address { font-style: normal; }
    ========================================================================== */
 .brand { display: inline-flex; align-items: center; text-decoration: none; flex: none; }
 .brand img { block-size: 34px; inline-size: auto; }
-/* On dark grounds the logo is the same artwork as in the header — no filter — set
-   on a light plate so the near-black mark and wordmark stay legible. */
-.brand--inverse {
-  background: var(--surface);
-  padding: .5rem .8rem;
-  border-radius: var(--r);
-}
-.brand--inverse img { filter: none; }
+/* On dark grounds the logo is the light artwork — the same lockup and the same
+   size as the header, sitting straight on the dark ground with no plate behind it. */
+.brand--inverse img { block-size: 34px; inline-size: auto; filter: none; }
 
 .topbar { background: var(--ink); color: var(--text-inverse-mu); font-size: var(--fs-xs); }
 .topbar__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); min-height: 44px; flex-wrap: wrap; }
@@ -1350,10 +1345,17 @@ address { font-style: normal; }
   padding-block: clamp(2.5rem, 4.5vw, 3.5rem);
 }
 @media (min-width: 760px) { .footer-intro { grid-template-columns: auto 1fr; align-items: start; gap: var(--s-6); } }
-.footer-intro img { block-size: 28px; inline-size: auto; }
+.footer-intro img { block-size: 34px; inline-size: auto; }
 /* No measure cap here — the description is meant to run the full width of the
-   page box so it ends level with the rule underneath it. */
-.footer-intro p { line-height: 1.75; color: var(--text-inverse-mu); }
+   page box so it ends level with the rule underneath it. Set brighter and a step
+   larger than the link columns: it is body copy, not a label, and the muted grey
+   was too faint to read comfortably against the footer ground. */
+.footer-intro p {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.8;
+  color: #E3E9ED;
+}
 
 /* Four link columns */
 .footer-cols {
