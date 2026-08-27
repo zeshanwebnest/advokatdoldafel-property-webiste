@@ -949,6 +949,38 @@ address { font-style: normal; }
   content: ""; position: absolute; left: 0; top: .7em;
   inline-size: .6rem; block-size: 1px; background: var(--accent);
 }
+/* --------------------------------------------------------------------------
+   TILE GRID
+   Short service labels set as cards instead of a bare list: a warm oak tint,
+   a hairline frame and a filled medallion carrying the icon. Sits in the right
+   half of the two-column advisory sections, which is the same width as the copy
+   beside it, so the tiles run two-up and drop to one-up when the column narrows.
+   -------------------------------------------------------------------------- */
+.tile-grid {
+  display: grid; margin: 0; gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.5rem), 1fr));
+}
+.tile {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  background: #F7E7D5;
+  border: 1px solid #EAD2B8;
+  border-radius: var(--r);
+}
+.tile__icon {
+  display: grid; place-items: center; flex: none;
+  inline-size: 48px; block-size: 48px;
+  border-radius: 50%;
+  background: #7A6A5C; color: #fff;
+}
+.tile__icon .icon { inline-size: 1.35rem; block-size: 1.35rem; }
+.tile__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm); font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase;
+  line-height: 1.35; color: var(--text);
+}
+
 /* Footer is pinned to the bottom of the card so every card in a row lines up,
    whether or not it carries a feature list. */
 .service-card__foot,
