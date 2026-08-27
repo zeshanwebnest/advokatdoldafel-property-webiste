@@ -366,6 +366,18 @@ address { font-style: normal; }
 }
 .section-head--two .lead { max-width: 46ch; }
 
+/* Body copy running under a two-column section head. A single measure would
+   leave the right half of the band empty, so the text sets in two balanced
+   columns on the same gutter as the head above it. */
+@media (min-width: 940px) {
+  .prose--cols { columns: 2; column-gap: clamp(2rem, 6vw, 5rem); }
+  /* Margin-bottom rather than the inherited margin-top: a top margin on the
+     first line of the second column is not reliably dropped by browsers. */
+  .prose--cols > * + * { margin-top: 0; }
+  .prose--cols > * { margin-bottom: 1.4em; }
+  .prose--cols > :last-child { margin-bottom: 0; }
+}
+
 /* Decorative numeral used to open a section */
 .section-index {
   font-family: var(--font-display); font-size: var(--fs-micro); font-weight: 600;
@@ -951,34 +963,39 @@ address { font-style: normal; }
 }
 /* --------------------------------------------------------------------------
    TILE GRID
-   Short service labels set as cards instead of a bare list: a warm oak tint,
-   a hairline frame and a filled medallion carrying the icon. Sits in the right
+   Short service labels set as cards instead of a bare list: the limestone
+   surface, the standard hairline and a slate medallion carrying the icon —
+   the same palette as the rest of the page. Sits in the right
    half of the two-column advisory sections, which is the same width as the copy
    beside it, so the tiles run two-up and drop to one-up when the column narrows.
    -------------------------------------------------------------------------- */
 .tile-grid {
   display: grid; margin: 0; gap: var(--s-4);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.5rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 .tile {
-  display: flex; align-items: center; gap: 1rem;
+  display: flex; align-items: center; gap: .95rem;
   padding: 1.15rem 1.25rem;
-  background: #F7E7D5;
-  border: 1px solid #EAD2B8;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
   border-radius: var(--r);
 }
 .tile__icon {
   display: grid; place-items: center; flex: none;
-  inline-size: 48px; block-size: 48px;
+  inline-size: 2.75rem; block-size: 2.75rem;
   border-radius: 50%;
-  background: #7A6A5C; color: #fff;
+  background: var(--brand); color: #fff;
 }
-.tile__icon .icon { inline-size: 1.35rem; block-size: 1.35rem; }
+.tile__icon .icon { inline-size: 1.25rem; block-size: 1.25rem; }
+/* min-width:0 lets the label shrink inside the flex row, and the wrap rules
+   break the long Swedish compounds instead of letting them run past the frame. */
 .tile__label {
+  min-width: 0;
   font-family: var(--font-display);
   font-size: var(--fs-sm); font-weight: 600;
-  letter-spacing: .07em; text-transform: uppercase;
+  letter-spacing: .04em; text-transform: uppercase;
   line-height: 1.35; color: var(--text);
+  overflow-wrap: break-word; hyphens: auto;
 }
 
 /* Footer is pinned to the bottom of the card so every card in a row lines up,
