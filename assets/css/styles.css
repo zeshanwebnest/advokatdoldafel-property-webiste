@@ -1495,222 +1495,956 @@ address { font-style: normal; }
 }
 
 /* ==========================================================================
-   18. PROPERTY VISUAL LAYER
+   18. ESTATE LAYER
    --------------------------------------------------------------------------
-   The practice is a property practice, and the page has to say so before a
-   word is read. This section changes nothing structural — no new components,
-   no markup requirements — it only sets how the existing ones look:
+   The practice is a property practice, and the page has to look like one
+   before a word is read. This layer changes no copy — it sets how the
+   existing components look and how much of the page the photography carries.
 
-     18.1  two property glyphs (roof frame, moisture)
-     18.2  one photographic grade across the whole library
-     18.3  photographs mounted like plates, not dropped in loose
-     18.4  a faint plan grid on the stone band
-     18.5  drawing-square tick in place of the round bullet
-     18.6  more air, and one baseline for every section head
-     18.7  hero — let the building through the scrim
+   The whole layer is built on the two colours the brand already owns —
+   wet slate and warm oak — and one third ground, limestone. Nothing new is
+   introduced; the existing palette is simply used at more weights, so the
+   page reads as one material world rather than a white page with photos on it.
+
+     18.1  palette weights, shape, elevation, rhythm
+     18.2  grounds — limestone, slate, and slate over a photograph
+     18.3  photography — plates, frames, ratios
+     18.4  the hero
+     18.5  heads, eyebrows, numerals
+     18.6  cards — one family
+     18.7  editorial rows, feature panels, media figures
+     18.8  process, statistics, checklists, tiles
+     18.9  accordion
+     18.10 team
+     18.11 contact band and footer
+     18.12 chrome
+     18.13 property glyphs
 
    Everything degrades: remove this section and the site still works.
    ========================================================================== */
 
-/* 18.1 Property glyphs — same 24px grid and 1.6px stroke as the base set ---- */
+/* 18.1 Palette weights, shape, elevation, rhythm --------------------------- */
 :root {
-  --i-frame: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 11 10-7 10 7'/%3E%3Cpath d='M5 9.9V20h14V9.9M5 20h14M9 20v-5h6v5M12 4.6V9'/%3E%3C/svg%3E");
-  --i-drop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3s6 6.4 6 10.4A6 6 0 0 1 6 13.4C6 9.4 12 3 12 3Z'/%3E%3Cpath d='M9.4 14a2.6 2.6 0 0 0 2.6 2.6'/%3E%3C/svg%3E");
-}
-.icon--frame{-webkit-mask-image:var(--i-frame);mask-image:var(--i-frame)}
-.icon--drop{-webkit-mask-image:var(--i-drop);mask-image:var(--i-drop)}
+  /* Slate, five weights — the same hue the logo and the brand tokens use */
+  --slate-900: #131E24;
+  --slate-800: #16232A;
+  --slate-700: #1B2A32;
+  --slate-600: #24363F;
+  --slate-500: #2E434E;
 
-/* 18.2 One grade for every photograph -------------------------------------
-   The library is stock from several sources, so left alone it reads as a
-   collection rather than a brand. A light desaturation with a touch of
-   contrast pulls the whole set onto the slate-and-oak palette. Team portraits
-   are excluded — they carry their own grayscale-to-colour treatment. */
+  /* Oak, four weights */
+  --oak-700: #7A5930;
+  --oak-600: #8A6538;
+  --oak-500: #B98B54;
+  --oak-400: #D6AE76;
+  --oak-300: #E8CFA9;
+
+  /* Limestone, three weights */
+  --stone-100: #FBF9F5;
+  --stone-200: #F4F0E9;
+  --stone-300: #E9E2D6;
+
+  /* Shape — the references lean on generous, confident curvature */
+  --r-xs:   8px;
+  --r:     14px;
+  --r-lg:  22px;
+  --r-xl:  30px;
+  --r-2xl: 40px;
+  --r-pill: 999px;
+
+  /* Elevation — wide, soft, warm-neutral. The light a house is shot in. */
+  --sh-xs: 0 1px 2px rgba(19,30,36,.05);
+  --sh-sm: 0 2px 12px -6px rgba(19,30,36,.14), 0 1px 2px rgba(19,30,36,.04);
+  --sh-md: 0 16px 36px -20px rgba(19,30,36,.24), 0 4px 10px -6px rgba(19,30,36,.08);
+  --sh-lg: 0 38px 72px -38px rgba(19,30,36,.34), 0 12px 28px -18px rgba(19,30,36,.14);
+  --sh-xl: 0 70px 120px -60px rgba(19,30,36,.55), 0 24px 50px -30px rgba(19,30,36,.22);
+
+  /* Rhythm */
+  --section-y:    clamp(3.75rem, 5.4vw, 6.25rem);
+  --section-y-lg: clamp(4.75rem, 7vw, 8rem);
+}
+
+/* 18.2 Grounds -------------------------------------------------------------
+   Three grounds and no rules between them. A band change is legible on its
+   own; a hairline on top of it only adds noise. */
+.section--alt, .section--dark, .cta, .page-head { border-top: 0; }
+.section--alt + .section:not(.section--alt):not(.section--dark) { border-top: 0; }
+
+.section--alt {
+  background: linear-gradient(180deg, var(--stone-100) 0%, var(--stone-200) 42%, var(--stone-300) 100%);
+}
+.section--alt::before { content: none; }
+
+/* Slate. A vertical fall from 500 to 900, one oak glow off the top right,
+   and a surveyor's grid that fades out before it reaches the copy. */
+.section--dark {
+  background:
+    radial-gradient(52% 42% at 84% 0%, rgba(185,139,84,.20), transparent 66%),
+    radial-gradient(60% 55% at 6% 100%, rgba(185,139,84,.08), transparent 62%),
+    linear-gradient(180deg, var(--slate-500) 0%, var(--slate-700) 46%, var(--slate-900) 100%);
+}
+.section--dark::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+/* Slate over a photograph. The picture is chosen for the section it sits in,
+   so the scrim is heavy enough to read type over and light enough that the
+   building still comes through. */
+.section--photo { position: relative; isolation: isolate; }
+.section--photo > .section__media {
+  position: absolute; inset: 0; z-index: -2; overflow: hidden;
+}
+.section--photo > .section__media img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.section--photo::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(50% 40% at 86% 4%, rgba(185,139,84,.20), transparent 68%),
+    linear-gradient(100deg, rgba(19,30,36,.96) 0%, rgba(19,30,36,.90) 44%, rgba(19,30,36,.66) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.60), rgba(19,30,36,.30) 45%, rgba(19,30,36,.88));
+}
+.section--photo.section--dark { background: var(--slate-800); }
+
+/* A hairline of oak closing the top of every slate band — the one rule the
+   page keeps, because it reads as a material seam rather than a divider. */
+.section--dark::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; z-index: 1;
+  background: linear-gradient(90deg, transparent, rgba(214,174,118,.55) 22%, rgba(214,174,118,.55) 78%, transparent);
+  pointer-events: none;
+}
+.section--photo.section--dark::after { z-index: 2; }
+
+/* 18.3 Photography ---------------------------------------------------------
+   One grade, generous radii, and nothing ever printed across the subject. */
 .hero__media img,
 .page-head__media img,
 .cta__media img,
+.section__media img,
 .feature-panel__media img,
 .service-card__media img,
 .post-card__media img,
 .post-feature__media img,
 .svc-row__media img,
 .split__media img,
-.article-hero img {
-  filter: saturate(.82) contrast(1.05);
+.article-hero img,
+.media-figure img,
+.note-panel__media img,
+.hero__frame img {
+  filter: saturate(.98) contrast(1.03);
 }
-
-/* 18.3 Photographs mounted as plates ---------------------------------------
-   A hairline set in from the edge, the way a drawing is mounted on board.
-   It reads as deliberate rather than dropped in, and it ties the cards, the
-   feature panel and the service rows into one family. */
-.service-card__media, .post-card__media, .feature-panel__media { position: relative; }
 .service-card__media::before,
 .post-card__media::before,
-.feature-panel__media::before {
-  content: ""; position: absolute; inset: .75rem; z-index: 2; pointer-events: none;
-  border: 1px solid rgba(255,255,255,.26);
-  transition: border-color var(--t) var(--ease), inset var(--t) var(--ease);
+.feature-panel__media::before { content: none; }
+.svc-row__media::after { content: none; }
+
+.split__media img, .svc-row__media img { border-radius: var(--r-lg); box-shadow: var(--sh-md); }
+
+/* MEDIA FIGURE — a photograph mounted the way a drawing is mounted on board:
+   the plate itself, and a fine oak rule stepped off one corner behind it. It
+   is the page's one decorative move, and it is drawn, not photographed. */
+.media-figure { position: relative; margin: 0; }
+.media-figure::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  inset: clamp(.9rem, 2vw, 1.6rem) calc(-1 * clamp(.9rem, 2vw, 1.6rem)) calc(-1 * clamp(.9rem, 2vw, 1.6rem)) clamp(.9rem, 2vw, 1.6rem);
+  border: 1px solid rgba(185,139,84,.45);
+  border-radius: var(--r-lg);
 }
-.service-card:hover .service-card__media::before,
-.post-card:hover .post-card__media::before { border-color: rgba(214,174,118,.75); }
-
-/* The wide editorial images get the frame set outside the photograph instead,
-   so nothing is drawn over the subject. */
-.svc-row__media { position: relative; }
-.svc-row__media::after {
-  content: ""; position: absolute; inset: -.6rem;
-  border: 1px solid rgba(185,139,84,.32); border-radius: var(--r-lg);
-  pointer-events: none;
+.media-figure--flip::before {
+  inset: clamp(.9rem, 2vw, 1.6rem) clamp(.9rem, 2vw, 1.6rem) calc(-1 * clamp(.9rem, 2vw, 1.6rem)) calc(-1 * clamp(.9rem, 2vw, 1.6rem));
 }
-
-/* 18.4 A faint plan grid on the stone band ---------------------------------
-   Same device the slate band already uses, at a quarter of the strength —
-   enough to read as a site plan under the content, never as a texture. */
-.section--alt::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(27,42,50,.032) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(27,42,50,.032) 1px, transparent 1px);
-  background-size: 88px 88px;
-  -webkit-mask-image: radial-gradient(78% 68% at 50% 0%, #000 0%, transparent 82%);
-  mask-image: radial-gradient(78% 68% at 50% 0%, #000 0%, transparent 82%);
+.media-figure img {
+  position: relative; z-index: 1;
+  display: block; width: 100%; height: auto;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
 }
+.media-figure--portrait img { aspect-ratio: 4 / 5; object-fit: cover; }
+.media-figure--wide img { aspect-ratio: 3 / 2; object-fit: cover; }
+.section--dark .media-figure::before { border-color: rgba(214,174,118,.45); }
 
-/* 18.5 A drawing square, not a bullet -------------------------------------- */
-.badge::before { border-radius: 1px; }
-
-/* 18.6 More air, and one baseline for every section head -------------------
-   The complaint was that sections felt loose against each other. Widening the
-   band rhythm and fixing a single head-to-content gap makes the page read as
-   one document rather than a stack of blocks. */
-:root {
-  --section-y:    clamp(3rem, 4.6vw, 4.75rem);
-  --section-y-lg: clamp(3.75rem, 6vw, 6.25rem);
+/* 18.4 THE HERO ------------------------------------------------------------
+   One cinematic plate of architecture held inside the page box, with the
+   headline set into its lower-left corner. The photograph is the first
+   impression; the type sits in the part of the frame the light has already
+   fallen away from, so nothing has to be dimmed to make it legible. */
+.hero--estate {
+  display: block; min-height: 0; overflow: visible;
+  background: linear-gradient(180deg, var(--stone-100) 0%, var(--stone-200) 58%, var(--surface) 100%);
+  color: var(--text);
+  padding-block: clamp(1.25rem, 2.4vw, 2.25rem) clamp(3.5rem, 6vw, 6.5rem);
 }
-.section-head { margin-bottom: clamp(2.25rem, 3.8vw, 3.5rem); }
-.section-head--two > :first-child { align-self: end; }
+.hero--estate::after { content: none; }
 
-/* 18.7 Hero — let the building through ------------------------------------
-   The scrim was built for a photograph that was only texture. The house is
-   the message now, so the right-hand end of the wash comes back far enough
-   for the gable to read, while the headline side stays at full strength. */
-.hero::after {
+.hero__frame {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; align-items: end;
+  min-height: min(78svh, 760px);
+  border-radius: var(--r-2xl);
+  background: var(--slate-800);
+  box-shadow: var(--sh-xl), inset 0 0 0 1px rgba(214,174,118,.20);
+}
+.hero__frame > .hero__media { position: absolute; inset: 0; z-index: -2; }
+.hero__frame > .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
+.hero__frame::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(100deg, rgba(14,22,27,.96) 0%, rgba(14,22,27,.86) 40%, rgba(14,22,27,.40) 100%),
-    linear-gradient(180deg, rgba(14,22,27,.52), rgba(14,22,27,.10) 42%, rgba(14,22,27,.74));
-}
-.hero__media img { object-position: 50% 52%; }
-
-@media (prefers-reduced-motion: reduce) {
-  .service-card__media::before, .post-card__media::before { transition: none; }
+    radial-gradient(44% 40% at 88% 6%, rgba(214,174,118,.26), transparent 68%),
+    linear-gradient(96deg, rgba(19,30,36,.94) 0%, rgba(19,30,36,.86) 30%, rgba(19,30,36,.46) 62%, rgba(19,30,36,.14) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.36) 0%, rgba(19,30,36,0) 34%, rgba(19,30,36,.72) 100%);
 }
 
-/* ==========================================================================
-   19. PROPERTY GRAPHIC LANGUAGE
-   --------------------------------------------------------------------------
-   Section 18 set the palette and the photographic treatment. This section
-   adds the thing photography alone could not: a drawn vocabulary of houses,
-   apartments, roofs, damp, plans and inspections, so the category is legible
-   even where a photograph is generic or absent.
-
-   Taken from the real-estate references as *language*, not as layout — icon
-   led categories, generous card radii, image-dominant cards, a confident
-   architectural motif. Deliberately NOT taken: search widgets, listing grids,
-   price tags, map panes, agent cards. This is a law firm, not a marketplace.
-
-     19.1  property glyph set
-     19.2  architectural elevation motif
-     19.3  card geometry — softer, more image-forward
-     19.4  glyph plates
-   ========================================================================== */
-
-/* 19.1 Property glyph set --------------------------------------------------
-   Same 24px grid, 1.6px stroke and round caps as the base icons, so they sit
-   in the existing plates without redrawing anything. */
-:root {
-  /* floor plan — used where the copy talks about the shape of the practice */
-  --i-plan: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='1.5'/%3E%3Cpath d='M3 10h7M10 3v18M10 15h11M17 15v6'/%3E%3C/svg%3E");
-  /* survey — the inspection clipboard a defect claim is built on */
-  --i-survey: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2'/%3E%3Crect x='9' y='2.5' width='6' height='3.5' rx='1'/%3E%3Cpath d='m8.5 12 2 2 4-4M8.5 17h7'/%3E%3C/svg%3E");
-  /* structural crack — the defect itself */
-  --i-crack: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z'/%3E%3Cpath d='m11 8-2.5 4h4L10 17'/%3E%3C/svg%3E");
+.hero__body {
+  position: relative; z-index: 2;
+  padding: clamp(1.75rem, 4.4vw, 4rem);
+  max-width: 47rem; color: #fff;
 }
-.icon--plan{-webkit-mask-image:var(--i-plan);mask-image:var(--i-plan)}
-.icon--survey{-webkit-mask-image:var(--i-survey);mask-image:var(--i-survey)}
-.icon--crack{-webkit-mask-image:var(--i-crack);mask-image:var(--i-crack)}
-
-/* 19.2 Architectural elevation motif ---------------------------------------
-   A line drawing of a house beside an apartment block, set into the two dark
-   grounds. It is the single clearest "this is about buildings" signal on the
-   page, and it costs no photography. Composited into the existing scrim stack
-   so it sits above the photograph and below the copy. */
-.cta::after {
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 170' fill='none' stroke='%23ffffff' stroke-opacity='.16' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 160h308'/%3E%3Cpath d='M36 160V92l46-32 46 32v68'/%3E%3Cpath d='M68 160v-32h28v32'/%3E%3Cpath d='M52 104h18v16H52zM94 104h18v16H94z'/%3E%3Cpath d='M164 160V58h74v102'/%3E%3Cpath d='M164 58h74'/%3E%3Cpath d='M176 74h16v16h-16zM210 74h16v16h-16zM176 104h16v16h-16zM210 104h16v16h-16zM176 134h16v14h-16zM210 134h16v14h-16z'/%3E%3Cpath d='M258 160v-54h30v54'/%3E%3Cpath d='M258 106h30M268 120h10M268 138h10'/%3E%3C/svg%3E")
-      right clamp(1rem, 4vw, 4rem) bottom 0 / auto clamp(120px, 22vh, 210px) no-repeat,
-    linear-gradient(180deg, rgba(16,25,30,.92), rgba(16,25,30,.96));
+/* A short oak rule opening the block, the same mark the section eyebrows use. */
+.hero__body::before {
+  content: ""; display: block;
+  inline-size: clamp(2.5rem, 6vw, 4.5rem); block-size: 2px;
+  margin-bottom: clamp(1.1rem, 2.4vw, 1.75rem);
+  background: linear-gradient(90deg, var(--oak-400), rgba(214,174,118,0));
 }
+.hero--estate .hero__title {
+  color: #fff;
+  font-size: clamp(2.25rem, 1.35rem + 3.5vw, 4.25rem);
+  line-height: 1.02; letter-spacing: -.022em;
+  max-width: 15ch; margin: var(--s-5) 0 var(--s-5);
+  text-wrap: balance;
+}
+.hero--estate .hero__lead {
+  color: rgba(255,255,255,.84);
+  font-size: clamp(1rem, .95rem + .32vw, 1.1875rem);
+  max-width: 50ch; margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+.hero--estate .badge {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(214,174,118,.42);
+  color: var(--oak-300);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.hero--estate .badge::before { background: var(--oak-400); }
+
+/* The interior mounted over the frame's lower-right corner: the second half of
+   the story — the house outside, the home inside. */
+.hero__inset {
+  position: absolute; z-index: 3; margin: 0;
+  right: clamp(1.75rem, 3.4vw, 3.25rem); bottom: clamp(1.75rem, 3.4vw, 3.25rem);
+  inline-size: clamp(11rem, 15vw, 15rem); aspect-ratio: 4 / 5;
+  overflow: hidden; border-radius: var(--r-lg);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.28), var(--sh-lg);
+}
+.hero__inset img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1099px) { .hero__inset { display: none; } }
 @media (max-width: 720px) {
-  /* On a phone the drawing would sit under the buttons — drop it. */
-  .cta::after { background: linear-gradient(180deg, rgba(16,25,30,.92), rgba(16,25,30,.96)); }
+  .hero__frame { min-height: 0; border-radius: var(--r-xl); }
+  .hero__frame > .hero__media { position: relative; inset: auto; aspect-ratio: 16 / 11; }
+  .hero__frame::after { inset: 0 0 auto 0; height: 100%; }
+  .hero__body { background: linear-gradient(180deg, var(--slate-700), var(--slate-900)); max-width: none; }
 }
 
-/* The same hand at the head of the footer, as a rule rather than a picture. */
-.site-footer {
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 60' fill='none' stroke='%23ffffff' stroke-opacity='.045' stroke-width='1.4' stroke-linejoin='round'%3E%3Cpath d='M0 58h480'/%3E%3Cpath d='M24 58V30l20-14 20 14v28'/%3E%3Cpath d='M92 58V22h32v36M92 22h32'/%3E%3Cpath d='M150 58V34l18-12 18 12v24'/%3E%3Cpath d='M214 58V14h28v44M214 14h28'/%3E%3Cpath d='M270 58V32h24v26'/%3E%3Cpath d='M322 58V24l20-13 20 13v34'/%3E%3Cpath d='M390 58V20h30v38M390 20h30'/%3E%3Cpath d='M446 58V36h22v22'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: min(1400px, 130%) auto;
+/* 18.5 Heads, eyebrows, numerals ------------------------------------------- */
+.badge {
+  margin-bottom: var(--s-5);
+  padding: .5rem 1.1rem .5rem .9rem;
+  background: rgba(185,139,84,.09);
+  border-color: rgba(185,139,84,.32);
+  letter-spacing: .15em;
+}
+.badge::before { inline-size: 5px; block-size: 5px; border-radius: 50%; }
+.badge--dark { background: rgba(214,174,118,.13); border-color: rgba(214,174,118,.32); }
+.section--dark .badge, .on-dark .badge {
+  background: rgba(214,174,118,.13); border-color: rgba(214,174,118,.32); color: var(--oak-300);
+}
+.section--dark .badge::before, .on-dark .badge::before { background: var(--oak-400); }
+
+.section-head { margin-bottom: clamp(2.5rem, 4.2vw, 4rem); }
+.section-head .h2 { max-width: 20ch; text-wrap: balance; }
+.section-head--two .h2 { max-width: 21ch; }
+.h2 { line-height: 1.08; }
+
+.section-index {
+  display: inline-flex; align-items: center; gap: .8rem;
+  margin-bottom: var(--s-4);
+  font-size: .8125rem; letter-spacing: .26em; color: var(--oak-600);
+}
+.section-index::after {
+  content: ""; inline-size: 2.5rem; block-size: 1px;
+  background: linear-gradient(90deg, var(--oak-500), rgba(185,139,84,0));
 }
 
-/* 19.3 Card geometry — softer corners, image-forward -----------------------
-   The references all lean on generous radii and a dominant photograph. Taken
-   as proportion, not as layout: the card stays a card, the image just gets
-   more of it. */
-:root {
-  --r-xs: 3px;
-  --r:    6px;
-  --r-lg: 14px;
+/* 18.6 Cards — one family --------------------------------------------------
+   A single radius, a single hairline, a single resting shadow and a single
+   lift. Applied everywhere, it does more for the premium read than any
+   amount of ornament. */
+.info-card {
+  padding: clamp(1.6rem, 3vw, 2.25rem);
+  background: var(--surface);
+  border-color: rgba(19,30,36,.08);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
 }
-.service-card__media { aspect-ratio: 3 / 2; }
-.service-card__media::before,
-.post-card__media::before,
-.feature-panel__media::before { border-radius: 5px; }
-
-/* 19.4 Glyph plates --------------------------------------------------------
-   The icon plates carry most of the category signal now, so they get a little
-   more presence and a warmer resting state. */
-.service-card__badge {
-  inline-size: 3rem; block-size: 3rem;
-  background: rgba(255,255,255,.94);
-  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+.info-card h2, .info-card h3 {
+  font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600;
+  letter-spacing: -.01em; margin-bottom: .7rem;
 }
-.service-card__badge .icon { inline-size: 1.5rem; block-size: 1.5rem; }
-.value-card__icon .icon,
-.trust-item__icon .icon { inline-size: 1.45rem; block-size: 1.45rem; }
-.trust-item__icon { inline-size: 2.75rem; block-size: 2.75rem; }
+.info-card--dark {
+  background:
+    radial-gradient(70% 58% at 88% 2%, rgba(185,139,84,.20), transparent 66%),
+    linear-gradient(180deg, var(--slate-600), var(--slate-800));
+  border-color: transparent; box-shadow: var(--sh-lg);
+}
 
-/* The split CTA puts contact cards in the right-hand column, exactly where the
-   drawing sits — so that variant keeps the plain scrim. */
+.value-card {
+  padding: clamp(1.6rem, 2.8vw, 2.15rem);
+  background: var(--surface);
+  border-color: rgba(19,30,36,.08);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+}
+.section--alt .value-card { background: var(--surface); border-color: rgba(19,30,36,.07); }
+.value-card:hover { transform: translateY(-6px); box-shadow: var(--sh-lg); border-color: rgba(185,139,84,.38); }
+.value-card__icon {
+  inline-size: 3.5rem; block-size: 3.5rem; margin-bottom: var(--s-6);
+  border-radius: var(--r);
+  background: linear-gradient(150deg, rgba(214,174,118,.24), rgba(185,139,84,.10));
+  color: var(--oak-600);
+  box-shadow: inset 0 0 0 1px rgba(185,139,84,.22);
+}
+.section--alt .value-card__icon { background: linear-gradient(150deg, rgba(214,174,118,.24), rgba(185,139,84,.10)); }
+.value-card:hover .value-card__icon { background: var(--slate-700); color: var(--oak-300); }
+.value-card__num {
+  font-size: 2rem; font-weight: 500;
+  color: transparent; -webkit-text-stroke: 1px rgba(19,30,36,.16);
+}
+.value-card h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fs-h3); letter-spacing: -.01em; margin-bottom: .55rem;
+}
+.grid-4 .value-card h3 { font-size: 1.1875rem; line-height: 1.3; }
+.section--dark .value-card__num { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.24); }
+
+.service-card::after, .post-card::after, .value-card::after { height: 2px; }
+.service-card, .post-card, .quote-card, .g-review { border-radius: var(--r-lg); box-shadow: var(--sh-sm); }
+.service-card:hover, .post-card:hover, .g-review:hover { box-shadow: var(--sh-lg); }
+
+.tile {
+  padding: 1.15rem 1.3rem;
+  background: var(--surface);
+  border-color: rgba(19,30,36,.08);
+  border-radius: var(--r);
+  box-shadow: var(--sh-xs);
+  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.tile:hover { box-shadow: var(--sh-md); border-color: rgba(185,139,84,.38); transform: translateY(-2px); }
+.tile__icon {
+  border-radius: var(--r-xs);
+  background: linear-gradient(150deg, rgba(214,174,118,.26), rgba(185,139,84,.10));
+  color: var(--oak-600);
+  box-shadow: inset 0 0 0 1px rgba(185,139,84,.20);
+}
+.tile__label {
+  font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 600;
+  letter-spacing: 0; text-transform: none; line-height: 1.45; hyphens: manual;
+}
+.section--alt .tile { border-color: rgba(19,30,36,.07); }
+
+.grid--lg { gap: clamp(1.5rem, 2.6vw, 2.25rem); }
+
+/* PANEL — a limestone plate used to gather a block that would otherwise sit
+   loose on the page. */
+.panel {
+  padding: clamp(1.75rem, 3.4vw, 3rem);
+  background: linear-gradient(160deg, var(--stone-100), var(--stone-200));
+  border: 1px solid rgba(19,30,36,.07);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-sm);
+}
+.section--alt .panel { background: var(--surface); }
+
+/* NOTE PANEL — a photograph and a short slate note locked into one frame.
+   Used where a caution belongs beside the thing it is cautioning about. */
+.note-panel {
+  display: grid; overflow: hidden;
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  background: var(--slate-700);
+}
+@media (min-width: 860px) { .note-panel { grid-template-columns: 1.05fr .95fr; } }
+.note-panel__media { position: relative; min-height: 15rem; }
+.note-panel__media img { width: 100%; height: 100%; object-fit: cover; }
+.note-panel__body {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(1.75rem, 3.4vw, 3rem);
+  color: #fff;
+  background:
+    radial-gradient(76% 62% at 88% 4%, rgba(185,139,84,.22), transparent 66%),
+    linear-gradient(180deg, var(--slate-600), var(--slate-900));
+}
+.note-panel__body::before {
+  content: ""; display: block;
+  inline-size: 2.75rem; block-size: 2px; margin-bottom: 1.25rem;
+  background: linear-gradient(90deg, var(--oak-400), rgba(214,174,118,0));
+}
+.note-panel__body h2, .note-panel__body h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.375rem, 1.15rem + .8vw, 1.875rem);
+  letter-spacing: -.01em; color: #fff; margin-bottom: .75rem;
+}
+.note-panel__body p { color: var(--text-inverse-mu); font-size: var(--fs-base); line-height: 1.75; }
+
+/* 18.7 Editorial rows, feature panels -------------------------------------- */
+.feature-panel {
+  border: 0; border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+}
+.feature-panel__body { padding: clamp(1.75rem, 3.6vw, 3.25rem); }
+.feature-panel__note {
+  padding: 1.35rem 1.6rem;
+  background: linear-gradient(180deg, rgba(19,30,36,0), rgba(19,30,36,.92) 58%);
+}
+.feature-panel__note strong { font-size: var(--fs-base); }
+
+.svc-rows { display: grid; gap: 0; }
+.svc-row {
+  padding-block: clamp(2.5rem, 4.4vw, 4rem);
+  border-top: 1px solid rgba(19,30,36,.08);
+  gap: clamp(1.75rem, 3.6vw, 4.5rem);
+}
+.svc-row:last-child { border-bottom: 1px solid rgba(19,30,36,.08); }
+.svc-row__body h2, .svc-row__body h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
+  letter-spacing: -.015em;
+}
+.svc-row__media img { aspect-ratio: 3 / 2; }
+
+/* 18.8 Process, statistics, checklists ------------------------------------- */
+@media (min-width: 900px) {
+  .section--dark .steps { grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 1.8vw, 1.5rem); }
+  .section--dark .step {
+    display: block;
+    padding: clamp(1.6rem, 2.6vw, 2.15rem);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: var(--r-lg);
+    background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background-color var(--t) var(--ease), border-color var(--t) var(--ease), transform var(--t) var(--ease);
+  }
+  .section--dark .step:last-child { border-bottom: 1px solid rgba(255,255,255,.14); }
+  .section--dark .step:hover { border-color: rgba(214,174,118,.48); transform: translateY(-6px); }
+  .section--dark .step p { grid-column: auto; }
+}
+.section--dark .step__num {
+  display: inline-grid; place-items: center;
+  inline-size: 3rem; block-size: 3rem; margin-bottom: var(--s-5);
+  border: 1px solid rgba(214,174,118,.45); border-radius: 50%;
+  background: rgba(214,174,118,.10);
+  font-size: 1.0625rem; color: var(--oak-300);
+}
+.section--dark .step h3 {
+  font-family: var(--font-display); font-size: 1.1875rem; font-weight: 600;
+  line-height: 1.3; margin-bottom: .5rem;
+}
+
+.stat-strip {
+  gap: var(--s-6) var(--s-7);
+  margin-top: clamp(2.5rem, 4.5vw, 4rem);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top-color: rgba(255,255,255,.16);
+}
+.stat__value {
+  font-size: clamp(2rem, 1.5rem + 1.8vw, 3rem);
+  color: #fff; letter-spacing: -.025em;
+}
+.section--dark .stat-strip > div { position: relative; padding-left: clamp(0px, 2vw, 1.75rem); }
+@media (min-width: 640px) {
+  .section--dark .stat-strip > div + div::before {
+    content: ""; position: absolute; left: 0; top: .1rem; bottom: .1rem;
+    width: 1px; background: linear-gradient(180deg, rgba(214,174,118,.5), rgba(255,255,255,.06));
+  }
+}
+
+.checklist li { padding-block: 1.35rem; gap: 1.15rem; border-color: rgba(19,30,36,.08); }
+.checklist li:first-child { border-top-color: rgba(19,30,36,.08); }
+@media (min-width: 820px) { .checklist--cols li { border-top-color: rgba(19,30,36,.08); } }
+.checklist .icon {
+  position: relative; margin-top: 0; flex: none;
+  inline-size: 1.85rem; block-size: 1.85rem;
+  border-radius: 50%;
+  background: linear-gradient(150deg, rgba(214,174,118,.28), rgba(185,139,84,.12));
+  box-shadow: inset 0 0 0 1px rgba(185,139,84,.24);
+  -webkit-mask-image: none; mask-image: none;
+}
+.checklist .icon::after {
+  content: ""; position: absolute; inset: .42rem;
+  background: var(--oak-600);
+  -webkit-mask: var(--i-check) center/contain no-repeat;
+  mask: var(--i-check) center/contain no-repeat;
+}
+.section--dark .checklist .icon,
+.on-dark .checklist .icon { background: rgba(214,174,118,.18); box-shadow: inset 0 0 0 1px rgba(214,174,118,.3); }
+.section--dark .checklist .icon::after,
+.on-dark .checklist .icon::after { background: var(--oak-300); }
+.checklist strong {
+  font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600;
+  letter-spacing: -.005em; margin-bottom: .3rem;
+}
+
+/* 18.9 Accordion — every question on its own plate ------------------------- */
+.accordion { border-top: 0; display: grid; gap: .75rem; }
+.accordion__item {
+  border: 1px solid rgba(19,30,36,.08);
+  border-radius: var(--r);
+  background: var(--surface);
+  box-shadow: var(--sh-xs);
+  padding-inline: clamp(1.15rem, 2.2vw, 1.65rem);
+  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.accordion__item:hover { border-color: rgba(185,139,84,.4); box-shadow: var(--sh-sm); }
+.accordion__item:has(.accordion__trigger[aria-expanded="true"]) {
+  border-color: rgba(185,139,84,.5); box-shadow: var(--sh-md);
+}
+.accordion__trigger { padding-block: clamp(1.15rem, 2.2vw, 1.45rem); }
+.accordion__icon { border-radius: 50%; border-color: rgba(185,139,84,.5); }
+.accordion__trigger[aria-expanded="true"] .accordion__icon { background: var(--oak-600); border-color: var(--oak-600); }
+
+/* 18.10 Team --------------------------------------------------------------- */
+.person__media { border-radius: var(--r-lg); box-shadow: var(--sh-sm); }
+.person__media img { filter: grayscale(.5) contrast(1.03); }
+.person:hover .person__media img { filter: grayscale(0) contrast(1.03); }
+.person__meta { border-top-color: rgba(19,30,36,.09); }
+.person__role { color: var(--oak-600); }
+
+/* 18.11 Contact band and footer -------------------------------------------- */
+.cta::after,
 .cta--split::after,
 .cta--split.cta::after {
-  background: linear-gradient(180deg, rgba(16,25,30,.92), rgba(16,25,30,.96));
+  background:
+    radial-gradient(44% 40% at 88% 4%, rgba(214,174,118,.22), transparent 68%),
+    linear-gradient(100deg, rgba(19,30,36,.95) 0%, rgba(19,30,36,.88) 44%, rgba(19,30,36,.52) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.58), rgba(19,30,36,.24) 45%, rgba(19,30,36,.84));
+}
+.cta__media img { object-position: 50% 46%; }
+.cta { border-top: 0; }
+.cta::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; z-index: 1;
+  background: linear-gradient(90deg, transparent, rgba(214,174,118,.55) 22%, rgba(214,174,118,.55) 78%, transparent);
+}
+.contact-cards__item {
+  border-radius: var(--r-lg); padding: 1.3rem 1.55rem;
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.16);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.contact-cards__icon {
+  border-radius: var(--r);
+  background: linear-gradient(150deg, rgba(214,174,118,.28), rgba(185,139,84,.12));
+  box-shadow: inset 0 0 0 1px rgba(214,174,118,.26);
 }
 
-/* ==========================================================================
-   20. DEFECT GLYPHS
-   --------------------------------------------------------------------------
-   One mark per defect type named in the home-page copy: damp, mould,
-   drainage, structure, electrics and wet rooms. Same 24px grid and 1.6px
-   stroke as every other icon, so they drop into the existing plates.
-   ========================================================================== */
+.site-footer { background-image: none; border-top: 0; position: relative; }
+.site-footer::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(214,174,118,.5) 22%, rgba(214,174,118,.5) 78%, transparent);
+}
+.social-row a { border-radius: var(--r-xs); }
+
+/* 18.12 Chrome ------------------------------------------------------------- */
+.site-header { background: rgba(255,255,255,.86); border-bottom-color: rgba(19,30,36,.07); }
+.site-header.is-stuck { background: rgba(255,255,255,.95); box-shadow: 0 1px 24px rgba(19,30,36,.07); }
+.nav a { font-weight: 500; }
+.nav a::after { height: 1.5px; bottom: 0; background: var(--oak-500); }
+.nav-toggle { border-radius: var(--r-xs); }
+.topbar { background: var(--slate-800); }
+
+.btn--gold {
+  background: linear-gradient(135deg, #E9CFA4 0%, #D6AE76 40%, #B98B54 100%);
+  box-shadow: 0 14px 30px -16px rgba(185,139,84,.8);
+}
+.btn--gold:hover { box-shadow: 0 18px 38px -16px rgba(185,139,84,.9); transform: translateY(-1px); }
+.btn--primary { background: var(--slate-700); }
+.btn--primary:hover { background: var(--slate-600); transform: translateY(-1px); }
+.btn--outline { border-color: rgba(19,30,36,.22); }
+.btn--outline:hover { border-color: var(--slate-700); background: rgba(19,30,36,.04); }
+
+.input, .select, .textarea { border-radius: var(--r-xs); }
+.map-embed, .article-hero, .post-feature__media, .profile__media img { border-radius: var(--r-lg); }
+.side-form, .inline-cta { border-radius: var(--r-lg); }
+.consent, .form-status { border-radius: var(--r-xs); }
+
+@media (prefers-reduced-motion: reduce) {
+  .value-card:hover, .tile:hover, .section--dark .step:hover,
+  .btn--gold:hover, .btn--primary:hover { transform: none; }
+}
+
+/* 18.13 Property glyphs ---------------------------------------------------- */
 :root {
+  --i-frame: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 11 10-7 10 7'/%3E%3Cpath d='M5 9.9V20h14V9.9M5 20h14M9 20v-5h6v5M12 4.6V9'/%3E%3C/svg%3E");
+  --i-drop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3s6 6.4 6 10.4A6 6 0 0 1 6 13.4C6 9.4 12 3 12 3Z'/%3E%3Cpath d='M9.4 14a2.6 2.6 0 0 0 2.6 2.6'/%3E%3C/svg%3E");
+  --i-plan: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='1.5'/%3E%3Cpath d='M3 10h7M10 3v18M10 15h11M17 15v6'/%3E%3C/svg%3E");
+  --i-survey: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2'/%3E%3Crect x='9' y='2.5' width='6' height='3.5' rx='1'/%3E%3Cpath d='m8.5 12 2 2 4-4M8.5 17h7'/%3E%3C/svg%3E");
+  --i-crack: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z'/%3E%3Cpath d='m11 8-2.5 4h4L10 17'/%3E%3C/svg%3E");
   --i-mould: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8.5' cy='8.5' r='3.2'/%3E%3Ccircle cx='15.5' cy='14.5' r='4.2'/%3E%3Ccircle cx='6.5' cy='16.5' r='2.2'/%3E%3C/svg%3E");
   --i-pipe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6h5a4 4 0 0 1 4 4v5a3 3 0 0 0 3 3h4'/%3E%3Cpath d='M3 4v4M18 16.5v3'/%3E%3C/svg%3E");
   --i-bolt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6Z'/%3E%3C/svg%3E");
   --i-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='1.5'/%3E%3Cpath d='M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6'/%3E%3C/svg%3E");
+  --i-key: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7.5' cy='14.5' r='4'/%3E%3Cpath d='m10.4 11.6 8.1-8.1M16 6l2.5 2.5M13.6 8.4l2.5 2.5'/%3E%3C/svg%3E");
+  --i-handshake: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m11 6 2-1.5L21 9v6l-3 2-4-3.5'/%3E%3Cpath d='M3 9.5 8.5 5l3.5 2.6-3 2.6a1.6 1.6 0 0 0 0 2.4l3.6 3.1'/%3E%3Cpath d='M3 9.5V15l3 2'/%3E%3C/svg%3E");
 }
+.icon--frame{-webkit-mask-image:var(--i-frame);mask-image:var(--i-frame)}
+.icon--drop{-webkit-mask-image:var(--i-drop);mask-image:var(--i-drop)}
+.icon--plan{-webkit-mask-image:var(--i-plan);mask-image:var(--i-plan)}
+.icon--survey{-webkit-mask-image:var(--i-survey);mask-image:var(--i-survey)}
+.icon--crack{-webkit-mask-image:var(--i-crack);mask-image:var(--i-crack)}
 .icon--mould{-webkit-mask-image:var(--i-mould);mask-image:var(--i-mould)}
 .icon--pipe{-webkit-mask-image:var(--i-pipe);mask-image:var(--i-pipe)}
 .icon--bolt{-webkit-mask-image:var(--i-bolt);mask-image:var(--i-bolt)}
 .icon--tile{-webkit-mask-image:var(--i-tile);mask-image:var(--i-tile)}
+.icon--key{-webkit-mask-image:var(--i-key);mask-image:var(--i-key)}
+.icon--handshake{-webkit-mask-image:var(--i-handshake);mask-image:var(--i-handshake)}
+
+.service-card__media { aspect-ratio: 3 / 2; }
+.service-card__badge {
+  inline-size: 3.25rem; block-size: 3.25rem;
+  border-radius: var(--r);
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.service-card__badge .icon { inline-size: 1.5rem; block-size: 1.5rem; }
+.value-card__icon .icon { inline-size: 1.6rem; block-size: 1.6rem; }
+
+/* 18.14 PARTY PANELS — the two-sided section ------------------------------
+   Buyer and seller are one idea seen from two ends, so they are set as a
+   matched pair: the same plate, the same glyph medallion, one in limestone
+   and one in slate, with a drawn elevation behind each rather than a
+   photograph. It keeps a text-only block from reading as two grey boxes. */
+.party-grid { display: grid; gap: clamp(1.5rem, 2.6vw, 2.25rem); }
+@media (min-width: 900px) { .party-grid { grid-template-columns: repeat(2, 1fr); } }
+.party-card {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column;
+  padding: clamp(1.85rem, 3.4vw, 2.85rem);
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(19,30,36,.08);
+  background: linear-gradient(160deg, var(--surface), var(--stone-100));
+  box-shadow: var(--sh-sm);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.party-card:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); border-color: rgba(185,139,84,.35); }
+.party-card__icon {
+  display: grid; place-items: center;
+  inline-size: 3.75rem; block-size: 3.75rem; margin-bottom: var(--s-6);
+  border-radius: var(--r);
+  background: linear-gradient(150deg, rgba(214,174,118,.28), rgba(185,139,84,.10));
+  color: var(--oak-600);
+  box-shadow: inset 0 0 0 1px rgba(185,139,84,.24);
+}
+.party-card__icon .icon { inline-size: 1.7rem; block-size: 1.7rem; }
+.party-card h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.375rem, 1.15rem + .8vw, 1.75rem);
+  letter-spacing: -.012em; margin-bottom: .85rem;
+}
+.party-card p { color: var(--text-muted); line-height: 1.8; }
+/* The drawn elevation, low in the corner, at the weight of a watermark. */
+.party-card::after {
+  content: ""; position: absolute; z-index: -1; right: -1.5rem; bottom: -1.5rem;
+  inline-size: 15rem; block-size: 10rem; opacity: .5;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' fill='none' stroke='%23B98B54' stroke-opacity='.32' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 150h224'/%3E%3Cpath d='M28 150V86l44-30 44 30v64'/%3E%3Cpath d='M58 150v-30h28v30'/%3E%3Cpath d='M42 98h16v14H42zM86 98h16v14H86z'/%3E%3Cpath d='M148 150V60h56v90M148 60h56'/%3E%3Cpath d='M158 74h14v14h-14zM182 74h14v14h-14zM158 100h14v14h-14zM182 100h14v14h-14zM158 126h14v14h-14zM182 126h14v14h-14z'/%3E%3C/svg%3E")
+      right bottom / contain no-repeat;
+}
+.party-card--slate {
+  background:
+    radial-gradient(70% 58% at 88% 2%, rgba(185,139,84,.20), transparent 66%),
+    linear-gradient(165deg, var(--slate-600), var(--slate-900));
+  border-color: transparent; color: #fff;
+  box-shadow: var(--sh-lg);
+}
+.party-card--slate h3 { color: #fff; }
+.party-card--slate p { color: var(--text-inverse-mu); }
+.party-card--slate .party-card__icon {
+  background: rgba(214,174,118,.16); color: var(--oak-300);
+  box-shadow: inset 0 0 0 1px rgba(214,174,118,.3);
+}
+.party-card--slate::after {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' fill='none' stroke='%23D6AE76' stroke-opacity='.3' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 150h224'/%3E%3Cpath d='M28 150V86l44-30 44 30v64'/%3E%3Cpath d='M58 150v-30h28v30'/%3E%3Cpath d='M42 98h16v14H42zM86 98h16v14H86z'/%3E%3Cpath d='M148 150V60h56v90M148 60h56'/%3E%3Cpath d='M158 74h14v14h-14zM182 74h14v14h-14zM158 100h14v14h-14zM182 100h14v14h-14zM158 126h14v14h-14zM182 126h14v14h-14z'/%3E%3C/svg%3E");
+}
+
+/* 18.15 REMEDY CARDS — the compensation section ---------------------------
+   Three outcomes, set as a stacked column beside the property they are
+   measured against, each opening with its own oak rule. */
+
+.remedy-card {
+  position: relative;
+  padding: clamp(1.4rem, 2.6vw, 1.9rem) clamp(1.4rem, 2.6vw, 1.9rem) clamp(1.4rem, 2.6vw, 1.9rem) clamp(1.75rem, 3vw, 2.35rem);
+  background: var(--surface);
+  border: 1px solid rgba(19,30,36,.08);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.remedy-card::before {
+  content: ""; position: absolute; left: 0; top: clamp(1.4rem,2.6vw,1.9rem); bottom: clamp(1.4rem,2.6vw,1.9rem);
+  width: 3px; border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--oak-400), var(--oak-600));
+}
+.remedy-card:hover { transform: translateX(4px); box-shadow: var(--sh-md); border-color: rgba(185,139,84,.35); }
+.remedy-card h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + .55vw, 1.5rem);
+  letter-spacing: -.01em; margin-bottom: .5rem;
+}
+.remedy-card p { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.75; }
+.remedy-card .badge { margin-bottom: .85rem; }
+
+
+/* 18.18 Hero corrections after proofing ------------------------------------ */
+.hero__frame > .hero__media img { object-position: 50% 62%; }
+.hero__frame::after {
+  background:
+    radial-gradient(44% 40% at 88% 6%, rgba(214,174,118,.24), transparent 68%),
+    linear-gradient(96deg, rgba(19,30,36,.92) 0%, rgba(19,30,36,.82) 33%, rgba(19,30,36,.40) 66%, rgba(19,30,36,.08) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.30) 0%, rgba(19,30,36,0) 36%, rgba(19,30,36,.70) 100%);
+}
+.hero__body::before { margin-bottom: clamp(.85rem, 1.6vw, 1.15rem); }
+/* An oak ring rather than a white one: the inset should sit inside the frame's
+   material, not punch a hole in it. */
+.hero__inset { box-shadow: 0 0 0 1px rgba(214,174,118,.55), var(--sh-lg); }
+/* Surveyor's corner marks, top right — the one drawn detail on the plate. */
+.hero__frame::before {
+  content: ""; position: absolute; z-index: 2; pointer-events: none;
+  right: clamp(1.5rem, 3vw, 2.75rem); top: clamp(1.5rem, 3vw, 2.75rem);
+  inline-size: clamp(2.5rem, 5vw, 4rem); block-size: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(214,174,118,.6);
+  border-right: 1px solid rgba(214,174,118,.6);
+  border-top-right-radius: 6px;
+}
+
+/* 18.19 CHECKLIST — paired column beside a photograph ---------------------- */
+@media (min-width: 640px) {
+  .checklist--pair { grid-template-columns: repeat(2, 1fr); gap: 0 clamp(1.5rem, 3vw, 2.5rem); }
+  .checklist--pair li { border-top: 1px solid rgba(19,30,36,.08); border-bottom: 0; }
+}
+
+/* A portrait plate sitting beside a stack of cards should not tower over it —
+   cap it and let the photograph crop rather than the row grow. */
+.media-figure--portrait img { max-height: 46rem; }
+
+/* 18.20 Corrections after proofing ----------------------------------------
+   Three faults that only showed once the page was rendered end to end. */
+
+/* The scrim over a photographic slate band was being written to ::after, which
+   the oak seam rule on .section--dark also claims — so the seam won and the
+   photograph came through at full strength with white type over it. The scrim
+   belongs to the media element, where nothing else competes for it. */
+.section--photo::after {
+  background: none;
+  height: 1px; inset: 0 0 auto 0;
+}
+.section--photo > .section__media::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(48% 40% at 86% 4%, rgba(214,174,118,.20), transparent 68%),
+    linear-gradient(100deg, rgba(19,30,36,.96) 0%, rgba(19,30,36,.92) 42%, rgba(19,30,36,.80) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.82), rgba(19,30,36,.72) 45%, rgba(19,30,36,.94));
+}
+
+
+/* A badge is an inline chip. Inside the flex columns it now sits in — the
+   feature panel body, the party cards — it was being stretched to the column. */
+.badge { align-self: flex-start; }
+
+
+/* The scrim over the photographic bands was tuned blind and came out opaque.
+   Enough to hold white type, light enough that the building still reads. */
+.section--photo > .section__media::after {
+  background:
+    radial-gradient(48% 40% at 86% 4%, rgba(214,174,118,.22), transparent 68%),
+    linear-gradient(100deg, rgba(19,30,36,.95) 0%, rgba(19,30,36,.88) 40%, rgba(19,30,36,.66) 100%),
+    linear-gradient(180deg, rgba(19,30,36,.74), rgba(19,30,36,.56) 45%, rgba(19,30,36,.90));
+}
+
+/* 18.22 PROCESS RAIL — a drawn line running behind the four steps ---------- */
+@media (min-width: 900px) {
+  .process-grid { position: relative; }
+  .process-grid::before {
+    content: ""; position: absolute; z-index: 0;
+    left: 7%; right: 7%; top: 3.8rem; height: 1px;
+    background: repeating-linear-gradient(90deg,
+      rgba(185,139,84,.55) 0 6px, rgba(185,139,84,0) 6px 15px);
+  }
+  .process-grid > * { position: relative; z-index: 1; }
+}
+
+/* Between the tablet and desktop breakpoints the copy spans most of the frame,
+   so a scrim that falls away to the right leaves the lead sitting over the lit
+   part of the house. Below 1100px the wash becomes vertical instead. */
+@media (min-width: 721px) and (max-width: 1100px) {
+  .hero__frame::after {
+    background:
+      radial-gradient(50% 38% at 88% 6%, rgba(214,174,118,.20), transparent 68%),
+      linear-gradient(180deg, rgba(19,30,36,.40) 0%, rgba(19,30,36,.16) 28%, rgba(19,30,36,.84) 66%, rgba(19,30,36,.95) 100%);
+  }
+}
+
+/* The photographic bands lost the oak seam when their scrim moved off ::after.
+   Put it back so every slate band closes the same way. */
+.section--photo::after {
+  background: linear-gradient(90deg, transparent, rgba(214,174,118,.55) 22%, rgba(214,174,118,.55) 78%, transparent);
+}
+
+
+/* ==========================================================================
+   19. FULL-BLEED HERO AND SECTION BALANCE
+   ========================================================================== */
+
+/* 19.1 The hero runs the full width of the viewport ------------------------
+   Held inside the page box the plate read as a card on a page. Edge to edge it
+   reads as the building itself, which is the first impression the page is
+   after. The copy still sits on the container grid — only the photograph and
+   the scrim break out. */
+.hero--estate { padding-block: 0; background: var(--slate-800); }
+.hero__frame {
+  border-radius: 0;
+  min-height: min(82svh, 820px);
+  box-shadow: none;
+}
+/* .hero__body IS the .container now, so the gutter comes from the container and
+   only the vertical padding belongs to the hero. */
+.hero--estate .hero__body {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+/* The corner marks and the inset align to the container's content edge, not to
+   the viewport, or they drift off into the margin on a wide screen. */
+.hero__frame::before,
+.hero__inset {
+  right: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+}
+.hero__frame::before { top: clamp(1.75rem, 3.4vw, 3rem); }
+.hero__inset { bottom: clamp(2rem, 4vw, 3.5rem); }
+
+@media (max-width: 720px) {
+  .hero__frame { border-radius: 0; }
+  .hero--estate .hero__body { padding-block: clamp(2rem, 7vw, 3rem); }
+}
+
+/* 19.2 The two advisory sections ------------------------------------------
+   Copy and a photograph in one column, the eight service tiles two-up in the
+   other — the pairing the page had before. The photograph takes the wider
+   16:9 crop so the column does not tower, and the tile column centres against
+   whatever height is left. */
+.split--advisory .media-figure--wide img { aspect-ratio: 16 / 9; }
+@media (min-width: 940px) {
+  .split--advisory { grid-template-columns: 1.02fr .98fr; }
+  .split--advisory > :last-child { align-self: center; }
+}
+
+/* 19.3 Small screens -------------------------------------------------------
+   A long badge wraps on a phone, and as a flex item the marker dot was left
+   stranded on a line of its own. Inline-block ties it to the first word.
+   (This rule was in the layer this one replaced; it belongs here now.) */
+@media (max-width: 620px) {
+  .badge { display: inline-block; padding: .45rem 1rem; line-height: 1.5; }
+  .badge::before { display: inline-block; margin-right: .6em; vertical-align: .12em; }
+}
+/* The surveyor's corner mark reads as a detail on a wide plate and as clutter
+   on a phone, where it lands over the photograph's own edge. */
+@media (max-width: 720px) { .hero__frame::before { content: none; } }
+
+/* 19.4 FLUSH SPLIT — the photograph finishes level with the copy -----------
+   Centred, a 3:2 plate beside a two-paragraph column starts lower and ends
+   higher than the text, so the pair reads as two loose blocks. Stretched, the
+   photograph fills the row and the two columns begin and end on the same
+   lines — which is the whole point of setting them side by side. */
+@media (min-width: 940px) {
+  .split--flush { align-items: stretch; }
+  .split--flush .split__media { display: block; }
+  .split--flush .split__media img { height: 100%; object-fit: cover; }
+}
+
+/* 19.5 CHECKLIST AS CARDS — the six reasons on a slate band ----------------
+   The same plate as the four steps: a glass card, an oak medallion carrying
+   the mark, a display heading and muted copy. Three up, two rows. */
+.checklist--cards { display: grid; gap: clamp(1rem, 1.8vw, 1.5rem); }
+@media (min-width: 700px)  { .checklist--cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .checklist--cards { grid-template-columns: repeat(3, 1fr); } }
+
+.section--dark .checklist--cards li,
+.section--dark .checklist--cards li:first-child {
+  display: block;
+  padding: clamp(1.6rem, 2.6vw, 2.15rem);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.section--dark .checklist--cards li:hover {
+  border-color: rgba(214,174,118,.48); transform: translateY(-6px);
+}
+.section--dark .checklist--cards .icon {
+  display: block; margin: 0 0 var(--s-5);
+  inline-size: 3rem; block-size: 3rem;
+  border: 1px solid rgba(214,174,118,.45);
+  background: rgba(214,174,118,.10);
+  box-shadow: none;
+}
+.section--dark .checklist--cards .icon::after { inset: .8rem; background: var(--oak-300); }
+.section--dark .checklist--cards strong {
+  font-family: var(--font-display); font-size: 1.1875rem; font-weight: 600;
+  line-height: 1.3; color: #fff; margin-bottom: .5rem;
+}
+.section--dark .checklist--cards span { color: var(--text-inverse-mu); line-height: 1.7; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section--dark .checklist--cards li:hover { transform: none; }
+}
+
+/* ==========================================================================
+   20. COLUMN BALANCE
+   --------------------------------------------------------------------------
+   Two sections were leaving a column short. Both are fixed by changing what
+   goes in the columns rather than by padding one of them out.
+   ========================================================================== */
+
+/* 20.1 The two advisory sections ------------------------------------------
+   Copy, photograph and eight tiles in two columns could never finish level:
+   the copy side ran a heading, two paragraphs and a plate, the tile side four
+   rows. Splitting it into a two-column head with the row of image + tiles
+   underneath puts blocks of comparable height beside each other, and the
+   dead space on the right goes with it. */
+.split--advisory .media-figure--wide img { aspect-ratio: 3 / 2; }
+@media (min-width: 940px) {
+  .split--advisory { grid-template-columns: 1.02fr .98fr; align-items: start; }
+}
+/* The prose in the head sets on a measure rather than running the full track. */
+.section-head--two > .prose { max-width: 48ch; }
+
+/* ==========================================================================
+   21. TWO LAST CORRECTIONS
+   ========================================================================== */
+
+/* 21.1 The compensation section --------------------------------------------
+   A 4:5 photograph beside three cards made the section twice as tall as the
+   copy in it warranted, and no crop of a house reads well at that shape. The
+   three remedies are one set of three, so they sit as a row of three — which
+   is what the section is actually saying. */
+.remedy-row { display: grid; gap: clamp(1.25rem, 2.2vw, 1.75rem); }
+@media (min-width: 900px) { .remedy-row { grid-template-columns: repeat(3, 1fr); } }
+
+/* 21.2 The two-column section head -----------------------------------------
+   The head bottom-aligns its heading against the column beside it, which is
+   right when that column holds one short lead. Against two paragraphs of prose
+   it pushed the heading down and opened a hole above it, so where the head
+   carries prose the two columns start together instead. */
+.section-head--two:has(.prose) { align-items: start; }
+.section-head--two:has(.prose) > :first-child { align-self: start; }
