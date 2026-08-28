@@ -718,11 +718,14 @@ address { font-style: normal; }
    header. The black wordmark cannot read on the dark ground on its own, so it sits
    on a light plate — the plate is the ground, the logo itself is unchanged. */
 .brand--inverse {
-  align-self: start;
   background: #fff;
   padding: .55rem .95rem;
   border-radius: var(--r);
 }
+/* Only in the footer grid does the plate pin to the top-left of its cell. In the
+   mobile-nav head it must stay a plain flex item so it centres on the same line
+   as the close button. */
+.footer-intro .brand--inverse { align-self: start; justify-self: start; }
 .brand--inverse img { block-size: 34px; inline-size: auto; filter: none; }
 
 .topbar { background: var(--ink); color: var(--text-inverse-mu); font-size: var(--fs-xs); }
@@ -732,6 +735,9 @@ address { font-style: normal; }
 .topbar a { color: #fff; text-decoration: none; }
 .topbar a:hover { color: var(--accent-soft); }
 .topbar .icon { color: var(--accent-soft); inline-size: 1em; block-size: 1em; }
+/* On a phone the strip has to wrap onto two rows and eats the top of the page —
+   the address, hours, phone and mail are all repeated in the footer. */
+@media (max-width: 780px) { .topbar { display: none; } }
 
 .site-header {
   position: sticky; top: 0; z-index: 900;
