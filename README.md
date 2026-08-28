@@ -73,6 +73,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
       brand/                       logo, favicons, Open Graph images
       hero/                        hero and full-width banner images
       about/                       office and consultation photography
+      property/                    houses, apartments and interiors — the home page set
       services/                    one image per practice area
       blog/                        article images
       team/                        portraits
@@ -151,11 +152,45 @@ lawyer-client-consultation-portrait-900.webp 4:5 editorial column
 law-firm-hero-columns-1800.webp             16:9 home hero
 ```
 
-| Suffix       | Ratio | Used for                          |
-| ------------ | ----- | --------------------------------- |
-| *(none)*     | 3:2   | cards and section images          |
-| `-portrait`  | 4:5   | tall editorial columns            |
-| `-wide`      | 16:6  | page headers and banners          |
+| Suffix       | Ratio  | Used for                          |
+| ------------ | ------ | --------------------------------- |
+| *(none)*     | 3:2    | cards and section images          |
+| `-portrait`  | 4:5    | tall editorial columns            |
+| `-wide`      | 16:6   | page headers and banners          |
+| `hero-…-wide`| 16:9   | the home hero plate               |
+
+**`assets/images/property/`** is the home-page set: one library of houses,
+apartment buildings, Nordic interiors, a construction detail, a surveyor's
+drawings and the Stockholm waterfront, shot in the same daylight and the same
+restrained palette so the page reads as one commissioned set rather than
+assorted stock. The home page draws every one of its photographs from this
+folder; nothing else does, so the set can be re-shot or re-licensed without
+touching another page.
+
+Every photograph is chosen for the section it sits in, and each one is sized to
+finish level with the copy beside it rather than tower over it — that pairing is
+the point, so check it before swapping any single image:
+
+| Section                       | Photograph                          |
+| ----------------------------- | ----------------------------------- |
+| Hero (full-bleed)             | `hero-villa-dusk-wide` + `oak-stair-hall-portrait` inset |
+| Om vår hjälp                  | *(none — copy and the service card only)* |
+| Jurist och advokat            | `survey-drawings-desk`              |
+| Vad räknas som dolda fel      | `nordic-kitchen-island`             |
+| Hus · Bostadsrätt · Fastighet | `family-house-porch`, `apartment-block-facade`, `white-modern-villa` |
+| Vanliga dolda fel             | `hidden-construction-detail`, in the note panel under the six cards |
+| Har du upptäckt …             | `house-facade-night` behind the slate scrim |
+| Juridisk rådgivning           | `services/contract-review-detail`   |
+| Tvister                       | `swedish-house-red-roof`            |
+| Vilken ersättning             | *(none — three cards in a row)*     |
+| Fastighetstvister             | `modern-house-drive`                |
+| Erfarenhet                    | `stockholm-riddarholmen-wide` behind the slate scrim |
+| Varför anlita oss             | `nordic-kitchen-corridor` behind the slate scrim |
+| Kontakt                       | `stockholm-skyline-wide`            |
+
+The hero plate — `hero-villa-dusk-wide-{1200,1800,2400}.webp` — is preloaded in
+the `<head>` of `index.html`. Change the photograph and change the
+`rel="preload"` with it, or the largest paint regresses.
 
 **To replace an image:** export the new photo at every width already present for that
 name (e.g. `-600`, `-1000`, `-1600`), keep the same aspect ratio, save as WebP at
@@ -301,15 +336,67 @@ is the legible text variant; `--accent-soft` is its counterpart on dark grounds.
 chosen because it matches the high-contrast serif of the ADVANTAGE wordmark. *Inter*
 for all body and UI text. Both variable, `font-display: swap`, weight axis only.
 
-**Space** — sections run `--section-y: clamp(2.75rem, 4vw, 4rem)` and the large
-variant `--section-y-lg: clamp(3.25rem, 5vw, 5rem)`. Section heads have
-`clamp(2rem, 3.4vw, 3rem)` below them. The container caps at 1360px (`--container`),
+**Space** — sections run `--section-y: clamp(3.75rem, 5.4vw, 6.25rem)` and the large
+variant `--section-y-lg: clamp(4.75rem, 7vw, 8rem)`. Section heads have
+`clamp(2.5rem, 4.2vw, 4rem)` below them. The container caps at 1360px (`--container`),
 the wide variant at 1500px, and long-form copy at 42rem.
 
-**Shape** — radii top out at 6px. Separation comes from white space and 1px
-hairlines; the only shadows are the soft lift on card hover and under `.feature-panel`.
+**Shape and elevation** — the estate layer (§18 of the stylesheet) sets one radius
+scale, `--r-xs: 8px` through `--r-2xl: 40px`, and one shadow family, `--sh-xs`
+through `--sh-xl`. Both are wide, soft and warm-neutral. Use the tokens; do not
+write a one-off `border-radius` or `box-shadow`, or the page stops reading as one
+material.
 
-**Recurring components** — three carry the look across all nine pages:
+**Palette weights** — the brand owns two colours, wet slate and warm oak, and the
+estate layer simply uses them at more weights: `--slate-900` … `--slate-500`,
+`--oak-700` … `--oak-300`, and `--stone-100` … `--stone-300` for the limestone
+ground. Nothing outside those three ramps appears on the page. Slate bands close
+with a single oak hairline seam, which is the page's one recurring rule.
+
+**Recurring components** — these carry the look across all nine pages:
+
+- `.hero--estate` on the home page — one cinematic plate of architecture running the
+  full width of the viewport (`.hero__frame`), the headline set into its lower-left
+  corner where the light has already fallen away, and `.hero__inset` mounting an
+  interior over the opposite corner. Only the photograph and the scrim break out of
+  the page box: `.hero__body` is itself a `.container`, and the inset and the
+  surveyor's corner mark are pinned to the container's content edge with
+  `max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)))` so they
+  never drift into the margin on a wide screen.
+- `.media-figure` — a photograph mounted like a drawing on board: the plate, and a
+  fine oak rule stepped off one corner behind it. `--flip` steps it the other way,
+  `--portrait` / `--wide` / `--band` set the ratio. This is the page's one
+  decorative move, and it is drawn rather than photographed.
+- `.section--photo` on a `.section--dark` — a slate band over a photograph. The
+  scrim lives on `.section__media::after`, **not** on the section's `::after`,
+  which the oak seam already claims. Three sections use it, and they carry the
+  same card treatment: the four steps, and the six reasons via `.checklist--cards`.
+- `.checklist--cards` — the plain checklist re-set as glass plates on a slate
+  band, the tick in an oak medallion. Same markup as `.checklist`; only the
+  modifier changes.
+- `.split--flush` — stretches the photograph so the two columns of an editorial
+  split begin and end on the same lines. Without it a 3:2 plate beside a
+  two-paragraph column centres, starting lower and finishing higher than the copy.
+- `.split--advisory` — the row under the head in the two service sections: a 3:2
+  photograph beside the eight tiles two-up. The copy belongs in a
+  `.section-head--two` above it, not in the left column; putting a heading, two
+  paragraphs and a plate on one side left the tile side 270px short and the
+  section looked half-empty on the right.
+- `.section-head--two` splits its paragraphs across both columns where there are
+  two of them: the first sits under the heading on the left, the second stands
+  alone on the right. Reading order is unchanged — heading, first paragraph,
+  second paragraph — and neither column is left with a hole beside a heading.
+  A head that carries a `.prose` block top-aligns (`:has(.prose)`); one carrying
+  a single short `.lead` keeps the bottom alignment it was designed for.
+- `.note-panel` — a photograph and a short slate note locked into one frame.
+- `.party-card` / `.party-card--slate` — a matched pair of panels, one limestone
+  and one slate, each with a glyph medallion and a drawn elevation watermark. Used
+  where a text-only block would otherwise read as two grey boxes.
+- `.remedy-row` / `.remedy-card` — three outcomes in a row, each opening with its
+  own oak rule. It was tried as a column beside a 4:5 photograph and neither
+  worked: the plate doubled the height of the section, and no crop of a house
+  reads well at that shape.
+- `.process-grid` — draws a dashed oak rail behind a four-up step grid.
 
 - `.feature-panel` — image and copy inside one bordered frame, image left by default,
   `.feature-panel--flip` puts it right. `.feature-panel__note` is the optional caption
@@ -356,7 +443,7 @@ Verified in this build:
 * Zero horizontal overflow at 360 / 480 / 768 / 992 / 1200 / 1440
 * One CSS file and one JS file, both deferred and unminified for legibility
 * LCP image preloaded per page with `fetchpriority="high"`; everything else lazy
-* Images: 134 files, ~12 MB total, largest single file 283 KB
+* Images: 174 files, ~19 MB total
 
 ---
 
@@ -407,3 +494,4 @@ unless you are reading it off the live Google listing that day.
 "# advokatdoldafel-premium" 
 "# advokatdoldafel-premium" 
 "# advokatdoldafel-premium-website" 
+"# advokatdoldafel-property-webiste" 
