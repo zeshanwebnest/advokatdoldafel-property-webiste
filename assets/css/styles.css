@@ -2448,3 +2448,145 @@ address { font-style: normal; }
    carries prose the two columns start together instead. */
 .section-head--two:has(.prose) { align-items: start; }
 .section-head--two:has(.prose) > :first-child { align-self: start; }
+
+/* ==========================================================================
+   22. PRACTICE PAGE — dolda-fel-i-hus.html
+   --------------------------------------------------------------------------
+   Four components the home page did not need. Everything else on the page is
+   the home page's own vocabulary: the full-bleed hero, the feature panel, the
+   flush splits, the value and remedy cards, the accordion and the split CTA.
+   ========================================================================== */
+
+/* 22.1 A read-more link closing a value card -------------------------------
+   The defect cards carry their own link, so the card gets a footer rule and
+   the link is pinned to it — the same signature the service cards use. */
+.value-card { display: flex; flex-direction: column; }
+.value-card > p { flex: 1; }
+.value-card > .link-arrow {
+  margin-top: var(--s-5); padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  color: var(--accent-deep);
+}
+.section--alt .value-card > .link-arrow { border-top-color: rgba(0,0,0,.08); }
+
+/* 22.2 An icon plate on the remedy cards -----------------------------------
+   On the home page the three remedies open with a badge. Here they open with
+   a glyph, so the row reads at a glance before a word of it is. */
+.remedy-card__icon {
+  display: grid; place-items: center;
+  inline-size: 3.25rem; block-size: 3.25rem;
+  margin-bottom: var(--s-5);
+  border-radius: var(--r);
+  background: rgba(185,139,84,.10);
+  color: var(--accent-deep);
+}
+.remedy-card__icon .icon { inline-size: 1.5rem; block-size: 1.5rem; }
+
+/* 22.3 The expert band -----------------------------------------------------
+   A headline, one action and the face of the lawyer who takes the call, set
+   over the slate photographic ground. */
+.expert-band { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
+@media (min-width: 860px) {
+  .expert-band { grid-template-columns: minmax(0, 1fr) minmax(0, 18rem); }
+}
+.expert-band__body .h2 { max-width: 24ch; }
+.expert-band__portrait {
+  position: relative; margin: 0; justify-self: start;
+  inline-size: clamp(11rem, 22vw, 16rem); aspect-ratio: 1 / 1;
+  border-radius: 50%; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(214,174,118,.35), 0 0 0 10px rgba(255,255,255,.05), var(--sh-lg);
+}
+@media (min-width: 860px) { .expert-band__portrait { justify-self: end; } }
+.expert-band__portrait img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  filter: grayscale(.35) contrast(1.03);
+}
+
+/* 22.4 The FAQ column ------------------------------------------------------
+   Twelve questions run long, so the accordion sets on a measure and centres
+   under its head rather than stretching the full page box. */
+.faq-wrap { max-width: 58rem; margin-inline: auto; }
+.section-head--center .badge { display: inline-flex; }
+
+/* 22.5 The form on the contact band ---------------------------------------- */
+.form-card {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--sh-lg);
+}
+.form-card .form { gap: var(--s-4); }
+.form-card .field > label { color: rgba(255,255,255,.76); }
+
+/* 22.7 A rule where the home page uses an eyebrow -------------------------
+   The practice page carries no eyebrow text of its own, and inventing labels
+   would have meant adding words to a page whose copy is fixed. A short oak
+   rule holds the same position in the rhythm and says nothing. */
+.eyebrow-rule {
+  display: block; inline-size: 3.25rem; block-size: 2px;
+  margin-bottom: var(--s-5); border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(185,139,84,.15));
+}
+.eyebrow-rule--dark { background: linear-gradient(90deg, var(--accent-soft), rgba(214,174,118,.15)); }
+.section-head--center .eyebrow-rule { margin-inline: auto; }
+
+/* 22.8 The contact form, two fields to a row ------------------------------
+   Five fields stacked ran the card longer than the copy beside it. Name and
+   phone share a row, e-mail and subject share the next, and the message keeps
+   the full width. The base `.form__row--2` pairs from 640px, which is right
+   while the card is full width — but between 940px and 1100px the card is only
+   a narrow column of the split, and two inputs in it would be cramped. */
+@media (min-width: 940px) and (max-width: 1023px) {
+  .form-card .form__row--2 { grid-template-columns: 1fr; }
+}
+.form-card .form__row { gap: var(--s-4); }
+.form-card .input, .form-card .select { min-height: 48px; }
+.form-card .textarea { min-height: 7.5rem; }
+
+/* 22.9 EDITORIAL SPLIT — a portrait plate beside a long column ------------
+   The section that runs five paragraphs takes a photograph shot tall rather
+   than a landscape one stretched to fit: a narrower media track and a 4:5
+   source, so the plate finishes level with the copy with almost nothing
+   cropped away. Prefer this wherever a portrait crop of
+   the photograph exists. */
+@media (min-width: 940px) {
+  .split--editorial { grid-template-columns: .85fr 1.15fr; }
+}
+
+/* 22.10 Two-column prose ---------------------------------------------------
+   `columns` will happily break a paragraph across the gutter, so the reader
+   finishes a sentence at the foot of one column and picks it up at the head of
+   the next. Every block in a `.prose--cols` stays whole. */
+@media (min-width: 940px) {
+  .prose--cols > * { break-inside: avoid; page-break-inside: avoid; }
+}
+
+/* 22.11 The closing contact note ------------------------------------------
+   The note that ends the practice page reads as a bar rather than a card:
+   the address and number on the left, the action on the right, so it does not
+   sit as a tall block under a two-column argument. */
+.contact-note { display: grid; gap: var(--s-5); align-items: center; }
+@media (min-width: 820px) { .contact-note { grid-template-columns: 1fr auto; gap: var(--s-6); } }
+.contact-note p { margin: 0; max-width: 78ch; }
+.contact-note p + p { margin-top: .9em; }
+.contact-note .btn { white-space: nowrap; }
+
+/* 22.12 A photograph behind a light band ----------------------------------
+   `.section--photo` puts a slate scrim over its picture and sets white type on
+   it. This is the daylight counterpart: the photograph sits far back under a
+   limestone wash, so it gives the band warmth and depth without competing with
+   the white cards standing on it. The wash is opaque enough that every text
+   contrast on the band is unchanged. */
+.section--photo-soft { position: relative; isolation: isolate; overflow: hidden; }
+.section--photo-soft > .section__media { position: absolute; inset: 0; z-index: -1; }
+.section--photo-soft > .section__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%;
+}
+.section--photo-soft > .section__media::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(255,255,255,.72), transparent 70%),
+    linear-gradient(180deg, rgba(250,247,242,.91) 0%, rgba(242,238,231,.88) 45%, rgba(239,234,225,.94) 100%);
+}

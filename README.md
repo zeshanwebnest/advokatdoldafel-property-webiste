@@ -1,6 +1,6 @@
 # Advantage Law Firm — website
 
-Nine static pages, English content, built with HTML, CSS and vanilla JavaScript.
+Ten static pages, built with HTML, CSS and vanilla JavaScript.
 No framework, no build step required to run, no third-party runtime dependencies
 beyond the Google Fonts stylesheet.
 
@@ -19,8 +19,17 @@ beyond the Google Fonts stylesheet.
 | `blog.html`           | Blog                |
 | `blog-details.html`   | Blog details        |
 | `contact.html`        | Contact us          |
+| `dolda-fel-i-hus.html`| Dolda fel i hus — practice page |
 
-Nothing else. The navigation, footer and every internal link stay inside these nine.
+`dolda-fel-i-hus.html` is a rebuild of the live page at
+`https://advokatdoldafel.se/dolda-fel-i-hus/` in this design system. Its copy is
+the client's and is **fixed**: every heading, paragraph, card, button label, FAQ
+entry and form field is the live page's, word for word, and all six `Read more`
+links still point at `#` exactly as they do there. The page carries no eyebrow
+labels because inventing them would have meant adding words — `.eyebrow-rule`
+holds that position in the rhythm instead. The home page's
+"Läs mer om dolda fel i hus" now links here rather than to
+`service-details.html`.
 
 **Home page sections, in order:** Hero → About → Services → Why Choose Us →
 Call to Action → Team → Reviews → Latest Blogs → FAQ → Contact CTA → Footer.
@@ -53,7 +62,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ```
 /
-  index.html … contact.html      the nine pages (complete, standalone)
+  index.html … dolda-fel-i-hus.html   the ten pages (complete, standalone)
   build.ps1                      optional page assembler — see §4
 
   _partials/                     shared chrome (source for build.ps1)
@@ -93,7 +102,8 @@ tooling. To keep those copies identical, edit the partial and rebuild:
 powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
-It reads `_partials/*` plus `_pages/<slug>.html` and rewrites all nine root pages.
+It reads `_partials/*` plus `_pages/<slug>.html` and rewrites the root pages it has
+sources for. `dolda-fel-i-hus.html` was written directly and has no `_pages/` source.
 
 Front matter keys at the top of each `_pages/<slug>.html`:
 
@@ -163,9 +173,9 @@ law-firm-hero-columns-1800.webp             16:9 home hero
 apartment buildings, Nordic interiors, a construction detail, a surveyor's
 drawings and the Stockholm waterfront, shot in the same daylight and the same
 restrained palette so the page reads as one commissioned set rather than
-assorted stock. The home page draws every one of its photographs from this
-folder; nothing else does, so the set can be re-shot or re-licensed without
-touching another page.
+assorted stock. The home page and `dolda-fel-i-hus.html` draw every one of their
+photographs from this folder; no other page does, so the set can be re-shot or
+re-licensed without touching the rest of the site.
 
 Every photograph is chosen for the section it sits in, and each one is sized to
 finish level with the copy beside it rather than tower over it — that pairing is
@@ -173,11 +183,11 @@ the point, so check it before swapping any single image:
 
 | Section                       | Photograph                          |
 | ----------------------------- | ----------------------------------- |
-| Hero (full-bleed)             | `hero-villa-dusk-wide` + `oak-stair-hall-portrait` inset |
+| Hero (full-bleed)             | `hero-modern-villa-wide` + `oak-stair-hall-portrait` inset |
 | Om vår hjälp                  | *(none — copy and the service card only)* |
 | Jurist och advokat            | `survey-drawings-desk`              |
-| Vad räknas som dolda fel      | `nordic-kitchen-island`             |
-| Hus · Bostadsrätt · Fastighet | `family-house-porch`, `apartment-block-facade`, `white-modern-villa` |
+| Vad räknas som dolda fel      | `nordic-apartment-parquet`          |
+| Hus · Bostadsrätt · Fastighet | `family-house-porch`, `apartment-block-facade`, `timber-entrance-facade` |
 | Vanliga dolda fel             | `hidden-construction-detail`, in the note panel under the six cards |
 | Har du upptäckt …             | `house-facade-night` behind the slate scrim |
 | Juridisk rådgivning           | `services/contract-review-detail`   |
@@ -188,7 +198,7 @@ the point, so check it before swapping any single image:
 | Varför anlita oss             | `nordic-kitchen-corridor` behind the slate scrim |
 | Kontakt                       | `stockholm-skyline-wide`            |
 
-The hero plate — `hero-villa-dusk-wide-{1200,1800,2400}.webp` — is preloaded in
+The hero plate — `hero-modern-villa-wide-{1200,1800,2400}.webp` — is preloaded in
 the `<head>` of `index.html`. Change the photograph and change the
 `rel="preload"` with it, or the largest paint regresses.
 
@@ -371,6 +381,11 @@ with a single oak hairline seam, which is the page's one recurring rule.
   scrim lives on `.section__media::after`, **not** on the section's `::after`,
   which the oak seam already claims. Three sections use it, and they carry the
   same card treatment: the four steps, and the six reasons via `.checklist--cards`.
+- `.section--photo-soft` on a `.section--alt` — the daylight counterpart. The
+  photograph sits far back under a limestone wash, giving a light band warmth and
+  depth without competing with the white cards standing on it. The wash is opaque
+  enough that text contrast on the band is unchanged; if you swap the photograph,
+  keep it that way rather than letting the picture come forward.
 - `.checklist--cards` — the plain checklist re-set as glass plates on a slate
   band, the tick in an oak medallion. Same markup as `.checklist`; only the
   modifier changes.
@@ -388,6 +403,27 @@ with a single oak hairline seam, which is the page's one recurring rule.
   second paragraph — and neither column is left with a hole beside a heading.
   A head that carries a `.prose` block top-aligns (`:has(.prose)`); one carrying
   a single short `.lead` keeps the bottom alignment it was designed for.
+**A long column beside a photograph.** Five or six paragraphs will always outrun a
+3:2 plate, and every way of papering over that gap looked worse than the gap:
+stretching the photograph crops its subject away, centring it leaves it floating,
+a sticky plate still reads as two columns, and running it off the page edge just
+made the section top-heavy. Two things actually work, and the practice page uses
+both so they do not become their own kind of repetition:
+
+- **Give the plate a portrait source.** `.split--editorial` narrows the media
+  track to `.85fr` and takes a 4:5 crop, so the photograph is tall because it was
+  shot tall. Use this wherever a portrait crop exists.
+- **Let the copy widen instead.** Keep the heading and the first paragraphs beside
+  the plate at its natural ratio, then run the rest full width in a
+  `.prose--cols` block. The section opens up as the argument does, and the
+  photograph never has to be tall at all.
+- `.eyebrow-rule` — a short oak rule standing where a `.badge` would, for pages
+  whose copy is fixed and cannot take an invented label.
+- `.expert-band` — headline, one action and a circular portrait, over a slate
+  photographic ground.
+- `.form-card` — a glass panel holding a form on a dark band.
+- `.contact-note` — the closing note as a bar: copy left, action right, so it does
+  not sit as a tall block under a two-column argument.
 - `.note-panel` — a photograph and a short slate note locked into one frame.
 - `.party-card` / `.party-card--slate` — a matched pair of panels, one limestone
   and one slate, each with a glyph medallion and a drawn elevation watermark. Used
@@ -443,7 +479,7 @@ Verified in this build:
 * Zero horizontal overflow at 360 / 480 / 768 / 992 / 1200 / 1440
 * One CSS file and one JS file, both deferred and unminified for legibility
 * LCP image preloaded per page with `fetchpriority="high"`; everything else lazy
-* Images: 174 files, ~19 MB total
+* Images: 189 files, ~23 MB total
 
 ---
 
