@@ -2590,3 +2590,10 @@ address { font-style: normal; }
     radial-gradient(80% 60% at 50% 0%, rgba(255,255,255,.72), transparent 70%),
     linear-gradient(180deg, rgba(250,247,242,.91) 0%, rgba(242,238,231,.88) 45%, rgba(239,234,225,.94) 100%);
 }
+
+/* 22.13 Two pillars ---------------------------------------------------------
+   The disputes page opens on a pair of long-form blocks — when the seller is
+   liable, and what to do first. They are the same plate as the three remedies,
+   two up and carrying several paragraphs each. */
+@media (min-width: 900px) { .remedy-row--2 { grid-template-columns: repeat(2, 1fr); } }
+.remedy-row--2 .remedy-card p + p { margin-top: 1em; }
