@@ -1,6 +1,6 @@
 # Advantage Law Firm — website
 
-Ten static pages, built with HTML, CSS and vanilla JavaScript.
+Eleven static pages, built with HTML, CSS and vanilla JavaScript.
 No framework, no build step required to run, no third-party runtime dependencies
 beyond the Google Fonts stylesheet.
 
@@ -20,16 +20,26 @@ beyond the Google Fonts stylesheet.
 | `blog-details.html`   | Blog details        |
 | `contact.html`        | Contact us          |
 | `dolda-fel-i-hus.html`| Dolda fel i hus — practice page |
+| `dolda-fel-i-bostadsratt.html` | Dolda fel i bostadsrätt — practice page |
 
-`dolda-fel-i-hus.html` is a rebuild of the live page at
-`https://advokatdoldafel.se/dolda-fel-i-hus/` in this design system. Its copy is
-the client's and is **fixed**: every heading, paragraph, card, button label, FAQ
-entry and form field is the live page's, word for word, and all six `Read more`
-links still point at `#` exactly as they do there. The page carries no eyebrow
-labels because inventing them would have meant adding words — `.eyebrow-rule`
-holds that position in the rhythm instead. The home page's
-"Läs mer om dolda fel i hus" now links here rather than to
-`service-details.html`.
+The two practice pages are rebuilds of the live pages at
+`https://advokatdoldafel.se/dolda-fel-i-hus/` and `/dolda-fel-i-bostadsratt/` in
+this design system. Their copy is the client's and is **fixed**: every heading,
+paragraph, card, button label, FAQ entry and form field is the live page's, word
+for word, and the six `Read more` links on each still point at `#` exactly as
+they do there. Neither page carries eyebrow labels, because inventing them would
+have meant adding words — `.eyebrow-rule` holds that position in the rhythm
+instead. The home page's "Läs mer om dolda fel i hus" and "Läs mer om dolda fel i
+bostadsrätt" now link here rather than to `service-details.html` and
+`services.html`.
+
+**Before changing either page, re-run the content check.** Fetch the live page,
+strip its tags, and diff the word streams both ways — that is how the rebuilds
+were verified and it is the only thing standing between a layout change and a
+silent edit to the client's copy. Two classes of difference are expected and
+safe: `&nbsp;` where the rebuild has an ordinary space, and a `U+2060` word
+joiner the live page carries before "Fuktskador". Anything else is a real
+change.
 
 **Home page sections, in order:** Hero → About → Services → Why Choose Us →
 Call to Action → Team → Reviews → Latest Blogs → FAQ → Contact CTA → Footer.
@@ -62,7 +72,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ```
 /
-  index.html … dolda-fel-i-hus.html   the ten pages (complete, standalone)
+  index.html … dolda-fel-i-bostadsratt.html   the eleven pages (complete, standalone)
   build.ps1                      optional page assembler — see §4
 
   _partials/                     shared chrome (source for build.ps1)
@@ -103,7 +113,8 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
 It reads `_partials/*` plus `_pages/<slug>.html` and rewrites the root pages it has
-sources for. `dolda-fel-i-hus.html` was written directly and has no `_pages/` source.
+sources for. The two practice pages were written directly and have no `_pages/`
+sources.
 
 Front matter keys at the top of each `_pages/<slug>.html`:
 
@@ -173,7 +184,7 @@ law-firm-hero-columns-1800.webp             16:9 home hero
 apartment buildings, Nordic interiors, a construction detail, a surveyor's
 drawings and the Stockholm waterfront, shot in the same daylight and the same
 restrained palette so the page reads as one commissioned set rather than
-assorted stock. The home page and `dolda-fel-i-hus.html` draw every one of their
+assorted stock. The home page and the two practice pages draw every one of their
 photographs from this folder; no other page does, so the set can be re-shot or
 re-licensed without touching the rest of the site.
 
@@ -479,7 +490,7 @@ Verified in this build:
 * Zero horizontal overflow at 360 / 480 / 768 / 992 / 1200 / 1440
 * One CSS file and one JS file, both deferred and unminified for legibility
 * LCP image preloaded per page with `fetchpriority="high"`; everything else lazy
-* Images: 189 files, ~23 MB total
+* Images: 204 files, ~25 MB total
 
 ---
 
