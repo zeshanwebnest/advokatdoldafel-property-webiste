@@ -280,8 +280,15 @@ say without writing new copy. It carries its weight with photography instead:
 | Section          | Photograph                                                    |
 | ---------------- | ------------------------------------------------------------- |
 | Hero (full-bleed)| `stockholm-boulevard-wide` + `city-entrance-doors-portrait` inset |
-| Kontakta oss     | `stockholm-skyline-wide` — the same ground as every closing band |
 | Karta            | the Google embed in `.map-frame`                              |
+| Kontakta oss     | `stockholm-skyline-wide` — the same ground as every closing band |
+
+**The map sits between the hero and the contact band, not after it.** The live
+page puts it last, but that leaves two dark grounds touching — the hero and the
+contact band read as one region, the same failure the expert band hit on
+`dolda-fel-i-hus.html`. The limestone map band between them gives the page a
+dark / light / dark rhythm and lets the form close it above the footer, as on
+every other page. No copy moved; only the embed did.
 
 The hero photograph runs bright and sunlit where every other hero on the site is
 overcast or dusk, which is what stops a three-band page from reading as thin. The
