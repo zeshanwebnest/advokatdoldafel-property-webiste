@@ -2667,3 +2667,103 @@ address { font-style: normal; }
   box-shadow: 0 0 0 1px rgba(185,139,84,.35), 0 0 0 10px rgba(185,139,84,.07), var(--sh-lg);
 }
 .expert-band--light .expert-band__portrait img { filter: grayscale(.25) contrast(1.03); }
+
+/* 22.16 ADDRESS NOTE — a postal address set apart from the copy -----------
+   The consumer board's address is the last thing in its paragraph on the
+   source page. Left inline it reads as three orphan lines; given an oak rule
+   and a limestone ground it reads as what it is — somewhere to write to. */
+.address-note {
+  display: block;
+  padding: 1.1rem 1.35rem;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--r-xs) var(--r-xs) 0;
+  background: var(--surface-alt);
+  font-family: var(--font-display);
+  font-size: var(--fs-h4); font-weight: 600;
+  line-height: 1.65; color: var(--text);
+  font-style: normal;
+}
+
+/* 22.17 Long single-word headlines ----------------------------------------
+   `.hero__title` breaks words so a headline can never overflow its box. That
+   is right for a phrase, wrong for a Swedish compound standing alone:
+   "Konsumenttvistnämnden" is 21 characters against a 15ch cap, so it split as
+   "Konsumenttvistnäm / nden". The cap now only governs where phrases wrap —
+   a single long word overflows it and sets on one line, which the container
+   has room for. */
+.hero--estate .hero__title { overflow-wrap: normal; }
+/* A one-word headline cannot wrap, so on a narrow screen it either overflows
+   or splits mid-syllable. `hyphens: auto` would break it properly, but only
+   where the browser ships a Swedish dictionary — Chrome does not. Sizing the
+   headline so the word fits is the reliable answer; add the modifier to any
+   hero whose title is a single long compound. */
+@media (max-width: 480px) {
+  .hero--estate .hero__title--compound {
+    font-size: clamp(1.625rem, 7.2vw, 2.25rem);
+    overflow-wrap: normal;
+  }
+}
+
+/* 22.18 Numbered lists inside an accordion --------------------------------
+   `.accordion__body li::before` draws an oak dot for every list item, which
+   is right for a bulleted list and wrong for a numbered one — an <ol> came
+   out as four dots. Ordered lists keep their markers. */
+.accordion__body ol {
+  list-style: decimal; padding-left: 1.5rem; margin-top: .85em;
+}
+.accordion__body ol > li { padding-left: .2rem; }
+.accordion__body ol > li::before { content: none; }
+.accordion__body ol > li::marker { color: var(--accent-deep); font-weight: 600; }
+.accordion__body strong { color: var(--text); font-weight: 600; }
+/* A paragraph closing a list needs the same air as one following a paragraph. */
+.accordion__body ol + p, .accordion__body ul + p { margin-top: .85em; }
+
+/* ==========================================================================
+   23. FOOTER — the client's four-column layout
+   --------------------------------------------------------------------------
+   The brand blurb is now the first column of the grid rather than a row of its
+   own above it, matching the live site: blurb, Snabblänkar, Kontaktinformation,
+   Prenumerera oss, then a bottom bar carrying the copyright and three links out
+   to advantage.se.
+   ========================================================================== */
+.footer-cols--brand { border-top: 0; }
+.footer-cols--brand .footer-intro {
+  display: block; padding-block: 0; gap: 0;
+}
+.footer-cols--brand .footer-intro p {
+  margin-top: var(--s-5);
+  font-size: var(--fs-sm); line-height: 1.75;
+}
+@media (min-width: 1040px) {
+  .footer-cols--brand { grid-template-columns: 1.55fr 1fr 1.1fr .75fr; }
+}
+
+/* Between the drawer breakpoint and the wide grid the four columns are narrow
+   enough that "Prenumerera oss" wraps and the fourth social tile drops onto a
+   second row. Borrowing width from the blurb keeps that column on one line. */
+@media (min-width: 1040px) and (max-width: 1279px) {
+  .footer-cols--brand { grid-template-columns: 1.2fr 1fr 1.1fr 1.05fr; }
+}
+
+/* The social row is a footer column now, not a tail on the bottom bar. */
+.footer-cols--brand .social-row { flex-wrap: wrap; }
+
+/* Bottom bar: copyright left, the three advantage.se links right. */
+.footer-legal {
+  display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; margin: 0;
+  list-style: none; padding: 0;
+}
+.footer-legal a {
+  color: var(--text-inverse-mu); text-decoration: none;
+  font-size: var(--fs-sm); letter-spacing: .06em; text-transform: uppercase;
+  transition: color var(--t-fast) var(--ease);
+}
+.footer-legal a:hover { color: #fff; }
+
+/* Six Swedish nav items are longer than the six English ones they replace, so
+   the row needs to keep its nerve down to the drawer breakpoint. */
+@media (min-width: 1000px) and (max-width: 1279px) {
+  .nav ul { gap: 1rem; }
+  .nav a { font-size: var(--fs-xs); }
+  .header-phone { display: none; }
+}

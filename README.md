@@ -1,6 +1,6 @@
 # Advantage Law Firm — website
 
-Thirteen static pages, built with HTML, CSS and vanilla JavaScript.
+Fifteen static pages, built with HTML, CSS and vanilla JavaScript.
 No framework, no build step required to run, no third-party runtime dependencies
 beyond the Google Fonts stylesheet.
 
@@ -23,27 +23,33 @@ beyond the Google Fonts stylesheet.
 | `dolda-fel-i-bostadsratt.html` | Dolda fel i bostadsrätt — practice page |
 | `dolda-fel-tvister.html` | Dolda fel tvister — practice page |
 | `allmanna-villkor.html` | Allmänna villkor — terms |
+| `konsumenttvistnamnden.html` | Konsumenttvistnämnden — consumer disputes board |
+| `faq.html`            | FAQ — vanliga frågor och svar |
 
-Four pages are rebuilds of live pages in this design system: the three practice
+Six pages are rebuilds of live pages in this design system: the three practice
 pages from `https://advokatdoldafel.se/dolda-fel-i-hus/`,
-`/dolda-fel-i-bostadsratt/` and `/dolda-fel-tvister/`, and the terms page from
-`/allmanna-villkor/`. Their copy is the client's and is **fixed**: every heading,
-paragraph, clause, card, button label, FAQ entry and form field is the live page's,
-word for word, and the six `Read more` links on the first two practice pages still
-point at `#` exactly as they do there. None of them carries eyebrow labels, because
-inventing them would have meant adding words — `.eyebrow-rule` holds that position
-in the rhythm instead. The home page's "Läs mer om dolda fel i hus" and "Läs mer om
-dolda fel i bostadsrätt" now link to the first two rather than to
-`service-details.html` and `services.html`.
+`/dolda-fel-i-bostadsratt/` and `/dolda-fel-tvister/`, and the three informational
+pages from `/allmanna-villkor/`, `/konsumenttvistnamnden/` and `/faq/`. Their copy
+is the client's and is **fixed**: every heading, paragraph, clause, card, button
+label, FAQ entry and form field is the live page's, word for word, and every `#`
+link still points at `#` exactly as it does there. None of them carries eyebrow
+labels, because inventing them would have meant adding words — `.eyebrow-rule`
+holds that position in the rhythm instead. The home page's "Läs mer om dolda fel i
+hus" and "Läs mer om dolda fel i bostadsrätt" now link to the first two rather than
+to `service-details.html` and `services.html`.
 
-**`dolda-fel-tvister.html` and `allmanna-villkor.html` are not linked from
-anywhere yet.** The other two replaced existing links whose text already named
-them; nothing on the site says "tvister" or "allmänna villkor" in a way that could
-be repointed, and adding a link means writing new words into the shared footer.
-Both need a footer entry — terms conventionally sit in the bottom bar beside the
-copyright — or a decision from the client about where they belong.
+**The client's copy contains typos that the rebuilds reproduce on purpose.** On
+`/faq/` several bolded lead words run into the text after them — "skadeståndför
+kostnader", "hävning av köpeti särskilt allvarliga fall", "Fastighetsrätt–
+exempelvis", "framställa krav.När ett fel" — because the source markup closes the
+`<strong>` with no space. Adding the spaces would be an edit to the copy and the
+word-stream check would flag it. Leave them, or get the client to fix the source.
 
-**Before changing any of the four, re-run the content check.** Fetch the live page,
+**All six are reachable from the site chrome.** The Swedish nav carries the three
+practice pages; the footer's Snabblänkar column carries the terms page, the
+disputes board and the FAQ (§4).
+
+**Before changing any of the six, re-run the content check.** Fetch the live page,
 strip its tags, and diff the word streams both ways — that is how the rebuilds
 were verified and it is the only thing standing between a layout change and a
 silent edit to the client's copy. Two classes of difference are expected and
@@ -82,7 +88,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ```
 /
-  index.html … allmanna-villkor.html   the thirteen pages (complete, standalone)
+  index.html … faq.html   the fifteen pages (complete, standalone)
   build.ps1                      optional page assembler — see §4
 
   _partials/                     shared chrome (source for build.ps1)
@@ -113,17 +119,57 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ---
 
-## 4. Editing the shared header and footer
+## 4. The site chrome — Swedish header and footer
+
+The header and footer are the client's, taken from `https://advokatdoldafel.se/`
+and carried identically by all fifteen pages.
+
+**Header.** Top bar (address, opening hours, phone, e-mail), then the logo, the
+six-item Swedish nav and the phone link. There is no "Book a consultation"
+button — the live header does not have one, and the six Swedish labels need the
+room.
+
+| Nav item                | Target                                        |
+| ----------------------- | --------------------------------------------- |
+| Hem                     | `index.html`                                  |
+| Dolda fel i hus         | `dolda-fel-i-hus.html`                        |
+| Dolda fel i bostadsrätt | `dolda-fel-i-bostadsratt.html`                |
+| Dolda fel tvister       | `dolda-fel-tvister.html`                      |
+| Artiklar                | `https://advokatdoldafel.se/artiklar/`        |
+| Kontakta oss            | `https://advokatdoldafel.se/kontakta-oss/`    |
+
+The last two go out to the live site because there is no local equivalent yet.
+Build those pages and the two hrefs are the only thing to change. The four local
+pages carry `aria-current="page"` on their own nav item, in both the header and
+the drawer.
+
+Those Swedish labels are roughly 40% longer than the English ones they replaced,
+so between 1000px and 1279px the nav tightens its gap, drops to `--fs-xs` and
+hides the header phone link rather than wrapping to two rows. Below 1000px it is
+the drawer as before.
+
+**Footer.** Four columns — the brand blurb, **Snabblänkar**, **Kontaktinformation**
+and **Prenumerera oss** — over a bottom bar carrying the copyright and three links
+to `advantage.se` (Entreprenadrätt, Fel i entreprenad, Fastighetsrätt). Between
+1040px and 1279px the columns are re-proportioned (`1.2fr 1fr 1.1fr 1.05fr`);
+at the default `1.55fr 1fr 1.1fr .75fr` the social column is too narrow there and
+the fourth tile drops to a second row.
+
+**The social URLs are still placeholders except YouTube.** On the live site three
+of the four icons carry no `href` at all and the Instagram-classed icon points at
+a YouTube channel. The real YouTube URL is wired up; Facebook, Instagram and
+LinkedIn point at the bare service homepages until the client supplies theirs.
 
 Every page contains a full copy of the header and footer so the site runs without
-tooling. To keep those copies identical, edit the partial and rebuild:
+tooling. To change them, edit one page's block and propagate it — or edit the
+partial and rebuild, if the `_partials/` sources are restored:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
 It reads `_partials/*` plus `_pages/<slug>.html` and rewrites the root pages it has
-sources for. The four rebuilt pages were written directly and have no `_pages/`
+sources for. The six rebuilt pages were written directly and have no `_pages/`
 sources.
 
 Front matter keys at the top of each `_pages/<slug>.html`:
@@ -457,6 +503,18 @@ both so they do not become their own kind of repetition:
   not already imply — renumbering happens by itself if a clause is added or moved.
 - `.contact-note` — the closing note as a bar: copy left, action right, so it does
   not sit as a tall block under a two-column argument.
+- `.address-note` — a postal address set apart from the copy with an oak rule and
+  a limestone ground. On the source page the disputes board's address is the tail
+  of a paragraph; inline it reads as three orphan lines.
+- **Accordion answers can hold lists.** `.accordion__body li::before` draws an oak
+  dot on every item, which turned an `<ol>` on `faq.html` into four dots; ordered
+  lists now keep their markers, and a paragraph closing a list gets the same air as
+  one following a paragraph.
+- `.hero__title--compound` — for a hero whose title is one long word. The base
+  title breaks words so a headline can never overflow, which split
+  "Konsumenttvistnämnden" as "Konsumenttvistnäm / nden". `hyphens: auto` would
+  break it correctly but only where the browser ships a Swedish dictionary, and
+  Chrome does not — so the modifier sizes the headline to fit instead.
 - `.note-panel` — a photograph and a short slate note locked into one frame.
 - `.party-card` / `.party-card--slate` — a matched pair of panels, one limestone
   and one slate, each with a glyph medallion and a drawn elevation watermark. Used
@@ -479,8 +537,7 @@ both so they do not become their own kind of repetition:
 - `.cta.cta--split` — the closing band on all nine pages: headline, lead and buttons
   in the left column, a `.contact-cards` list (phone, e-mail, response time, office)
   in the right. Stacks to one column below 940px.
-- The footer — logo and description row, four link columns, then copyright and the
-  social tiles. Edit it once in `_partials/footer.html`.
+- The footer — the client's four Swedish columns over a copyright bar (§4).
 
 Icon tiles (`.value-card__icon`, `.contact-cards__icon`) wrap the glyph rather than
 sharing an element with it: `<span class="value-card__icon"><span class="icon icon--users">
@@ -512,7 +569,7 @@ Verified in this build:
 * Zero horizontal overflow at 360 / 480 / 768 / 992 / 1200 / 1440
 * One CSS file and one JS file, both deferred and unminified for legibility
 * LCP image preloaded per page with `fetchpriority="high"`; everything else lazy
-* Images: 210 files, ~26 MB total
+* Images: 222 files, ~28 MB total
 
 ---
 
@@ -553,7 +610,9 @@ unless you are reading it off the live Google listing that day.
       placeholders around the real portraits. Every profile currently links to the same
       `team-details.html`; duplicate it per person once the real biographies exist.
 - [ ] Configure `data-endpoint` on the contact form (§8).
-- [ ] Replace the placeholder social URLs in `_partials/footer.html`.
+- [ ] **Get the real social URLs.** Only YouTube is wired up; Facebook, Instagram
+      and LinkedIn point at the bare service homepages. The live site is no help —
+      three of its four icons have no `href` and the Instagram one goes to YouTube.
 - [ ] Set the real domain — the canonical URLs and JSON-LD currently use
       `https://advantagelaw.example`. Find and replace across `_pages/` and rebuild.
 - [ ] Generate `sitemap.xml` and `robots.txt`.
