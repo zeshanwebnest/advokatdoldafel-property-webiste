@@ -403,7 +403,7 @@ defects, so the images follow it literally.
 | --------------------------- | ----------------------------- | ------------------------------------ |
 | Hero                        | `facade-opened-damage-wide`   | a section cut out of an intact wall  |
 | Hero inset                  | `damaged-roof-portrait`       | a roof stripped to the battens       |
-| Inledning                   | `drainage-trench-detail`      | a drain pipe in an excavated trench  |
+| Inledning                   | `bathroom-stripped-renovation`| a bathroom stripped back mid-works   |
 | Vilken bevisning väger tyngst | `wall-opened-inspection`    | two experts at an opened wall        |
 | Fråga våra experter         | `basement-block-walls`        | a bare basement                      |
 | Förlikning eller domstol    | `nordic-courthouse-entrance`  | a Nordic courthouse portico          |
@@ -411,7 +411,14 @@ defects, so the images follow it literally.
 
 The hero answers the page's own opening sentence — "fukten sprider sig bakom en
 till synes hel vägg" — with a wall that looks whole apart from one cut-out panel.
-`drainage-trench-detail` sits under "dräneringen kollapsar" in the same sentence.
+`bathroom-stripped-renovation` takes the first trigger in that same sentence,
+"när badrummet rivs".
+
+That slot first held a drainage trench, chosen for "dräneringen kollapsar" in the
+same line. It was rejected on sight: at that crop it read as a municipal
+earthworks site, not a house. **Naming the right subject is not enough — the
+photograph still has to be recognisably domestic.** Utility and civil-engineering
+stock fails that test even when the caption matches the copy word for word.
 
 **Two slots on this page are legal, not technical, and the images say so.**
 "Förlikning eller domstol?" gets a courthouse and "När professionell hjälp gör
