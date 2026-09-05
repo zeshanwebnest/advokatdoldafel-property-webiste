@@ -312,10 +312,47 @@ Select-String -Path .\_pages\*.html -Pattern "your-image-name"
 If the aspect ratio changes, also update `width` and `height` on the `<img>` so the
 space stays reserved and layout shift stays at zero.
 
-Every photograph is sourced from Unsplash under the Unsplash License, which permits
-commercial use. The nine portraits in `assets/images/team/` are the real published
-photographs from advantage.se — confirm the firm holds the rights and that everyone
-pictured is still with the firm before launch.
+Photography comes from Unsplash (Unsplash License) and Pexels (Pexels License).
+Both permit commercial use without attribution. The nine portraits in
+`assets/images/team/` are the real published photographs from advantage.se —
+confirm the firm holds the rights and that everyone pictured is still with the
+firm before launch.
+
+### The hidden-defect set — `dolda-fel-i-hus.html`
+
+The client's brief: *"dolda fel" means hidden defects in a house or property —
+issues not visible or easily detectable when buying, discovered later.* A photo of
+a nice house does not say that. Every image on the practice page was replaced with
+one that shows the defect itself, or someone looking for it:
+
+| Section                      | Photograph                    | What it shows                    |
+| ---------------------------- | ----------------------------- | -------------------------------- |
+| Hero                         | `mould-wall-flashlight-wide`  | a torch on a mould-covered wall  |
+| Hero inset                   | `settlement-crack-portrait`   | a crack running down plaster     |
+| Dolda fel i hus              | `mould-damp-wall`             | damp and mould on an inner wall  |
+| Exempel på dolda fel         | `opened-wall-insulation-wide` | a wall stripped to studs         |
+| Vad är dolda fel vid husköp  | `ceiling-water-damage-portrait` | ceiling plaster off after a leak |
+| Fråga våra experter          | `basement-beams-pipes`        | an unfinished basement           |
+| Köparens undersökningsplikt  | `inspector-outlet-check`      | an inspector at an outlet + vent |
+| När ett fel inte är dolt     | `waterproofing-behind-tiles`  | the membrane behind the tiling   |
+| Vanliga exempel på tvister   | `crawl-space-inspection`      | a crawl-space hatch being opened |
+| Så bör du agera              | `moisture-meter-bathroom`     | a moisture meter on a wet-room floor |
+| Ersättning vid dolda fel     | `bathroom-rebuild-drywall`    | a wet room being rebuilt         |
+| Varför juridisk hjälp        | `studs-insulation-room`       | a room open to reglar and insulation |
+
+Each one is matched to the section's argument, not just to the theme —
+`waterproofing-behind-tiles` sits under the paragraph about `tätskiktsfel`,
+`crawl-space-inspection` under the one about `fuktskada i källare` and
+`grundläggning`. **Update the `alt` text with the picture.** It has to describe
+what is genuinely in the photograph; the alt on this page names the actual defect
+(«Mörka fukt- och mögelstråk …»), which is also what makes it useful to a screen
+reader and to search.
+
+Two things to know before extending the set to the other pages. Unsplash returns
+mostly abstract *peeling-paint texture* for these queries; Pexels has the usable
+photographs of inspections and real damage. And Pexels serves WebP directly —
+append `&fm=webp&q=<n>` to the `images.pexels.com/photos/<id>/…` URL, the same
+trick the Unsplash URLs use, or you get a JPEG with a `.webp` name.
 
 ---
 
