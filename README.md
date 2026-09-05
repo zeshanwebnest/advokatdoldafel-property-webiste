@@ -361,6 +361,38 @@ photographs of inspections and real damage. And Pexels serves WebP directly —
 append `&fm=webp&q=<n>` to the `images.pexels.com/photos/<id>/…` URL, the same
 trick the Unsplash URLs use, or you get a JPEG with a `.webp` name.
 
+### The hidden-defect set — `dolda-fel-i-bostadsratt.html`
+
+Same brief, different building. A flat's hidden defects live in the wet room, the
+pipework and the boundary with the association's stammar, so none of the house
+page's photographs is reused here:
+
+| Section                        | Photograph                    | What it shows                       |
+| ------------------------------ | ----------------------------- | ----------------------------------- |
+| Hero                           | `tiles-off-wall-wide`         | tiles lifting off a damp-stained wall |
+| Hero inset                     | `wetroom-pipes-portrait`      | pipework against wet-room tiling    |
+| Dolda fel i bostadsrätt        | `wc-stripped-pipes`           | a WC stripped back, pipes exposed   |
+| Exempel på dolda fel           | `apartment-wall-opened-wide`  | a flat's wall opened up             |
+| Vad menas med dolda fel        | `wetroom-renovation-portrait` | a wet room mid-rebuild              |
+| Fråga våra experter            | `corroded-pipes-wall`         | corroded pipe stubs out of a wall   |
+| Säljarens ansvar               | `damp-stained-wall`           | failed plaster and damp runs        |
+| Vanliga exempel på fel         | `floor-drain-wetroom`         | a floor drain in a tiled floor      |
+| Skillnaden bostadsrätt/fastighet | `pipe-manifold-work`        | pipes joined at a floor manifold    |
+| Så bör du agera                | `documenting-apartment`       | photographing a flat as evidence    |
+| Vad kan du kräva               | `apartment-strip-out`         | a flat stripped for repair          |
+| Bevisfrågan                    | `pipe-joint-inspection`       | a pipe joint examined behind insulation |
+| När juridisk hjälp gör skillnad| `apartment-renovation-open`   | a flat open, floor taken up         |
+
+The matching is again argument-level, and on this page the copy names the subjects
+outright: `floor-drain-wetroom` sits under "golvbrunnar som installerats fel",
+`damp-stained-wall` under "missfärgningar … tecken på tidigare läckage",
+`pipe-manifold-work` under the section separating the flat from the building.
+
+One image was replaced after review for the same reason the house hero was: a
+water-stained bedroom with bedding and pictures on the wall read as a neglected
+flat rather than a defect, and it looked like a personal snapshot beside the rest
+of the set. `damp-stained-wall` does the same job and matches the register.
+
 ---
 
 ## 7. Adding a service, a team member or an article
