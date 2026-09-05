@@ -2767,3 +2767,73 @@ address { font-style: normal; }
   .nav a { font-size: var(--fs-xs); }
   .header-phone { display: none; }
 }
+
+/* ==========================================================================
+   24. CONTACT PAGE — contact lines and the map frame
+   --------------------------------------------------------------------------
+   The live contact page lists phone, e-mail and address as icon + text with no
+   label above each one, so `.contact-cards` (which needs a <dt>) cannot be used
+   here without inventing words. `.contact-lines` is the same pill on dark, minus
+   the label row.
+   ========================================================================== */
+.contact-lines {
+  display: grid; gap: var(--s-4);
+  /* The top margin lives here rather than on a utility class: the component
+     resets the list margin, and a reset in a later section beats `.u-mt-*`. */
+  margin: var(--s-7) 0 0; padding: 0; list-style: none;
+}
+.contact-lines li {
+  display: flex; align-items: center; gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,.05);
+  transition: border-color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease),
+              transform var(--t-fast) var(--ease);
+}
+.contact-lines li:hover {
+  border-color: rgba(214,174,118,.55);
+  background: rgba(255,255,255,.08);
+  transform: translateX(4px);
+}
+.contact-lines__icon {
+  flex: 0 0 auto;
+  display: grid; place-items: center;
+  inline-size: 2.75rem; block-size: 2.75rem;
+  border-radius: var(--r);
+  background: rgba(214,174,118,.16);
+  color: var(--accent-soft);
+}
+.contact-lines__icon .icon { inline-size: 1.25rem; block-size: 1.25rem; }
+.contact-lines a, .contact-lines > li > span:last-child {
+  color: #fff; font-weight: 600; font-size: var(--fs-base);
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.contact-lines a:hover { color: var(--accent-soft); }
+
+/* The office address is a single 54-character run of capitals; on a narrow
+   column it needs the smaller step or it crowds the icon. */
+@media (max-width: 620px) {
+  .contact-lines li { padding: var(--s-4); }
+  .contact-lines a, .contact-lines > li > span:last-child { font-size: var(--fs-sm); }
+}
+
+/* The Google embed, framed like every other media block on the site. */
+.map-frame {
+  margin: 0;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: var(--sh-lg);
+  /* A tinted ground rather than white, so the frame still reads as a panel while
+     the Google embed is loading — or if a visitor blocks third-party frames. */
+  background: linear-gradient(160deg, #E8E2D7, #D9D2C6);
+}
+.map-frame iframe {
+  display: block;
+  inline-size: 100%;
+  block-size: clamp(20rem, 42vw, 30rem);
+  border: 0;
+  filter: saturate(.88) contrast(1.02);
+}

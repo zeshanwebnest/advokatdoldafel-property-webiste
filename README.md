@@ -25,11 +25,13 @@ beyond the Google Fonts stylesheet.
 | `allmanna-villkor.html` | Allmänna villkor — terms |
 | `konsumenttvistnamnden.html` | Konsumenttvistnämnden — consumer disputes board |
 | `faq.html`            | FAQ — vanliga frågor och svar |
+| `kontakta-oss.html`   | Kontakta oss — contact page   |
 
-Six pages are rebuilds of live pages in this design system: the three practice
+Seven pages are rebuilds of live pages in this design system: the three practice
 pages from `https://advokatdoldafel.se/dolda-fel-i-hus/`,
-`/dolda-fel-i-bostadsratt/` and `/dolda-fel-tvister/`, and the three informational
-pages from `/allmanna-villkor/`, `/konsumenttvistnamnden/` and `/faq/`. Their copy
+`/dolda-fel-i-bostadsratt/` and `/dolda-fel-tvister/`, the three informational
+pages from `/allmanna-villkor/`, `/konsumenttvistnamnden/` and `/faq/`, and the
+contact page from `/kontakta-oss/`. Their copy
 is the client's and is **fixed**: every heading, paragraph, clause, card, button
 label, FAQ entry and form field is the live page's, word for word, and every `#`
 link still points at `#` exactly as it does there. None of them carries eyebrow
@@ -45,11 +47,17 @@ exempelvis", "framställa krav.När ett fel" — because the source markup close
 `<strong>` with no space. Adding the spaces would be an edit to the copy and the
 word-stream check would flag it. Leave them, or get the client to fix the source.
 
-**All six are reachable from the site chrome.** The Swedish nav carries the three
-practice pages; the footer's Snabblänkar column carries the terms page, the
-disputes board and the FAQ (§4).
+**All seven are reachable from the site chrome.** The Swedish nav carries the three
+practice pages and the contact page; the footer's Snabblänkar column carries the
+terms page, the disputes board, the FAQ and the contact page (§4).
 
-**Before changing any of the six, re-run the content check.** Fetch the live page,
+**`kontakta-oss.html` now owns every "Kontakta oss" link on the site.** Those
+hrefs used to be absolute — `https://advokatdoldafel.se/kontakta-oss/` — in the
+chrome and in the client's body copy, because there was no local equivalent. They
+all point at the local file now. The destination is the same page; only the URL
+form changed. `contact.html` is the older English template page and is left alone.
+
+**Before changing any of the seven, re-run the content check.** Fetch the live page,
 strip its tags, and diff the word streams both ways — that is how the rebuilds
 were verified and it is the only thing standing between a layout change and a
 silent edit to the client's copy. Two classes of difference are expected and
@@ -88,7 +96,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ```
 /
-  index.html … faq.html   the fifteen pages (complete, standalone)
+  index.html … kontakta-oss.html   the sixteen pages (complete, standalone)
   build.ps1                      optional page assembler — see §4
 
   _partials/                     shared chrome (source for build.ps1)
@@ -122,7 +130,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 ## 4. The site chrome — Swedish header and footer
 
 The header and footer are the client's, taken from `https://advokatdoldafel.se/`
-and carried identically by all fifteen pages.
+and carried identically by all sixteen pages.
 
 **Header.** Top bar (address, opening hours, phone, e-mail), then the logo, the
 six-item Swedish nav and the phone link. There is no "Book a consultation"
@@ -136,12 +144,12 @@ room.
 | Dolda fel i bostadsrätt | `dolda-fel-i-bostadsratt.html`                |
 | Dolda fel tvister       | `dolda-fel-tvister.html`                      |
 | Artiklar                | `https://advokatdoldafel.se/artiklar/`        |
-| Kontakta oss            | `https://advokatdoldafel.se/kontakta-oss/`    |
+| Kontakta oss            | `kontakta-oss.html`                           |
 
-The last two go out to the live site because there is no local equivalent yet.
-Build those pages and the two hrefs are the only thing to change. The four local
-pages carry `aria-current="page"` on their own nav item, in both the header and
-the drawer.
+Artiklar is the one item that still goes out to the live site, because there is no
+local equivalent yet; build that page and its href is the only thing to change.
+The five local pages carry `aria-current="page"` on their own nav item, in both
+the header and the drawer.
 
 Those Swedish labels are roughly 40% longer than the English ones they replaced,
 so between 1000px and 1279px the nav tightens its gap, drops to `--fs-xs` and
@@ -265,6 +273,21 @@ the point, so check it before swapping any single image:
 | Varför anlita oss             | `nordic-kitchen-corridor` behind the slate scrim |
 | Kontakt                       | `stockholm-skyline-wide`            |
 
+**`kontakta-oss.html`** is the shortest page on the site — the live contact page
+is a heading, three contact lines, a form and a map, and there is nothing else to
+say without writing new copy. It carries its weight with photography instead:
+
+| Section          | Photograph                                                    |
+| ---------------- | ------------------------------------------------------------- |
+| Hero (full-bleed)| `stockholm-boulevard-wide` + `city-entrance-doors-portrait` inset |
+| Kontakta oss     | `stockholm-skyline-wide` — the same ground as every closing band |
+| Karta            | the Google embed in `.map-frame`                              |
+
+The hero photograph runs bright and sunlit where every other hero on the site is
+overcast or dusk, which is what stops a three-band page from reading as thin. The
+inset is a stately city doorway rather than another interior, so the two images
+tell one story — the street, then the door.
+
 The hero plate — `hero-modern-villa-wide-{1200,1800,2400}.webp` — is preloaded in
 the `<head>` of `index.html`. Change the photograph and change the
 `rel="preload"` with it, or the largest paint regresses.
@@ -346,38 +369,44 @@ needs:
 
 ## 8. Where to configure form submission
 
-One form, on `contact.html`, handled by `assets/js/main.js` (section 10).
+Nine forms, all handled by the same code in `assets/js/main.js` (section 10):
+`contact.html`, `kontakta-oss.html`, and the closing band on each of the seven
+rebuilt and practice pages.
 
-**It is not wired to a recipient.** By design the code never pretends a message was
-sent. Submitting a valid form currently shows:
+**None of them is wired to a recipient.** By design the code never pretends a
+message was sent. Submitting a valid form currently shows:
 
 > This form is not connected to a recipient yet. Please call +46 8 20 21 40 or e-mail
 > info@advantage.se and we will get straight back to you.
 
-To enable real submission, add `data-endpoint` to the `<form>` in
-`_pages/contact.html` and rebuild:
+To enable real submission, add `data-endpoint` to each `<form>`:
 
 ```html
 <form class="form" data-contact-form data-endpoint="https://your-handler.example/submit" novalidate>
 ```
 
-The script then `POST`s a `FormData` payload (`name`, `counterparty`, `phone`,
-`email`, `message`, `consent`) and expects a `2xx` response. Anything else shows an
-error pointing at the phone number.
+The script then `POST`s a `FormData` payload of whatever fields that form carries
+and expects a `2xx` response. Anything else shows an error pointing at the phone
+number.
 
-**The fields.** Name, Your Counterparty, Your Phone, Email, Describe your case, then
-Send. `counterparty` is the only optional one; it is there so the firm can run a
-conflict check before replying. Every input has a real `<label>` — they are
-`visually-hidden` so the placeholder carries the visible text, because a placeholder
-on its own vanishes the moment someone types and leaves the field unnamed to a screen
-reader. If you add a field, add its label the same way. The consent checkbox is
-required: the form collects personal detail about a legal matter, so do not remove it.
+**The fields differ by page, and that is deliberate — each form mirrors its live
+original.** `contact.html` (the older English template) has Name, Your
+Counterparty, Your Phone, Email, Describe your case and a required consent
+checkbox. The Swedish pages carry the live site's Elementor form: Namn, Telefon
+(the only required field), E-post, Ämne, Meddelande — and on `kontakta-oss.html`
+one extra field, **Din motpart**, which the live contact page has and the others
+do not. Do not "harmonise" them; the difference is the client's.
 
-**Privacy notes.** Nothing typed into the form is written to `localStorage` or
+Every input has a real `<label>`. If you add a field, add its label the same way —
+a placeholder on its own vanishes the moment someone types and leaves the field
+unnamed to a screen reader.
+
+**Privacy notes.** Nothing typed into any form is written to `localStorage` or
 `sessionStorage`. There is no analytics, tag manager, advertising pixel or tracking
-cookie anywhere in the build. The map is an OpenStreetMap embed, so no API key is
-exposed client-side. The message field tells visitors not to send sensitive documents
-through the form — keep that wording if you rewrite the copy.
+cookie anywhere in the build. `contact.html` uses an OpenStreetMap embed, so no API
+key is exposed client-side; `kontakta-oss.html` uses the client's own Google Maps
+embed URL, copied verbatim from the live page, which does set Google cookies for the
+visitor. Swap it for the OSM embed if the client wants the page cookie-free.
 
 ---
 
@@ -537,6 +566,18 @@ both so they do not become their own kind of repetition:
 - `.cta.cta--split` — the closing band on all nine pages: headline, lead and buttons
   in the left column, a `.contact-cards` list (phone, e-mail, response time, office)
   in the right. Stacks to one column below 940px.
+- `.contact-lines` — phone, e-mail and address as icon + text pills on a dark
+  ground, used in the contact band on `kontakta-oss.html`. It exists because
+  `.contact-cards` needs a `<dt>` label above each value ("Ring oss", "Mejla
+  oss") and the live contact page has none; adding them would have meant writing
+  new words. Its top margin lives in the component, not on a `.u-mt-*` utility —
+  the component's own `margin: 0` list reset sits later in the file and would
+  win.
+- `.map-frame` — the Google embed, framed like every other media block, on a
+  limestone gradient rather than white so it still reads as a panel while the
+  iframe loads. **The map does not paint in headless Chrome** — the embed loads
+  (its "Open in Maps" control renders) but the tiles need a real GPU context, so
+  screenshot it in a browser, not a capture script.
 - The footer — the client's four Swedish columns over a copyright bar (§4).
 
 Icon tiles (`.value-card__icon`, `.contact-cards__icon`) wrap the glyph rather than
@@ -609,15 +650,19 @@ unless you are reading it off the live Google listing that day.
 - [ ] **Confirm the team.** Names, roles and specialisms on `team.html` are
       placeholders around the real portraits. Every profile currently links to the same
       `team-details.html`; duplicate it per person once the real biographies exist.
-- [ ] Configure `data-endpoint` on the contact form (§8).
+- [ ] Configure `data-endpoint` on all nine forms (§8) — they validate but never
+      send until then.
 - [ ] **Get the real social URLs.** Only YouTube is wired up; Facebook, Instagram
       and LinkedIn point at the bare service homepages. The live site is no help —
       three of its four icons have no `href` and the Instagram one goes to YouTube.
 - [ ] Set the real domain — the canonical URLs and JSON-LD currently use
       `https://advantagelaw.example`. Find and replace across `_pages/` and rebuild.
 - [ ] Generate `sitemap.xml` and `robots.txt`.
-- [ ] Add a privacy policy page and link it from the consent checkbox on the contact
-      form, which currently has no target.
+- [ ] Add a privacy policy page and link it from the consent checkbox on
+      `contact.html`, which currently has no target.
+- [ ] Decide on the Google Maps embed on `kontakta-oss.html` — it is the client's
+      own embed URL and sets Google cookies. Keep it, or swap in the OSM embed
+      `contact.html` already uses (§8).
 - [ ] Re-run Lighthouse against the deployed origin, not `file://`.
 "# advokatdoldafel-premium" 
 "# advokatdoldafel-premium" 
