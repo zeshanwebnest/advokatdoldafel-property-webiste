@@ -393,6 +393,42 @@ water-stained bedroom with bedding and pictures on the wall read as a neglected
 flat rather than a defect, and it looked like a personal snapshot beside the rest
 of the set. `damp-stained-wall` does the same job and matches the register.
 
+### The hidden-defect set — `dolda-fel-tvister.html`
+
+A dispute page needs two registers, not one: the defect that started the argument,
+and the investigation and forum that resolve it. The copy is explicit about which
+defects, so the images follow it literally.
+
+| Section                     | Photograph                    | What it shows                        |
+| --------------------------- | ----------------------------- | ------------------------------------ |
+| Hero                        | `facade-opened-damage-wide`   | a section cut out of an intact wall  |
+| Hero inset                  | `damaged-roof-portrait`       | a roof stripped to the battens       |
+| Inledning                   | `drainage-trench-detail`      | a drain pipe in an excavated trench  |
+| Vilken bevisning väger tyngst | `wall-opened-inspection`    | two experts at an opened wall        |
+| Fråga våra experter         | `basement-block-walls`        | a bare basement                      |
+| Förlikning eller domstol    | `nordic-courthouse-entrance`  | a Nordic courthouse portico          |
+| När professionell hjälp     | `plans-on-site-review`        | drawings gone through on site        |
+
+The hero answers the page's own opening sentence — "fukten sprider sig bakom en
+till synes hel vägg" — with a wall that looks whole apart from one cut-out panel.
+`drainage-trench-detail` sits under "dräneringen kollapsar" in the same sentence.
+
+**Two slots on this page are legal, not technical, and the images say so.**
+"Förlikning eller domstol?" gets a courthouse and "När professionell hjälp gör
+verklig skillnad" gets people working through drawings on site. Forcing damage
+photography into those two would have made the images contradict the headings.
+
+Two traps this page sprang, both worth remembering:
+
+- **`split--flush` stretches the media to the text column's height**, so a 16:6
+  panorama gets cover-cropped to a tall slot and loses its subject. Riddarholmen
+  was tried here first and rendered as nothing but water. Feed these slots 3:2, or
+  pick a subject that survives any crop — a colonnade does, a skyline does not.
+- The obvious searches return **American county courthouses with flags** and
+  **Californian construction sites**. Both look wrong on a Swedish page. Search
+  for the European or Nordic equivalent explicitly; `nordic-courthouse-entrance`
+  is Copenhagen, which reads correctly to a Swedish visitor.
+
 ---
 
 ## 7. Adding a service, a team member or an article
