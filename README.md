@@ -327,7 +327,7 @@ one that shows the defect itself, or someone looking for it:
 
 | Section                      | Photograph                    | What it shows                    |
 | ---------------------------- | ----------------------------- | -------------------------------- |
-| Hero                         | `mould-wall-flashlight-wide`  | a torch on a mould-covered wall  |
+| Hero                         | `house-ceiling-damage-wide`   | a failed ceiling in a panelled hall |
 | Hero inset                   | `settlement-crack-portrait`   | a crack running down plaster     |
 | Dolda fel i hus              | `mould-damp-wall`             | damp and mould on an inner wall  |
 | Exempel på dolda fel         | `opened-wall-insulation-wide` | a wall stripped to studs         |
@@ -339,6 +339,13 @@ one that shows the defect itself, or someone looking for it:
 | Så bör du agera              | `moisture-meter-bathroom`     | a moisture meter on a wet-room floor |
 | Ersättning vid dolda fel     | `bathroom-rebuild-drywall`    | a wet room being rebuilt         |
 | Varför juridisk hjälp        | `studs-insulation-room`       | a room open to reglar and insulation |
+
+The hero went through one revision worth recording: the first pick was a torch
+playing over a mould-covered wall, and it was rejected because it read as an
+abandoned building rather than someone's home. The replacement is a white
+tongue-and-groove hall — unmistakably a Nordic house — with the ceiling collapsed
+and damp staining down the panelling. **A defect photograph still has to look like
+a home.** Derelict-building stock fails that test however dramatic it is.
 
 Each one is matched to the section's argument, not just to the theme —
 `waterproofing-behind-tiles` sits under the paragraph about `tätskiktsfel`,
