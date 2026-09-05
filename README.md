@@ -1,6 +1,6 @@
 # Advantage Law Firm — website
 
-Twelve static pages, built with HTML, CSS and vanilla JavaScript.
+Thirteen static pages, built with HTML, CSS and vanilla JavaScript.
 No framework, no build step required to run, no third-party runtime dependencies
 beyond the Google Fonts stylesheet.
 
@@ -22,25 +22,28 @@ beyond the Google Fonts stylesheet.
 | `dolda-fel-i-hus.html`| Dolda fel i hus — practice page |
 | `dolda-fel-i-bostadsratt.html` | Dolda fel i bostadsrätt — practice page |
 | `dolda-fel-tvister.html` | Dolda fel tvister — practice page |
+| `allmanna-villkor.html` | Allmänna villkor — terms |
 
-The three practice pages are rebuilds of the live pages at
-`https://advokatdoldafel.se/dolda-fel-i-hus/`, `/dolda-fel-i-bostadsratt/` and
-`/dolda-fel-tvister/` in this design system. Their copy is the client's and is
-**fixed**: every heading, paragraph, card, button label, FAQ entry and form field
-is the live page's, word for word, and the six `Read more` links on the first two
-still point at `#` exactly as they do there. None of them carries eyebrow labels,
-because inventing them would have meant adding words — `.eyebrow-rule` holds that
-position in the rhythm instead. The home page's "Läs mer om dolda fel i hus" and
-"Läs mer om dolda fel i bostadsrätt" now link to the first two rather than to
+Four pages are rebuilds of live pages in this design system: the three practice
+pages from `https://advokatdoldafel.se/dolda-fel-i-hus/`,
+`/dolda-fel-i-bostadsratt/` and `/dolda-fel-tvister/`, and the terms page from
+`/allmanna-villkor/`. Their copy is the client's and is **fixed**: every heading,
+paragraph, clause, card, button label, FAQ entry and form field is the live page's,
+word for word, and the six `Read more` links on the first two practice pages still
+point at `#` exactly as they do there. None of them carries eyebrow labels, because
+inventing them would have meant adding words — `.eyebrow-rule` holds that position
+in the rhythm instead. The home page's "Läs mer om dolda fel i hus" and "Läs mer om
+dolda fel i bostadsrätt" now link to the first two rather than to
 `service-details.html` and `services.html`.
 
-**`dolda-fel-tvister.html` is not linked from anywhere yet.** The other two
-replaced existing links whose text already named them; nothing on the site says
-"tvister" in a way that could be repointed, and adding a link means adding words
-to a page whose copy is also fixed. It needs either a footer entry or a decision
-from the client about where it belongs.
+**`dolda-fel-tvister.html` and `allmanna-villkor.html` are not linked from
+anywhere yet.** The other two replaced existing links whose text already named
+them; nothing on the site says "tvister" or "allmänna villkor" in a way that could
+be repointed, and adding a link means writing new words into the shared footer.
+Both need a footer entry — terms conventionally sit in the bottom bar beside the
+copyright — or a decision from the client about where they belong.
 
-**Before changing any of them, re-run the content check.** Fetch the live page,
+**Before changing any of the four, re-run the content check.** Fetch the live page,
 strip its tags, and diff the word streams both ways — that is how the rebuilds
 were verified and it is the only thing standing between a layout change and a
 silent edit to the client's copy. Two classes of difference are expected and
@@ -79,7 +82,7 @@ except the OpenStreetMap iframe on the contact page, which needs `http://`.
 
 ```
 /
-  index.html … dolda-fel-tvister.html   the twelve pages (complete, standalone)
+  index.html … allmanna-villkor.html   the thirteen pages (complete, standalone)
   build.ps1                      optional page assembler — see §4
 
   _partials/                     shared chrome (source for build.ps1)
@@ -120,7 +123,7 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
 It reads `_partials/*` plus `_pages/<slug>.html` and rewrites the root pages it has
-sources for. The three practice pages were written directly and have no `_pages/`
+sources for. The four rebuilt pages were written directly and have no `_pages/`
 sources.
 
 Front matter keys at the top of each `_pages/<slug>.html`:
@@ -191,7 +194,7 @@ law-firm-hero-columns-1800.webp             16:9 home hero
 apartment buildings, Nordic interiors, a construction detail, a surveyor's
 drawings and the Stockholm waterfront, shot in the same daylight and the same
 restrained palette so the page reads as one commissioned set rather than
-assorted stock. The home page and the three practice pages draw every one of their
+assorted stock. The home page and the practice pages draw every one of their
 photographs from this folder; no other page does, so the set can be re-shot or
 re-licensed without touching the rest of the site.
 
@@ -438,8 +441,20 @@ both so they do not become their own kind of repetition:
 - `.eyebrow-rule` — a short oak rule standing where a `.badge` would, for pages
   whose copy is fixed and cannot take an invented label.
 - `.expert-band` — headline, one action and a circular portrait, over a slate
-  photographic ground.
+  photographic ground. `.expert-band--light` is the same band on white, with an
+  oak ring around the portrait; the terms page uses it because the band sits
+  between the clause sheet and the closing contact band, and left dark it merged
+  into the CTA below it. Watch the section rhythm when placing this band: two
+  slate grounds touching read as one region, whichever two they are.
 - `.form-card` — a glass panel holding a form on a dark band.
+- `.terms-sheet` / `.terms-list` / `.terms-item` — a numbered legal document on one
+  white sheet, set on the limestone band so the panel reads as a document rather
+  than a run of loose text. Each clause is three columns from 1000px: oak
+  medallion, title, body. **The body must run to the right edge of the sheet.** The
+  first attempt stacked the body under the title and capped it at a measure, which
+  left the right third of the page empty and looked unfinished. The numerals are a
+  CSS counter on the `<ol>`, so the markup carries no numbers the source page does
+  not already imply — renumbering happens by itself if a clause is added or moved.
 - `.contact-note` — the closing note as a bar: copy left, action right, so it does
   not sit as a tall block under a two-column argument.
 - `.note-panel` — a photograph and a short slate note locked into one frame.
@@ -497,7 +512,7 @@ Verified in this build:
 * Zero horizontal overflow at 360 / 480 / 768 / 992 / 1200 / 1440
 * One CSS file and one JS file, both deferred and unminified for legibility
 * LCP image preloaded per page with `fetchpriority="high"`; everything else lazy
-* Images: 204 files, ~25 MB total
+* Images: 210 files, ~26 MB total
 
 ---
 

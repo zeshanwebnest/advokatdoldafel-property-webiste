@@ -2597,3 +2597,73 @@ address { font-style: normal; }
    two up and carrying several paragraphs each. */
 @media (min-width: 900px) { .remedy-row--2 { grid-template-columns: repeat(2, 1fr); } }
 .remedy-row--2 .remedy-card p + p { margin-top: 1em; }
+
+/* 22.14 TERMS SHEET — a numbered legal document ----------------------------
+   Twelve clauses on one white sheet, set on the limestone band so the panel
+   reads as a document rather than a run of loose text. Each clause is three
+   columns: an oak medallion, the title, and the body running to the right
+   edge of the sheet — capping the body at a measure and leaving the right
+   third of the page empty was the first attempt and it looked unfinished. */
+.terms-sheet {
+  background: var(--surface);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  padding: clamp(1.5rem, 3.4vw, 3rem) clamp(1.5rem, 3.4vw, 3.25rem);
+}
+.terms-list { counter-reset: clause; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+
+.terms-item {
+  counter-increment: clause;
+  display: grid; gap: .75rem 1.75rem;
+  padding-block: clamp(1.5rem, 2.8vw, 2.25rem);
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+.terms-item:first-child { border-top: 0; padding-top: 0; }
+.terms-item:last-child { padding-bottom: 0; }
+
+.terms-item::before {
+  content: counter(clause, decimal-leading-zero);
+  display: grid; place-items: center;
+  inline-size: 2.75rem; block-size: 2.75rem;
+  border-radius: 50%;
+  background: rgba(185,139,84,.10);
+  border: 1px solid rgba(185,139,84,.30);
+  font-family: var(--font-display); font-size: .9375rem; font-weight: 600;
+  line-height: 1; color: var(--accent-deep);
+  font-variant-numeric: tabular-nums;
+}
+.terms-item__title {
+  align-self: center;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.1875rem, 1.05rem + .6vw, 1.4375rem);
+  line-height: 1.25; letter-spacing: -.01em; color: var(--text);
+  margin: 0;
+}
+.terms-item .prose p { max-width: none; }
+
+/* Three columns: medallion, title, body. The body fills the sheet rather than
+   sitting under the title, so the clause reads across the page and nothing is
+   left standing empty beside it. */
+@media (min-width: 1000px) {
+  .terms-item {
+    grid-template-columns: 2.75rem minmax(0, 17rem) minmax(0, 1fr);
+    align-items: start; gap: 0 2.25rem;
+  }
+  .terms-item::before { grid-column: 1; grid-row: 1; }
+  .terms-item__title { grid-column: 2; grid-row: 1; align-self: start; padding-top: .3rem; }
+  .terms-item .prose { grid-column: 3; grid-row: 1; }
+}
+@media (min-width: 1240px) {
+  .terms-item { grid-template-columns: 2.75rem minmax(0, 19rem) minmax(0, 1fr); }
+}
+
+/* 22.15 The expert band on a light ground ---------------------------------
+   On the terms page the band sits between the clause sheet and the closing
+   contact band. Left dark it merged into the CTA below it and the two read as
+   one long slate region; on white it separates them and the page alternates
+   light and dark the way the rest of the site does. */
+.expert-band--light .expert-band__portrait {
+  box-shadow: 0 0 0 1px rgba(185,139,84,.35), 0 0 0 10px rgba(185,139,84,.07), var(--sh-lg);
+}
+.expert-band--light .expert-band__portrait img { filter: grayscale(.25) contrast(1.03); }
