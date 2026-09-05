@@ -436,6 +436,30 @@ Two traps this page sprang, both worth remembering:
   for the European or Nordic equivalent explicitly; `nordic-courthouse-entrance`
   is Copenhagen, which reads correctly to a Swedish visitor.
 
+### `konsumenttvistnamnden.html` — where the defect brief does not apply
+
+This page is the one exception, and it matters that it stays one. The
+Konsumenttvistnämnd is the Bar Association's board for **fee disputes and
+financial claims a consumer client brings against a lawyer or law firm** — it has
+nothing to do with hidden defects in property. Putting mould or a stripped wet
+room on it would make the pictures contradict the words.
+
+| Section     | Photograph                       | What it shows                       |
+| ----------- | -------------------------------- | ----------------------------------- |
+| Hero        | `stockholm-norrmalm-facade-wide` | a classic Norrmalm corner building   |
+| Hero inset  | `stone-arch-window-portrait`     | an ornate Stockholm stone window     |
+| Om nämnden  | `claim-documents-review`         | a formal document worked through     |
+
+What did change is that the page no longer runs on leftovers from the English
+template — its hero was `hero/law-firm-hero-columns` and its body image a generic
+waiting-room lounge. Both are now specifically Swedish and specifically formal;
+Norrmalm is the firm's own district, a few streets from Sveavägen 33.
+
+**The rule to carry forward: match the image to the section's argument, not to the
+site's theme.** The same reasoning kept a courthouse on "Förlikning eller
+domstol?" and drawings-on-site on "När professionell hjälp gör verklig skillnad"
+over on `dolda-fel-tvister.html`.
+
 ---
 
 ## 7. Adding a service, a team member or an article
