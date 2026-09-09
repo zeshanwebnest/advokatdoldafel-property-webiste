@@ -1570,8 +1570,18 @@ address { font-style: normal; }
 .section--alt, .section--dark, .cta, .page-head { border-top: 0; }
 .section--alt + .section:not(.section--alt):not(.section--dark) { border-top: 0; }
 
+/* The band starts at stone-200, NOT stone-100.
+
+   stone-100 is #FBF9F5 — 98% white. Starting the gradient there made the top
+   edge of every alt band invisible against the white section above it, so a
+   white -> alt join simply vanished and two sections read as one. Only the
+   bottom edge showed, because it lands on stone-300.
+
+   Running the band between stone-200 and stone-300 gives it a visible edge at
+   BOTH ends while staying in the same warm stone family. Check any white -> alt
+   join after changing these values; the top edge is the one that fails quietly. */
 .section--alt {
-  background: linear-gradient(180deg, var(--stone-100) 0%, var(--stone-200) 42%, var(--stone-300) 100%);
+  background: linear-gradient(180deg, var(--stone-200) 0%, var(--stone-300) 100%);
 }
 .section--alt::before { content: none; }
 
@@ -2837,3 +2847,51 @@ address { font-style: normal; }
   border: 0;
   filter: saturate(.88) contrast(1.02);
 }
+
+/* ==========================================================================
+   27. LOGO HARDENING
+   --------------------------------------------------------------------------
+   The logo is a raster wordmark with thin serifs, so anything that recolours or
+   half-composites it shows up immediately as a washed-out "ADVANTAGE" next to a
+   still-crisp "A" mark. These rules remove every way that can happen from
+   outside the theme.
+
+   `forced-color-adjust: none` is the important one. Windows High Contrast mode
+   and the forced-colors media feature repaint images and backgrounds with the
+   user's palette, which turns a dark wordmark on a transparent background into a
+   pale ghost. Opting the logo out keeps the client's artwork intact while leaving
+   the rest of the page free to adapt, which is the behaviour you want.
+
+   The rest are belt and braces against a plugin, an Elementor kit, or a browser
+   extension applying a filter, an opacity or a blend mode to images site-wide.
+   ========================================================================== */
+.brand img,
+.brand--inverse img,
+.site-header .brand img,
+.site-footer .brand img,
+.mobile-nav .brand img {
+  forced-color-adjust: none;
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  /* The master artwork is 322x62. Rendered at 34px it is a clean downscale on a
+     1x screen and very close to native on 2x. Keep it here rather than letting a
+     stray rule stretch it — a non-integer scale is what makes thin serifs go grey. */
+  block-size: 34px;
+  inline-size: auto;
+  max-inline-size: none;
+  image-rendering: auto;
+}
+
+/* Under forced colors, give the mark a border so it still reads as a logo block
+   even though we have opted its pixels out of the recolouring. */
+@media (forced-colors: active) {
+  .brand img { forced-color-adjust: none; }
+}
+
+/* If the file ever fails to load, the alt text is what shows. Make sure it is
+   legible on both grounds rather than inheriting a colour meant for an image. */
+.brand { color: var(--text); font-family: var(--font-display); font-weight: 700; }
+.brand--inverse { color: var(--slate-800); }

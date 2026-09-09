@@ -1,0 +1,20 @@
+/*
+Theme Name:  Advantage Dolda Fel
+Theme URI:   https://advokatdoldafel.se/
+Author:      Advantage Advokatbyrå
+Description: Premium property-law theme for advokatdoldafel.se. Ships a global contact-form component with entry storage, first-touch tracking and e-mail notifications, plus an Elementor style guard that keeps the kit stylesheet out of the theme's own components. Ships assignable page templates for every page of the site, a custom blog archive and single-post design, and full Elementor Theme Builder compatibility — every template location hands over to Elementor when a Theme Builder template matches, and renders the theme's own design when it does not.
+Version:     1.4.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License:     GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: advantage-dolda-fel
+Tags:        custom-menu, featured-images, translation-ready, blog
+*/
+
+/*
+  The real stylesheet is assets/css/styles.css — it is enqueued from functions.php.
+  This file exists because WordPress requires it for the theme header above.
+  Do not put rules here; they will not load in the order you expect.
+*/

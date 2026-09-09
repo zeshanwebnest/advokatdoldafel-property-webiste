@@ -34,11 +34,21 @@ pages from `/allmanna-villkor/`, `/konsumenttvistnamnden/` and `/faq/`, and the
 contact page from `/kontakta-oss/`. Their copy
 is the client's and is **fixed**: every heading, paragraph, clause, card, button
 label, FAQ entry and form field is the live page's, word for word, and every `#`
-link still points at `#` exactly as it does there. None of them carries eyebrow
+link still points at `#` exactly as it does there — with one client-requested
+exception, below.  None of them carries eyebrow
 labels, because inventing them would have meant adding words — `.eyebrow-rule`
 holds that position in the rhythm instead. The home page's "Läs mer om dolda fel i
 hus" and "Läs mer om dolda fel i bostadsrätt" now link to the first two rather than
 to `service-details.html` and `services.html`.
+
+**One deliberate deviation: the "Read more" links are gone.** The six defect
+cards on `/dolda-fel-i-hus/` and the six on `/dolda-fel-i-bostadsratt/` carried
+`<a class="link-arrow" href="#">Read more</a>` on the live site — an English label
+on a Swedish page, pointing at nothing. The client asked for them to be removed,
+so all twelve are gone from the static pages and the theme templates. The word
+stream will therefore differ from the live page by twelve instances of "Read
+more"; that is expected, not a regression. The `.value-card > .link-arrow` CSS is
+left in place so the links can come back if real destinations ever exist.
 
 **The client's copy contains typos that the rebuilds reproduce on purpose.** On
 `/faq/` several bolded lead words run into the text after them — "skadeståndför

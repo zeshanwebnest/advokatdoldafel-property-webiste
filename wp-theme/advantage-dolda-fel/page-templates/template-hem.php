@@ -1,0 +1,1092 @@
+<?php
+/**
+ * Template Name: Hem — startsida
+ *
+ * The home page: hero, services, process, reviews, FAQ and the closing contact band.
+ *
+ * Built from the static page "index.html". The copy is the client's and is fixed —
+ * see README.md in the theme root before editing any of it.
+ *
+ *
+ * TWO LINKS WERE REPOINTED. The static build's team section linked to
+ * "team.html" and "team-details.html" — English template pages that are not part
+ * of the live Swedish site and are not shipped as templates here. Both now point
+ * at the contact page so neither is a dead end. To send them somewhere else,
+ * search this file for adf_page_url and change those two calls.
+ *
+ * @package advantage-dolda-fel
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Preload the hero so the largest paint is requested before the CSS resolves.
+adf_preload_hero(
+	'assets/images/property/hero-modern-villa-wide-1800.webp',
+	'assets/images/property/hero-modern-villa-wide-1200.webp 1200w, assets/images/property/hero-modern-villa-wide-1800.webp 1800w, assets/images/property/hero-modern-villa-wide-2400.webp 2400w',
+	'100vw'
+);
+
+get_header();
+?>
+
+<!-- ===================== 1. HERO ===================== -->
+<section class="hero hero--estate" aria-labelledby="hero-title">
+  <div class="hero__frame">
+    <div class="hero__media" aria-hidden="true">
+      <img src="<?php echo ADF_URI; ?>/assets/images/property/hero-modern-villa-wide-1800.webp"
+           srcset="<?php echo ADF_URI; ?>/assets/images/property/hero-modern-villa-wide-1200.webp 1200w,
+                   <?php echo ADF_URI; ?>/assets/images/property/hero-modern-villa-wide-1800.webp 1800w,
+                   <?php echo ADF_URI; ?>/assets/images/property/hero-modern-villa-wide-2400.webp 2400w"
+           sizes="100vw"
+           width="1800" height="1013"
+           fetchpriority="high" decoding="async" alt="">
+    </div>
+
+    <div class="container hero__body">
+      <p class="badge">Juridisk rådgivning och hjälp vid dolda fel</p>
+
+      <h1 class="hero__title" id="hero-title">
+        Advokat Dolda Fel i Hus, Bostadsrätt och Fastighet
+      </h1>
+
+      <p class="hero__lead">
+        Har du upptäckt dolda fel i hus, bostadsrätt eller fastighet, eller har du som säljare
+        fått ett krav riktat mot dig? Advantage Advokatbyrå hjälper både köpare och säljare med
+        juridisk rådgivning vid dolda fel och andra fastighetsrelaterade tvister.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn--gold" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>">
+          Få en juridisk bedömning <span class="icon icon--arrow" aria-hidden="true"></span>
+        </a>
+        <a class="btn btn--ghost-light" href="tel:+468202140">
+          <span class="icon icon--phone" aria-hidden="true"></span> +46 8 20 21 40
+        </a>
+      </div>
+    </div>
+
+    <figure class="hero__inset" aria-hidden="true">
+      <img src="<?php echo ADF_URI; ?>/assets/images/property/oak-stair-hall-portrait-600.webp"
+           srcset="<?php echo ADF_URI; ?>/assets/images/property/oak-stair-hall-portrait-600.webp 600w,
+                   <?php echo ADF_URI; ?>/assets/images/property/oak-stair-hall-portrait-900.webp 900w"
+           sizes="15rem" width="600" height="750"
+           loading="lazy" decoding="async" alt="">
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== 2. VI HJÄLPER DIG MED ===================== -->
+<section class="section section--lg" aria-label="Om vår hjälp vid dolda fel">
+  <div class="container">
+    <div class="split split--text-wide split--top">
+      <div data-reveal>
+        <p class="badge">Om vår hjälp</p>
+        <div class="prose">
+          <p>
+            Våra erfarna jurister och advokater inom dolda fel bedömer ansvar, granskar
+            köpekontrakt, besiktningsprotokoll och teknisk bevisning samt hjälper till att
+            framställa eller bemöta krav. Vi företräder klienter genom hela processen, från den
+            första juridiska bedömningen och reklamationen till förhandling, förlikning och
+            domstolsprocess.
+          </p>
+          <p>
+            Vi har erfarenhet av dolda fel-tvister och fastighetstvister som rör bland annat
+            fukt, mögel, dränering, konstruktion, tak, våtrum, el och VVS. Varje ärende bedöms
+            individuellt utifrån fastighetens eller bostadsrättens förutsättningar, avtalet
+            mellan parterna och den bevisning som finns.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-card" data-reveal data-reveal-delay="80">
+        <h3>Vi hjälper dig med</h3>
+        <ul class="feature-list u-mt-5">
+          <li>Dolda fel i hus</li>
+          <li>Dolda fel i bostadsrätt</li>
+          <li>Dolda fel i fastighet</li>
+          <li>Tvister om dolda fel</li>
+          <li>Krav mot säljare</li>
+          <li>Krav från köpare</li>
+          <li>Prisavdrag och skadestånd</li>
+          <li>Förhandling och förlikning</li>
+          <li>Fastighetstvister</li>
+          <li>Tvist i domstol</li>
+        </ul>
+        <a class="btn btn--primary btn--block u-mt-6" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>">
+          Få en juridisk bedömning <span class="icon icon--arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3. JURIST OCH ADVOKAT VID DOLDA FEL ===================== -->
+<section class="section section--lg section--alt" aria-labelledby="jurist-title">
+  <div class="container">
+    <div class="feature-panel feature-panel--square" data-reveal>
+      <div class="feature-panel__media">
+        <img src="<?php echo ADF_URI; ?>/assets/images/property/survey-drawings-desk-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/property/survey-drawings-desk-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/property/survey-drawings-desk-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/property/survey-drawings-desk-1600.webp 1600w"
+             sizes="(min-width: 940px) 42vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="En sakkunnig granskar ritningar över en byggnad vid ett skrivbord">
+        <div class="feature-panel__note">
+          <span class="icon icon--survey" aria-hidden="true"></span>
+          <div>
+            <strong>Juridik och teknisk bevisning</strong>
+            <span>Köpekontrakt, besiktningsprotokoll och sakkunnigutlåtanden</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-panel__body">
+        <p class="badge">Jurist och advokat</p>
+        <h2 class="h2" id="jurist-title">Jurist och Advokat vid Dolda Fel</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Ett fel som upptäcks efter ett fastighetsköp eller bostadsköp kan medföra stora kostnader och komplicerade juridiska frågor. För att avgöra om det verkligen är fråga om ett dolt fel behöver bland annat köpekontrakt, besiktningsprotokoll, information från säljaren och teknisk bevisning analyseras. Våra jurister inom dolda fel hjälper både köpare och säljare att bedöma det juridiska läget och vilka krav eller invändningar som kan göras gällande.
+          </p>
+          <p>
+           Advantage Advokatbyrå erbjuder juridisk rådgivning vid dolda fel och företräder klienter genom hela processen. Vi hjälper till med reklamation, kravbrev, förhandling, förlikning och domstolsprocess. Vår målsättning är att tidigt identifiera styrkor, risker och ekonomiska konsekvenser så att klienten kan fatta välgrundade beslut om hur ärendet bör drivas vidare.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4. VAD RÄKNAS SOM DOLDA FEL? ===================== -->
+<section class="section section--lg" aria-labelledby="vad-title">
+  <div class="container">
+    <div class="split split--media-wide split--flush">
+      <figure class="split__media media-figure media-figure--flip" data-reveal>
+        <img src="<?php echo ADF_URI; ?>/assets/images/property/nordic-apartment-parquet-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/property/nordic-apartment-parquet-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/property/nordic-apartment-parquet-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/property/nordic-apartment-parquet-1600.webp 1600w"
+             sizes="(min-width: 940px) 50vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="Ett ljust vardagsrum med fiskbensparkett i en bostadsrätt">
+      </figure>
+
+      <div data-reveal data-reveal-delay="80">
+        <p class="badge">Bedömningen</p>
+        <h2 class="h2" id="vad-title">Vad Räknas som Dolda Fel?</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Ett fel är inte automatiskt ett dolt fel bara för att köparen upptäcker det efter tillträdet. Vid köp av fastighet måste man bland annat bedöma om felet fanns vid köpet, om det borde ha kunnat upptäckas inom ramen för köparens undersökningsplikt och vad köparen rimligen kunde förvänta sig med hänsyn till fastighetens ålder, skick, pris och övriga omständigheter.
+          </p>
+          <p>
+            Bedömningen kan därför kräva både juridisk och teknisk analys. Besiktningsprotokoll, köpehandlingar, säljarens uppgifter, fotografier, sakkunnigutlåtanden och annan dokumentation kan få stor betydelse. Våra advokater hjälper dig att bedöma om omständigheterna ger grund för ett krav eller hur ett framställt krav bör bemötas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5. HUS · BOSTADSRÄTT · FASTIGHET ===================== -->
+<section class="section section--lg section--alt" aria-label="Dolda fel i hus, bostadsrätt och fastighet">
+  <div class="container">
+    <div class="svc-rows">
+      <article class="svc-row" data-reveal>
+        <div class="svc-row__body">
+          <p class="section-index">01</p>
+          <h2 class="h3">Dolda Fel i Hus</h2>
+          <p>
+            Dolda fel i hus kan upptäckas långt efter att köparen har fått tillträde till fastigheten. Det kan exempelvis röra sig om problem med fukt, mögel, konstruktion, dränering, tak, el, VVS eller våtrum. Att ett problem varit osynligt vid köpet innebär dock inte i sig att det juridiskt är ett dolt fel.
+          </p>
+          <p>
+            Vi hjälper till att utreda vad köparen kunde förvänta sig av huset och om felet borde ha upptäckts före köpet. Vid behov kombineras den juridiska bedömningen med teknisk bevisning för att klarlägga felets orsak, omfattning och när det uppkom.
+          </p>
+          <p><a class="link-arrow" href="<?php echo adf_page_url( 'dolda-fel-i-hus' ); ?>"><span>Läs mer om dolda fel i hus</span></a></p>
+        </div>
+        <figure class="svc-row__media media-figure">
+          <img src="<?php echo ADF_URI; ?>/assets/images/property/family-house-porch-1000.webp"
+               srcset="<?php echo ADF_URI; ?>/assets/images/property/family-house-porch-600.webp 600w,
+                       <?php echo ADF_URI; ?>/assets/images/property/family-house-porch-1000.webp 1000w,
+                       <?php echo ADF_URI; ?>/assets/images/property/family-house-porch-1600.webp 1600w"
+               sizes="(min-width: 900px) 42vw, 100vw"
+               width="1000" height="667" loading="lazy" decoding="async"
+               alt="Ett vitt villahus med veranda och klippt gräsmatta">
+        </figure>
+      </article>
+
+      <article class="svc-row svc-row--flip" data-reveal>
+        <div class="svc-row__body">
+          <p class="section-index">02</p>
+          <h2 class="h3">Dolda Fel i Bostadsrätt</h2>
+          <p>
+            Vid dolda fel i bostadsrätt gäller andra rättsliga utgångspunkter än vid köp av en fastighet. Det är därför viktigt att bedömningen görs utifrån rätt regelverk, köpeavtalet, lämnade uppgifter och bostadsrättens skick vid köpet.
+          </p>
+          <p>
+            Vi hjälper köpare och säljare vid tvister om exempelvis felaktiga renoveringar, badrum, fukt, installationer och andra brister som upptäcks efter överlåtelsen. Vi bedömer ansvar, bevisning och möjliga krav samt företräder klienten vid förhandling och tvist.
+          </p>
+          <p><a class="link-arrow" href="<?php echo adf_page_url( 'dolda-fel-i-bostadsratt' ); ?>"><span>Läs mer om dolda fel i bostadsrätt</span></a></p>
+        </div>
+        <figure class="svc-row__media media-figure media-figure--flip">
+          <img src="<?php echo ADF_URI; ?>/assets/images/property/apartment-block-facade-1000.webp"
+               srcset="<?php echo ADF_URI; ?>/assets/images/property/apartment-block-facade-600.webp 600w,
+                       <?php echo ADF_URI; ?>/assets/images/property/apartment-block-facade-1000.webp 1000w,
+                       <?php echo ADF_URI; ?>/assets/images/property/apartment-block-facade-1600.webp 1600w"
+               sizes="(min-width: 900px) 42vw, 100vw"
+               width="1000" height="667" loading="lazy" decoding="async"
+               alt="Fasaden på ett modernt flerbostadshus med balkonger i kvällsljus">
+        </figure>
+      </article>
+
+      <article class="svc-row" data-reveal>
+        <div class="svc-row__body">
+          <p class="section-index">03</p>
+          <h2 class="h3">Dolda Fel i Fastighet</h2>
+          <p>
+            Vid dolda fel i fastighet kan säljarens felansvar och köparens undersökningsplikt få avgörande betydelse. En köpare har en långtgående skyldighet att undersöka fastigheten, samtidigt som det kan finnas fel som inte rimligen gick att upptäcka eller förvänta sig vid köpet.
+          </p>
+          <p>
+            Våra jurister analyserar bland annat köpekontrakt, besiktningsprotokoll, frågelistor, utfästelser, tekniska utlåtanden och kommunikationen mellan parterna. Utifrån underlaget bedömer vi om det finns rättslig grund för exempelvis prisavdrag, skadestånd eller andra påföljder.
+          </p>
+        </div>
+        <figure class="svc-row__media media-figure">
+          <img src="<?php echo ADF_URI; ?>/assets/images/property/timber-entrance-facade-1000.webp"
+               srcset="<?php echo ADF_URI; ?>/assets/images/property/timber-entrance-facade-600.webp 600w,
+                       <?php echo ADF_URI; ?>/assets/images/property/timber-entrance-facade-1000.webp 1000w,
+                       <?php echo ADF_URI; ?>/assets/images/property/timber-entrance-facade-1600.webp 1600w"
+               sizes="(min-width: 900px) 42vw, 100vw"
+               width="1000" height="667" loading="lazy" decoding="async"
+               alt="Entrén till en modern fastighet med träfasad">
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6. VANLIGA DOLDA FEL ===================== -->
+<section class="section section--lg" aria-labelledby="vanliga-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Vanliga fel</p>
+        <h2 class="h2" id="vanliga-title">Vanliga Dolda Fel i Hus och Fastigheter</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Problem som upptäcks efter ett fastighetsköp kan se mycket olika ut. Några typer av fel som ofta leder till juridiska frågor är:
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-3 grid--lg">
+      <div class="value-card" data-reveal>
+        <span class="value-card__num" aria-hidden="true">01</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--drop"></span></span>
+        <h3>Fuktskador</h3>
+        <p>Dolda fuktproblem i väggar, golv, källare eller andra delar av konstruktionen kan
+          leda till omfattande skador och kostnader.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="70">
+        <span class="value-card__num" aria-hidden="true">02</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--mould"></span></span>
+        <h3>Mögel och mikrobiella skador</h3>
+        <p>Mögel bakom ytskikt eller inne i konstruktionen kan vara svårt att upptäcka vid en vanlig visning eller undersökning.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="140">
+        <span class="value-card__num" aria-hidden="true">03</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--pipe"></span></span>
+        <h3>Dräneringsproblem</h3>
+        <p>Brister i dränering och fuktskydd kan orsaka återkommande problem i grund, källare
+          och andra byggnadsdelar.</p>
+      </div>
+      <div class="value-card" data-reveal>
+        <span class="value-card__num" aria-hidden="true">04</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--frame"></span></span>
+        <h3>Konstruktionsfel</h3>
+        <p>Felaktiga byggnadslösningar eller byggfel kan i vissa situationer ligga till grund för krav efter fastighetsköpet.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="70">
+        <span class="value-card__num" aria-hidden="true">05</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--bolt"></span></span>
+        <h3>El- och VVS-fel</h3>
+        <p>Dolda brister i installationer kan innebära både betydande reparationskostnader och
+          säkerhetsproblem.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="140">
+        <span class="value-card__num" aria-hidden="true">06</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--tile"></span></span>
+        <h3>Felaktigt utförda våtrum</h3>
+        <p>Brister i tätskikt, golvfall eller andra delar av badrum och våtrum kan leda till
+          omfattande följdskador.</p>
+      </div>
+    </div>
+
+    <div class="note-panel u-mt-8" data-reveal>
+      <figure class="note-panel__media">
+        <img src="<?php echo ADF_URI; ?>/assets/images/property/hidden-construction-detail-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/property/hidden-construction-detail-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/property/hidden-construction-detail-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/property/hidden-construction-detail-1600.webp 1600w"
+             sizes="(min-width: 860px) 52vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="Ett fönsterparti tätas mot isolering bakom väggens ytskikt">
+      </figure>
+      <div class="note-panel__body">
+        <h3>Viktigt</h3>
+        <p>
+          Att ett sådant fel förekommer betyder inte automatiskt att det är ett dolt fel i juridisk mening. Varje fall måste bedömas individuellt.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===================== 7. HAR DU UPPTÄCKT ETT MISSTÄNKT DOLT FEL? ===================== -->
+<section class="section section--lg section--dark section--photo" aria-labelledby="agera-title">
+  <div class="section__media" aria-hidden="true">
+    <img src="<?php echo ADF_URI; ?>/assets/images/property/house-facade-night-1600.webp"
+         srcset="<?php echo ADF_URI; ?>/assets/images/property/house-facade-night-1000.webp 1000w,
+                 <?php echo ADF_URI; ?>/assets/images/property/house-facade-night-1600.webp 1600w"
+         sizes="100vw" width="1600" height="1067" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge badge--dark">Om du har upptäckt något</p>
+        <h2 class="h2" id="agera-title">Har Du Upptäckt ett Misstänkt Dolt Fel?</h2>
+      </div>
+      <div>
+        <p class="lead">
+          När ett fel upptäcks är det viktigt att agera strukturerat. Hur felet dokumenteras, vilka undersökningar som genomförs och hur kommunikationen med motparten hanteras kan få betydelse om ärendet senare utvecklas till en tvist.
+        </p>
+      </div>
+    </div>
+
+    <ol class="steps" data-reveal>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">01</span>
+        <h3>Dokumentera felet</h3>
+        <p>Fotografera och dokumentera skadan och undvik om möjligt att förstöra viktig bevisning innan felet har undersökts.</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">02</span>
+        <h3>Teknisk undersökning</h3>
+        <p>En sakkunnig kan behöva utreda felets orsak, omfattning och om det sannolikt fanns redan vid köpet.</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">03</span>
+        <h3>Reklamera skriftligen</h3>
+        <p>Köparen bör inte vänta onödigt länge med att underrätta säljaren om det upptäckta felet.</p>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">04</span>
+        <h3>Juridisk bedömning</h3>
+        <p>En advokat inom dolda fel kan bedöma ansvar, bevisning och vilka krav som kan vara juridiskt motiverade.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== 8. JURIDISK RÅDGIVNING VID DOLDA FEL ===================== -->
+<section class="section section--lg" aria-labelledby="radgivning-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Vår rådgivning</p>
+        <h2 class="h2" id="radgivning-title">Juridisk Rådgivning vid Dolda Fel</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Advantage Advokatbyrå bistår från den första bedömningen till dess att ärendet avslutas. Vi granskar underlaget och analyserar om det finns förutsättningar att rikta krav mot säljaren eller, om du är säljare, hur ett krav från köparen bör bemötas.
+          </p>
+        </div>
+      </div>
+      <div class="prose">
+        <p>
+          Vi kan även hjälpa till att samordna juridiska och tekniska frågor, formulera krav och invändningar samt hantera kommunikationen med motpart, försäkringsbolag och andra berörda. Om en överenskommelse inte kan nås kan vi företräda klienten i domstol.
+        </p>
+      </div>
+    </div>
+
+    <div class="split split--top split--advisory">
+      <figure class="media-figure media-figure--wide" data-reveal>
+        <img src="<?php echo ADF_URI; ?>/assets/images/services/contract-review-detail-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/services/contract-review-detail-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/services/contract-review-detail-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/services/contract-review-detail-1600.webp 1600w"
+             sizes="(min-width: 940px) 46vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="Köpehandlingar i ett ärende om dolda fel granskas vid ett skrivbord">
+      </figure>
+
+      <div data-reveal data-reveal-delay="80">
+        <h3 class="h4">Vår juridiska hjälp omfattar</h3>
+        <ul class="tile-grid u-mt-5">
+          <li class="tile"><span class="tile__icon"><span class="icon icon--survey" aria-hidden="true"></span></span>
+            <span class="tile__label">Bedömning av dolda fel</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--file" aria-hidden="true"></span></span>
+            <span class="tile__label">Granskning av köpehandlingar</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--plan" aria-hidden="true"></span></span>
+            <span class="tile__label">Analys av besiktningsprotokoll</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--mail" aria-hidden="true"></span></span>
+            <span class="tile__label">Reklamation till säljare</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--quote" aria-hidden="true"></span></span>
+            <span class="tile__label">Kravbrev och bestridanden</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--users" aria-hidden="true"></span></span>
+            <span class="tile__label">Förhandling med motpart</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--compass" aria-hidden="true"></span></span>
+            <span class="tile__label">Förlikningsdiskussioner</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--scale" aria-hidden="true"></span></span>
+            <span class="tile__label">Domstolsprocess</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 9. TVISTER MELLAN KÖPARE OCH SÄLJARE ===================== -->
+<section class="section section--lg section--alt" aria-labelledby="tvist-title">
+  <div class="container">
+    <div class="split split--media-wide split--flush">
+      <figure class="split__media media-figure media-figure--flip" data-reveal>
+        <img src="<?php echo ADF_URI; ?>/assets/images/property/swedish-house-red-roof-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/property/swedish-house-red-roof-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/property/swedish-house-red-roof-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/property/swedish-house-red-roof-1600.webp 1600w"
+             sizes="(min-width: 940px) 50vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="Ett vitt trähus med rött plåttak och glasveranda">
+      </figure>
+
+      <div data-reveal data-reveal-delay="80">
+        <p class="badge">Tvister</p>
+        <h2 class="h2" id="tvist-title">Dolda Fel Tvister mellan Köpare och Säljare</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Dolda fel-tvister uppstår ofta när köparen och säljaren har olika uppfattningar om felets existens, orsak, upptäckbarhet eller ekonomiska betydelse. Köparen kan anse att säljaren ansvarar för ett allvarligt fel, medan säljaren kan invända att felet borde ha upptäckts eller varit förväntat med hänsyn till fastighetens skick.
+          </p>
+          <p>
+            Våra advokater företräder både köpare och säljare. Vi analyserar bevisningen, bedömer processrisken och arbetar för en ekonomiskt och juridiskt hållbar lösning. När en förlikning inte är möjlig kan vi driva eller försvara kravet i domstol.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10. VILKEN ERSÄTTNING KAN KRÄVAS? ===================== -->
+<section class="section section--lg" aria-labelledby="ersattning-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Påföljder</p>
+        <h2 class="h2" id="ersattning-title">Vilken Ersättning Kan Krävas vid Dolda Fel?</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Vilken påföljd som kan bli aktuell beror på omständigheterna i det enskilda fallet. Det är viktigt att skilja mellan kostnaden för att reparera ett fel och den ersättning som juridiskt kan krävas av motparten.
+        </p>
+      </div>
+    </div>
+
+    <div class="remedy-row" data-reveal>
+      <div class="remedy-card">
+        <p class="badge">Prisavdrag</p>
+        <h3>Prisavdrag</h3>
+        <p>Köparen kan under vissa förutsättningar ha rätt till prisavdrag när fastigheten avviker från vad köparen haft rätt att förutsätta.</p>
+      </div>
+      <div class="remedy-card">
+        <p class="badge">Skadestånd</p>
+        <h3>Skadestånd</h3>
+        <p>I vissa situationer kan även skadestånd bli aktuellt om de rättsliga förutsättningarna för ersättning är uppfyllda.</p>
+      </div>
+      <div class="remedy-card">
+        <p class="badge">Hävning</p>
+        <h3>Hävning</h3>
+        <p>Vid särskilt allvarliga fel kan frågan om hävning av fastighetsköpet aktualiseras, men kraven är höga och situationen måste bedömas noggrant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11. KÖPARE OCH SÄLJARE ===================== -->
+<section class="section section--lg section--alt" aria-labelledby="parter-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Båda sidor</p>
+        <h2 class="h2" id="parter-title">Vi Företräder Både Köpare och Säljare</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Vi arbetar på båda sidor av ett dolda fel-ärende och anpassar strategin efter din
+          position i tvisten.
+        </p>
+      </div>
+    </div>
+
+    <div class="party-grid">
+      <div class="party-card" data-reveal>
+        <span class="party-card__icon" aria-hidden="true"><span class="icon icon--key"></span></span>
+        <h3>För dig som köpare</h3>
+        <p>
+          Vi bedömer om det upptäckta felet kan grunda ett juridiskt krav och hjälper till med reklamation, bevisning, kravställande, förhandling och eventuell domstolsprocess.
+        </p>
+      </div>
+      <div class="party-card party-card--slate" data-reveal data-reveal-delay="80">
+        <span class="party-card__icon" aria-hidden="true"><span class="icon icon--handshake"></span></span>
+        <h3>För dig som säljare</h3>
+        <p>
+         Har du mottagit ett krav om dolda fel hjälper vi dig att analysera köparens påståenden, bedöma ansvar och bevisning samt bestrida eller förhandla om kravet när det finns anledning till det.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12. FASTIGHETSTVISTER ===================== -->
+<section class="section section--lg" aria-labelledby="fastighetstvister-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Närliggande ärenden</p>
+        <h2 class="h2" id="fastighetstvister-title">Fastighetstvister och Andra Fastighetsrättsliga Ärenden</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Vår erfarenhet av fastighetstvister sträcker sig längre än enbart dolda fel. Många problem efter ett fastighetsköp berör flera juridiska frågor samtidigt och kan exempelvis handla om avtalsvillkor, byggfel, entreprenadarbeten eller ansvar för uppgifter som lämnats inför köpet.
+          </p>
+        </div>
+      </div>
+      <div class="prose">
+        <p>
+          Vi kan därför hjälpa klienter med närliggande fastighetsrättsliga ärenden och tvister när dessa har samband med köp, försäljning, renovering eller ägande av en fastighet.
+        </p>
+      </div>
+    </div>
+
+    <div class="split split--top split--advisory">
+      <figure class="media-figure media-figure--wide" data-reveal>
+        <img src="<?php echo ADF_URI; ?>/assets/images/property/modern-house-drive-1000.webp"
+             srcset="<?php echo ADF_URI; ?>/assets/images/property/modern-house-drive-600.webp 600w,
+                     <?php echo ADF_URI; ?>/assets/images/property/modern-house-drive-1000.webp 1000w,
+                     <?php echo ADF_URI; ?>/assets/images/property/modern-house-drive-1600.webp 1600w"
+             sizes="(min-width: 940px) 46vw, 100vw"
+             width="1000" height="667" loading="lazy" decoding="async"
+             alt="En modern villa med träfasad och infart">
+      </figure>
+
+      <div data-reveal data-reveal-delay="80">
+        <h3 class="h4">Relaterade tjänster</h3>
+        <ul class="tile-grid u-mt-5">
+          <li class="tile"><span class="tile__icon"><span class="icon icon--users" aria-hidden="true"></span></span>
+            <span class="tile__label">Tvist med hantverkare</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--building" aria-hidden="true"></span></span>
+            <span class="tile__label">Entreprenadtvist</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--file" aria-hidden="true"></span></span>
+            <span class="tile__label">Köpekontrakt fastighet</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--home" aria-hidden="true"></span></span>
+            <span class="tile__label">Tvist efter fastighetsköp</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--briefcase" aria-hidden="true"></span></span>
+            <span class="tile__label">Skadestånd vid fastighetsköp</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--scale" aria-hidden="true"></span></span>
+            <span class="tile__label">Hävning av fastighetsköp</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--survey" aria-hidden="true"></span></span>
+            <span class="tile__label">Besiktningsrelaterade tvister</span></li>
+          <li class="tile"><span class="tile__icon"><span class="icon icon--shield" aria-hidden="true"></span></span>
+            <span class="tile__label">Försäkringstvister</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 13. ERFARENHET ===================== -->
+<section class="section section--lg section--dark section--photo" aria-labelledby="erfarenhet-title">
+  <div class="section__media" aria-hidden="true">
+    <img src="<?php echo ADF_URI; ?>/assets/images/property/stockholm-riddarholmen-wide-1600.webp"
+         srcset="<?php echo ADF_URI; ?>/assets/images/property/stockholm-riddarholmen-wide-1000.webp 1000w,
+                 <?php echo ADF_URI; ?>/assets/images/property/stockholm-riddarholmen-wide-1600.webp 1600w,
+                 <?php echo ADF_URI; ?>/assets/images/property/stockholm-riddarholmen-wide-2400.webp 2400w"
+         sizes="100vw" width="1600" height="600" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge badge--dark">Om byrån</p>
+        <h2 class="h2" id="erfarenhet-title">Advantage Advokatbyrå – Erfarenhet av Dolda Fel och Fastighetstvister</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Advantage Advokatbyrå har varit verksam i över 18 år och har under åren byggt upp omfattande erfarenhet av dolda fel, fastighetsrätt och kvalificerad tvistelösning. Våra advokater och jurister företräder både köpare och säljare i tvister om dolda fel i hus, bostadsrätter och fastigheter och bistår genom hela processen, från den första juridiska bedömningen och förhandlingen till en eventuell domstolsprocess.
+        </p>
+      </div>
+    </div>
+
+    <div class="prose prose--cols" data-reveal>
+      <p>
+        Byrån har stor processvana från svenska domstolar och erfarenhet av att hantera såväl omfattande som komplicerade fastighetstvister. I ärenden om dolda fel arbetar vi strategiskt med juridiken, den tekniska utredningen och bevisningen för att bedöma ansvar, ekonomiska krav och processrisk. Vår erfarenhet av både förhandling och process gör att vi kan hjälpa klienten att välja rätt väg framåt, oavsett om målet är att nå en förlikning eller att driva eller försvara ett krav i domstol.
+      </p>
+      
+    </div>
+
+    <dl class="stat-strip" data-reveal>
+      <div>
+        <dt class="stat__value">18 år</dt>
+        <dd class="stat__label">Verksam byrå med erfarenhet av dolda fel och fastighetsrätt</dd>
+      </div>
+      <div>
+        <dt class="stat__value">Båda parter</dt>
+        <dd class="stat__label">Vi företräder både köpare och säljare</dd>
+      </div>
+      <div>
+        <dt class="stat__value">Hela Sverige</dt>
+        <dd class="stat__label">Vi assisterar klienter i hela landet</dd>
+      </div>
+      <div>
+        <dt class="stat__value">Domstol</dt>
+        <dd class="stat__label">Omfattande erfarenhet från svenska rättsväsendet</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+<!-- ===================== 14. VÅRA JURISTER ===================== -->
+<section class="section section--lg" aria-labelledby="jurister-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Våra jurister</p>
+        <h2 class="h2" id="jurister-title">Våra Jurister inom Fastighet och Tvistelösning</h2>
+        <div class="prose u-mt-5">
+          <p>
+            Våra jurister bistår med juridisk rådgivning, bedömning av avtal och andra handlingar, förhandlingar samt representation när en fastighetsrelaterad fråga utvecklas till en tvist.
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="lead">
+          Advokat Dolda Fel arbetar med jurister med erfarenhet inom fastighetsrätt, bostadsrätt, avtalsrätt, konsumenttvister och tvistelösning. Vi hjälper köpare, säljare och fastighetsägare med juridiska frågor som uppstår vid köp, försäljning och ägande av fastigheter och bostadsrätter, inklusive dolda fel och fastighetstvister.
+        </p>
+        <p class="u-mt-5"><a class="link-arrow" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>"><span>Se hela teamet</span></a></p>
+      </div>
+    </div>
+
+    <div class="team-grid team-grid--4">
+      <article class="person" data-reveal>
+        <div class="person__media">
+          <img src="<?php echo ADF_URI; ?>/assets/images/team/peter-tagestam.webp" width="1080" height="1080"
+               loading="lazy" decoding="async" alt="Porträtt av Peter Tagestam">
+          <div class="person__actions">
+            <a href="mailto:info@advantage.se" aria-label="Mejla Peter Tagestam"><span class="icon icon--mail" aria-hidden="true"></span></a>
+            <a href="tel:+468202140" aria-label="Ring Peter Tagestam"><span class="icon icon--phone" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <h3 class="person__name"><a class="stretched-link" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>">Peter Tagestam</a></h3>
+        <p class="person__role">Fastighetsrätt &amp; tvistelösning</p>
+        <p class="person__meta">Peter Tagestam arbetar med fastighetsrätt, avtalsrätt och bred tvistelösning. Hans erfarenhet omfattar juridiska frågor där fastigheter, avtal och tvister möts, inklusive bedömning och hantering av fastighetsrelaterade krav.</p>
+      </article>
+
+      <article class="person" data-reveal data-reveal-delay="70">
+        <div class="person__media">
+          <img src="<?php echo ADF_URI; ?>/assets/images/team/patrik-martinson.webp" width="1080" height="1080"
+               loading="lazy" decoding="async" alt="Porträtt av Patrik Martinson">
+          <div class="person__actions">
+            <a href="mailto:info@advantage.se" aria-label="Mejla Patrik Martinson"><span class="icon icon--mail" aria-hidden="true"></span></a>
+            <a href="tel:+468202140" aria-label="Ring Patrik Martinson"><span class="icon icon--phone" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <h3 class="person__name">Patrik Martinson</h3>
+        <p class="person__role">Bostads- &amp; fastighetsrätt</p>
+        <p class="person__meta">Patrik Martinson arbetar med bostads- och fastighetsrätt samt allmän tvistelösning. Hans erfarenhet är relevant vid juridiska frågor och tvister som uppstår i samband med bostäder, fastigheter och överlåtelser.</p>
+      </article>
+
+      <article class="person" data-reveal data-reveal-delay="140">
+        <div class="person__media">
+          <img src="<?php echo ADF_URI; ?>/assets/images/team/rasmus-kaneberg.webp" width="1080" height="1080"
+               loading="lazy" decoding="async" alt="Porträtt av Rasmus Kaneberg">
+          <div class="person__actions">
+            <a href="mailto:info@advantage.se" aria-label="Mejla Rasmus Kaneberg"><span class="icon icon--mail" aria-hidden="true"></span></a>
+            <a href="tel:+468202140" aria-label="Ring Rasmus Kaneberg"><span class="icon icon--phone" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <h3 class="person__name">Rasmus Kaneberg</h3>
+        <p class="person__role">Avtalsrätt &amp; konsumenttvister</p>
+        <p class="person__meta">Rasmus Kaneberg arbetar med avtalsrätt, konsumenttvister och fastighetsrätt. Hans erfarenhet är särskilt relevant för fastighetsrelaterade avtal, transaktioner och tvister mellan privatpersoner och näringsidkare.</p>
+      </article>
+
+      <article class="person" data-reveal data-reveal-delay="210">
+        <div class="person__media">
+          <img src="<?php echo ADF_URI; ?>/assets/images/team/bjorn-lotoft.webp" width="1080" height="1080"
+               loading="lazy" decoding="async" alt="Porträtt av Björn Lotoft">
+          <div class="person__actions">
+            <a href="mailto:info@advantage.se" aria-label="Mejla Björn Lotoft"><span class="icon icon--mail" aria-hidden="true"></span></a>
+            <a href="tel:+468202140" aria-label="Ring Björn Lotoft"><span class="icon icon--phone" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <h3 class="person__name">Björn Lotoft</h3>
+        <p class="person__role">Tvistelösning</p>
+        <p class="person__meta">Björn Lotoft arbetar med tvistelösning och juridiska frågor med anknytning till fastigheter och avtal. Hans erfarenhet är relevant i ärenden där parterna är oense om ansvar, avtalsförpliktelser, ekonomiska krav eller andra frågor som kan uppstå i samband med en fastighetstvist.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 15. VARFÖR ANLITA OSS ===================== -->
+<section class="section section--lg section--dark section--photo" aria-labelledby="varfor-title">
+  <div class="section__media" aria-hidden="true">
+    <img src="<?php echo ADF_URI; ?>/assets/images/property/nordic-kitchen-corridor-1600.webp"
+         srcset="<?php echo ADF_URI; ?>/assets/images/property/nordic-kitchen-corridor-1000.webp 1000w,
+                 <?php echo ADF_URI; ?>/assets/images/property/nordic-kitchen-corridor-1600.webp 1600w"
+         sizes="100vw" width="1600" height="1067" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge badge--dark">Varför oss</p>
+        <h2 class="h2" id="varfor-title">Varför Anlita Våra Advokater vid Dolda Fel?</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Sex skäl som återkommer när klienter berättar varför de valde oss för sitt
+          dolda fel-ärende.
+        </p>
+      </div>
+    </div>
+
+    <ul class="checklist checklist--cards" data-reveal>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Erfarenhet av Dolda Fel</strong>
+        <span>Vi har lång erfarenhet av juridiska frågor och tvister som rör fel i hus, bostadsrätter och fastigheter.</span></div></li>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Juridisk och Teknisk Förståelse</strong>
+        <span>Vi analyserar både de rättsliga frågorna och den tekniska bevisning som ofta är avgörande i dolda fel-tvister.</span></div></li>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Köpare och Säljare</strong>
+        <span>Vi företräder både köpare som vill framställa krav och säljare som behöver bemöta krav om dolda fel.</span></div></li>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Strategisk Tvistelösning</strong>
+        <span>Vi bedömer styrkor, svagheter och processrisk innan vi rekommenderar hur ett ärende bör drivas vidare.</span></div></li>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Förhandling och Domstol</strong>
+        <span>Vi hjälper klienter att försöka nå en förlikning och företräder dem i domstol när tvisten inte kan lösas.</span></div></li>
+      <li><span class="icon icon--check" aria-hidden="true"></span>
+        <div><strong>Hjälp i Hela Sverige</strong>
+        <span>Advantage Advokatbyrå bistår klienter med dolda fel och fastighetstvister över hela Sverige.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 16. SÅ HANTERAR VI DITT ÄRENDE ===================== -->
+<section class="section section--lg" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section-head section-head--two" data-reveal>
+      <div>
+        <p class="badge">Vår process</p>
+        <h2 class="h2" id="process-title">Så Hanterar Vi Ditt Ärende om Dolda Fel</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Fyra steg, från första genomgången av handlingarna till en eventuell process i
+          domstol.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-4 grid--lg process-grid">
+      <div class="value-card" data-reveal>
+        <span class="value-card__num" aria-hidden="true">01</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--compass"></span></span>
+        <h3>Inledande Bedömning</h3>
+        <p>Vi går igenom vad som har inträffat, när felet upptäcktes och vilken dokumentation som finns.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="70">
+        <span class="value-card__num" aria-hidden="true">02</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--survey"></span></span>
+        <h3>Juridisk Analys</h3>
+        <p>Vi granskar köpeavtal, besiktningsprotokoll, tekniska underlag och annan relevant bevisning..</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="140">
+        <span class="value-card__num" aria-hidden="true">03</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--file"></span></span>
+        <h3>Krav och Förhandling</h3>
+        <p>Vi framställer eller bemöter krav och företräder dig i kommunikationen och förhandlingarna med motparten.</p>
+      </div>
+      <div class="value-card" data-reveal data-reveal-delay="210">
+        <span class="value-card__num" aria-hidden="true">04</span>
+        <span class="value-card__icon" aria-hidden="true"><span class="icon icon--scale"></span></span>
+        <h3>Tvist och Domstol</h3>
+        <p>Om en lösning inte kan nås bedömer vi förutsättningarna för fortsatt process och kan företräda dig i domstol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 17. VANLIGA FRÅGOR ===================== -->
+<section class="section section--lg section--alt" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="split split--text-wide split--top">
+      <div data-reveal>
+        <p class="badge">Vanliga frågor</p>
+        <h2 class="h2" id="faq-title">Vanliga Frågor om Dolda Fel</h2>
+        <p class="lead u-mt-5">
+          De frågor vi får oftast om dolda fel i hus, bostadsrätt och fastighet. Hittar du inte
+          din fråga är du välkommen att höra av dig.
+        </p>
+
+        <div class="info-card info-card--dark u-mt-7">
+          <h3>Har du en fråga om ditt ärende?</h3>
+          <p>Beskriv situationen så återkommer vi med en juridisk bedömning.</p>
+          <ul class="info-list">
+            <li><span class="icon icon--phone" aria-hidden="true"></span><a href="tel:+468202140">+46 8 20 21 40</a></li>
+            <li><span class="icon icon--mail" aria-hidden="true"></span><a href="mailto:info@advantage.se">info@advantage.se</a></li>
+          </ul>
+          <a class="btn btn--gold btn--block u-mt-5" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>">
+            Få en juridisk bedömning <span class="icon icon--arrow" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+
+      <div data-reveal data-reveal-delay="80">
+        <div class="accordion" id="faq" data-single>
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button" data-open="true">
+              Vad räknas som ett dolt fel?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Ett fel som upptäcks efter köpet är inte automatiskt ett dolt fel. Vid fastighetsköp bedöms bland annat om felet fanns vid köpet, var upptäckbart och var något köparen rimligen borde ha räknat med.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Vad gör jag om jag upptäcker dolda fel i huset?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Dokumentera felet, säkra relevant bevisning och underrätta säljaren skriftligen. Det är ofta klokt att tidigt få både en teknisk och juridisk bedömning innan omfattande reparationer genomförs.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Hur länge ansvarar säljaren för dolda fel i fastighet?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Vid fastighetsköp finns en yttersta ansvarstid, men köparen måste dessutom reklamera inom skälig tid efter att felet har märkts eller borde ha märkts. Därför bör ett misstänkt fel hanteras utan onödigt dröjsmål.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Gäller samma regler för dolda fel i bostadsrätt?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Nej. Köp av bostadsrätt och köp av fastighet omfattas inte av exakt samma rättsliga regler. Därför måste dolda fel i bostadsrätt bedömas utifrån rätt regelverk och omständigheterna kring det aktuella köpet.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Kan jag få ersättning för ett dolt fel?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Beroende på omständigheterna kan bland annat prisavdrag eller skadestånd aktualiseras. I särskilt allvarliga situationer kan även hävning bli en fråga, men förutsättningarna måste bedömas individuellt.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Måste en tvist om dolda fel gå till domstol?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Nej. Många dolda fel-tvister kan lösas genom förhandling eller förlikning. Om parterna inte kan nå en överenskommelse kan tvisten behöva avgöras av domstol.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              Behöver jag en jurist för dolda fel?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+                Det finns inget generellt krav på juridiskt ombud, men en jurist inom dolda fel kan bedöma ansvar, bevisning, kravets storlek och processrisk samt företräda dig gentemot motparten.
+              </p>
+            </div></div></div>
+          </div>
+
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button">
+              När bör jag kontakta en advokat för dolda fel?
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion__panel"><div><div class="accordion__body">
+              <p>
+               Det är lämpligt att söka juridisk rådgivning vid dolda fel tidigt, särskilt när kostnaderna är betydande, ansvar bestrids eller ärendet riskerar att utvecklas till en domstolstvist.
+              </p>
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<?php
+// Latest articles. A live WP_Query, so it stays current on its own — the only
+// dynamic block on an otherwise fixed page. Plain ground: it sits between the
+// stone FAQ band above and the slate CTA below, so both edges stay legible.
+get_template_part( 'template-parts/section', 'latest-posts' );
+?>
+
+<!-- ===================== 19. KONTAKTA ADVOKAT FÖR DOLDA FEL ===================== -->
+<section class="section section--lg cta cta--split" aria-labelledby="kontakt-title">
+  <div class="cta__media" aria-hidden="true">
+    <img src="<?php echo ADF_URI; ?>/assets/images/property/stockholm-skyline-wide-1600.webp"
+         srcset="<?php echo ADF_URI; ?>/assets/images/property/stockholm-skyline-wide-1000.webp 1000w,
+                 <?php echo ADF_URI; ?>/assets/images/property/stockholm-skyline-wide-1600.webp 1600w,
+                 <?php echo ADF_URI; ?>/assets/images/property/stockholm-skyline-wide-2400.webp 2400w"
+         sizes="100vw" width="1600" height="600" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="container cta__inner on-dark">
+    <div class="cta__grid">
+      <div data-reveal>
+        <p class="badge badge--dark">Kontakt</p>
+        <h2 class="h2" id="kontakt-title">Kontakta Advokat för Dolda Fel</h2>
+        <p class="lead u-mt-5">
+          Misstänker du dolda fel i hus, bostadsrätt eller fastighet, eller har du fått ett krav riktat mot dig som säljare? Advantage Advokatbyrå hjälper dig att bedöma situationen, analysera bevisningen och avgöra vilka juridiska åtgärder som är lämpliga.
+        </p>
+        <p class="lead u-mt-5">
+          Vi bistår klienter över hela Sverige med juridisk rådgivning vid dolda fel och fastighetstvister, från den första bedömningen och förhandlingen till en eventuell domstolsprocess.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--gold" href="<?php echo adf_page_url( 'kontakta-oss' ); ?>">
+            Få en juridisk bedömning <span class="icon icon--arrow" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn--ghost-light" href="tel:+468202140">
+            <span class="icon icon--phone" aria-hidden="true"></span> +46 8 20 21 40
+          </a>
+        </div>
+      </div>
+
+      <dl class="contact-cards" data-reveal data-reveal-delay="80">
+        <div class="contact-cards__item">
+          <span class="contact-cards__icon" aria-hidden="true"><span class="icon icon--phone"></span></span>
+          <div>
+            <dt>Ring oss</dt>
+            <dd><a href="tel:+468202140">+46 8 20 21 40</a></dd>
+          </div>
+        </div>
+        <div class="contact-cards__item">
+          <span class="contact-cards__icon" aria-hidden="true"><span class="icon icon--mail"></span></span>
+          <div>
+            <dt>Mejla oss</dt>
+            <dd><a href="mailto:info@advantage.se">info@advantage.se</a></dd>
+          </div>
+        </div>
+        <div class="contact-cards__item">
+          <span class="contact-cards__icon" aria-hidden="true"><span class="icon icon--home"></span></span>
+          <div>
+            <dt>Vi hjälper dig i</dt>
+            <dd>Hela Sverige</dd>
+          </div>
+        </div>
+        <div class="contact-cards__item">
+          <span class="contact-cards__icon" aria-hidden="true"><span class="icon icon--pin"></span></span>
+          <div>
+            <dt>Kontor</dt>
+            <dd>Sveavägen 33, Stockholm</dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<?php
+// Structured data for this page, emitted verbatim from the static build.
+// If an SEO plugin also outputs FAQ schema, delete this block to avoid duplicates.
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LegalService",
+      "@id": "https://advokatdoldafel.se/#firm",
+      "name": "Advantage Advokatbyrå",
+      "url": "https://advokatdoldafel.se/",
+      "image": "https://advokatdoldafel.se/assets/images/brand/og-home.webp",
+      "logo": "https://advokatdoldafel.se/assets/images/brand/advantage-logo.png",
+      "telephone": "+46 8 20 21 40",
+      "email": "info@advantage.se",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sveavagen 33",
+        "postalCode": "111 34",
+        "addressLocality": "Stockholm",
+        "addressCountry": "SE"
+      },
+      "areaServed": { "@type": "Country", "name": "Sverige" },
+      "knowsLanguage": ["sv", "en"],
+      "serviceType": [
+        "Dolda fel i hus",
+        "Dolda fel i bostadsratt",
+        "Dolda fel i fastighet",
+        "Tvister om dolda fel",
+        "Fastighetstvister",
+        "Prisavdrag och skadestand"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00", "closes": "17:00"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://advokatdoldafel.se/#website",
+      "url": "https://advokatdoldafel.se/",
+      "name": "Advokat Dolda Fel — Advantage Advokatbyrå",
+      "inLanguage": "sv-SE",
+      "publisher": { "@id": "https://advokatdoldafel.se/#firm" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "sv-SE",
+  "mainEntity": [
+    { "@type": "Question", "name": "Vad räknas som ett dolt fel?", "acceptedAnswer": { "@type": "Answer", "text": "Ett fel som upptäcks efter köpet är inte automatiskt ett dolt fel. Vid fastighetsköp bedöms bland annat om felet fanns vid köpet, var påvisbart och var något köparen rimligen borde ha förväntat." } },
+    { "@type": "Question", "name": "Vad gör jag om jag upptäcker dolda fel i huset?", "acceptedAnswer": { "@type": "Answer", "text": "Dokumentera problemet, säkra relevant bevisning och underrätta säljaren skriftligen. Det är ofta klokt att tidigt få både teknisk och juridisk analys innan omfattande repairarbeten påbörjas." } },
+    { "@type": "Question", "name": "Hur länge ansvarar säljaren för dolda fel i fastighet?", "acceptedAnswer": { "@type": "Answer", "text": "Vid fastighetsköp finns en yttersta ansvarstid, men köparen måste dessutom reklamera inom skälig tid efter att felet har märkts eller borde ha märkts. Därför bör misstänkta fel hanteras omedelbar." } },
+    { "@type": "Question", "name": "Gäller samma regler för dolda fel i bostadsrätt?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Köp av bostadsrätt och köp av fastighet omfattas inte av identiska rättsliga ramverk. Därför måste dolda fel i bostadsrätt analyseras enligt tillämplig lagstiftning och köpets omständigheter." } },
+    { "@type": "Question", "name": "Kan jag få ersättning för ett dolt fel?", "acceptedAnswer": { "@type": "Answer", "text": "Beroende på omständigheterna kan bland annat prisavdrag eller skadestånd aktualiseras. I särskilt allvarliga fall kan även hävning bli en fråga, men förutsättningar måste utredas individuellt." } },
+    { "@type": "Question", "name": "Måste en tvist om dolda fel gå till domstol?", "acceptedAnswer": { "@type": "Answer", "text": "Nej. Många dolda fel-tvister kan lösas genom förhandling eller förlikning. Om parterna inte kan nå överenskommelse kan tvisten behöva avgöras av domstol." } },
+    { "@type": "Question", "name": "Behöver jag en jurist för dolda fel?", "acceptedAnswer": { "@type": "Answer", "text": "Det finns inget obligatorisk krav på juridisk representation, men en specialist kan bedöma ansvar, bevisning, fordrans storlek och processrisk samt representera dig gentemot motparten." } },
+    { "@type": "Question", "name": "När bör jag kontakta en advokat för dolda fel?", "acceptedAnswer": { "@type": "Answer", "text": "Det är lämpligt att söka juridisk rådgivning vid dolda fel tidigt, särskilt när kostnaderna är betydande, ansvar bestrids eller ärendet riskerar att utvecklas till en domstolstvist." } }
+  ]
+}
+</script>
+
+<?php
+get_footer();

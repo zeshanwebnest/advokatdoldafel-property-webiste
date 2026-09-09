@@ -1,0 +1,264 @@
+/* ==========================================================================
+   ELEMENTOR STYLE GUARD
+   --------------------------------------------------------------------------
+   Elementor publishes a global "kit" stylesheet (post-N.css) that styles bare
+   elements site-wide, not just Elementor widgets:
+
+       .elementor-kit-8 button,
+       .elementor-kit-8 input[type="button"],
+       .elementor-kit-8 input[type="submit"],
+       .elementor-kit-8 .elementor-button { background-color: var(--e-global-color-accent); … }
+       .elementor-kit-8 button:hover        { background-color: #4F3B24; }
+       .elementor-kit-8                     { font-family: …; color: …; }
+       .elementor-kit-8 h1, … h6            { font-family: …; }
+
+   Because those selectors sit on <body>, they reach every element the theme
+   renders — the FAQ accordion triggers, the nav toggle, the form submit, and the
+   site's typography. That is the brown accordion header and brown hover in the
+   reported screenshots.
+
+   This file wins them back, and is enqueued last so it lands after the kit.
+
+   THE ONE RULE THIS FILE FOLLOWS
+   Every selector below contains at least one class that only this theme ever
+   emits (.accordion__trigger, .btn, .nav-toggle, .site-header, .page-head,
+   .prose, .form, .chip, .adf-pagination …). Elementor never outputs those, so
+   nothing here can reach an Elementor widget. A Theme Builder header, footer,
+   archive or single template keeps its own styling exactly as designed — which
+   is the whole point of the dual-mode setup.
+
+   Specificity, since that is the mechanism:
+     Elementor  .elementor-kit-8 button        -> (0,1,1)
+                .elementor-kit-8 button:hover  -> (0,2,1)
+     Here       body.adf-theme .accordion__trigger        -> (0,2,1) + later = wins
+                body.adf-theme .accordion__trigger:hover  -> (0,3,1) = wins
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Buttons the theme renders.
+   -------------------------------------------------------------------------- */
+
+/* FAQ / accordion triggers — the component in the screenshots. */
+body.adf-theme .accordion__trigger,
+body.adf-theme .accordion__trigger:hover,
+body.adf-theme .accordion__trigger:focus,
+body.adf-theme .accordion__trigger:active,
+body.adf-theme .accordion__trigger[aria-expanded="true"] {
+  background-color: transparent;
+  background-image: none;
+  color: var(--text);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  font-family: var(--font-display);
+  text-transform: none;
+  letter-spacing: normal;
+}
+body.adf-theme .accordion__trigger:hover {
+  color: var(--accent-ink, var(--accent));
+}
+body.adf-theme .accordion__trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+/* The mobile-nav toggle and its close button. */
+body.adf-theme .nav-toggle,
+body.adf-theme .nav-toggle:hover,
+body.adf-theme .nav-toggle:focus,
+body.adf-theme .nav-toggle:active {
+  background-color: transparent;
+  background-image: none;
+  color: inherit;
+  box-shadow: none;
+  border-radius: var(--r);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Every .btn on the site, including <button class="btn"> and the form submit. */
+body.adf-theme .btn,
+body.adf-theme .btn:hover,
+body.adf-theme .btn:focus,
+body.adf-theme .btn:active {
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: .01em;
+  text-shadow: none;
+}
+body.adf-theme .btn--primary,
+body.adf-theme .btn--primary:focus { background-color: var(--slate-800); color: #fff; }
+body.adf-theme .btn--primary:hover { background-color: var(--slate-700, #24363F); color: #fff; }
+
+body.adf-theme .btn--gold,
+body.adf-theme .btn--gold:focus { background-color: var(--accent); color: var(--slate-800); }
+body.adf-theme .btn--gold:hover { background-color: var(--accent-soft, #D6AE76); color: var(--slate-800); }
+
+body.adf-theme .btn--ghost,
+body.adf-theme .btn--ghost:focus { background-color: transparent; color: var(--text); }
+body.adf-theme .btn--ghost:hover { background-color: transparent; color: var(--accent-ink, var(--text)); }
+
+body.adf-theme .btn--ghost-light,
+body.adf-theme .btn--ghost-light:focus { background-color: transparent; color: #fff; }
+body.adf-theme .btn--ghost-light:hover { background-color: transparent; color: #fff; }
+
+body.adf-theme .btn--light,
+body.adf-theme .btn--light:hover,
+body.adf-theme .btn--light:focus { background-color: #fff; color: var(--slate-800); }
+
+/* Category chips and pagination links. */
+body.adf-theme .chip,
+body.adf-theme .chip:focus { background-color: var(--surface); color: var(--text); text-transform: none; }
+body.adf-theme .chip:hover { background-color: var(--surface); color: var(--accent-ink, var(--text)); }
+body.adf-theme .chip.is-active,
+body.adf-theme .chip.is-active:hover { background-color: var(--slate-800); color: #fff; }
+
+body.adf-theme .adf-pagination .page-numbers,
+body.adf-theme .adf-pagination .page-numbers:focus { background-color: var(--surface); color: var(--text); }
+body.adf-theme .adf-pagination .page-numbers:hover { background-color: var(--surface); color: var(--accent-ink, var(--text)); }
+body.adf-theme .adf-pagination .page-numbers.current,
+body.adf-theme .adf-pagination .page-numbers.current:hover { background-color: var(--slate-800); color: #fff; }
+
+/* Any other bare button inside a theme component. */
+body.adf-theme .site-header button:not(.btn),
+body.adf-theme .site-footer button:not(.btn),
+body.adf-theme .mobile-nav button:not(.btn),
+body.adf-theme .accordion button:not(.btn),
+body.adf-theme .tabs button:not(.btn) {
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. Typography.
+   The kit sets font-family and colour on <body> and on h1–h6. Restated here for
+   the theme's own regions only.
+   -------------------------------------------------------------------------- */
+body.adf-theme .section,
+body.adf-theme .page-head,
+body.adf-theme .hero,
+body.adf-theme .site-header,
+body.adf-theme .site-footer,
+body.adf-theme .topbar,
+body.adf-theme .mobile-nav {
+  font-family: var(--font-body);
+}
+
+body.adf-theme .section h1, body.adf-theme .section h2, body.adf-theme .section h3,
+body.adf-theme .section h4, body.adf-theme .section .h1, body.adf-theme .section .h2,
+body.adf-theme .section .h3,
+body.adf-theme .page-head h1, body.adf-theme .page-head .h1,
+body.adf-theme .hero h1, body.adf-theme .hero .hero__title,
+body.adf-theme .prose h2, body.adf-theme .prose h3, body.adf-theme .prose h4 {
+  font-family: var(--font-display);
+  text-transform: none;
+}
+
+body.adf-theme .prose a,
+body.adf-theme .prose a:hover,
+body.adf-theme .prose a:focus {
+  color: var(--accent-ink, var(--accent));
+  background-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   3. Form controls inside the theme's form component.
+   -------------------------------------------------------------------------- */
+body.adf-theme .form .input,
+body.adf-theme .form .textarea,
+body.adf-theme .form .select,
+body.adf-theme .form .input:focus,
+body.adf-theme .form .textarea:focus,
+body.adf-theme .form .select:focus,
+body.adf-theme .search-form .input,
+body.adf-theme .search-form .input:focus {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* --------------------------------------------------------------------------
+   4. The honeypot on the global form. Never visible, never focusable, and
+   deliberately not display:none — some bots skip hidden inputs and fill the
+   rest, which is exactly the signal we want.
+   -------------------------------------------------------------------------- */
+.adf-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Form status message states, used by the AJAX response.
+   -------------------------------------------------------------------------- */
+.form-status { display: none; }
+.form-status.is-visible { display: block; margin-top: var(--s-5); font-size: var(--fs-sm); line-height: 1.6; }
+.form-status[data-state="success"] { color: #1a7f37; }
+.form-status[data-state="error"]   { color: #d05a5a; }
+.form-status[data-state="info"]    { color: var(--text-mu, #5a6b74); }
+.on-dark .form-status[data-state="success"] { color: #8fe0a6; }
+.on-dark .form-status[data-state="error"]   { color: #ffb0b0; }
+.on-dark .form-status[data-state="info"]    { color: rgba(255,255,255,.78); }
+
+/* --------------------------------------------------------------------------
+   6. BOX MODEL — the one the first version of this file missed.
+
+   Elementor's kit ships a full padding shorthand on every bare <button>:
+
+       .elementor-kit-8 button { padding: 16px 032px 16px 032px; }
+
+   A shorthand, so it wipes the theme's padding-block AND injects 32px of
+   horizontal padding the theme never asked for. Visible symptoms:
+
+     - FAQ accordion titles pushed inward and vertically squashed, while the
+       answer text below them stays at the real left edge, so the two no longer
+       line up;
+     - <button class="btn"> padded differently from <a class="btn">, because the
+       kit selector only reaches the element, not the class;
+     - the mobile nav toggle stretched from its 48x48 square.
+
+   Restating the theme's own values here fixes all three. These must stay in
+   sync with the base rules in styles.css — the values are repeated, not
+   inherited, because that is the only way to out-rank the kit.
+   -------------------------------------------------------------------------- */
+
+/* FAQ / accordion triggers: vertical rhythm only, never horizontal inset.
+   The trigger has to share its left edge with .accordion__body underneath it. */
+body.adf-theme .accordion__trigger {
+  padding-block: clamp(1.15rem, 2.2vw, 1.45rem);
+  padding-inline: 0;
+}
+
+/* Buttons: identical whether the element is <a class="btn"> or <button class="btn">. */
+body.adf-theme .btn {
+  min-height: 56px;
+  padding: 1rem 2.1rem;
+}
+body.adf-theme .btn--block { inline-size: 100%; }
+
+/* The drawer toggle is a fixed square. */
+body.adf-theme .nav-toggle {
+  inline-size: 48px;
+  block-size: 48px;
+  padding: 0;
+}
+
+/* Chips, whether rendered as <a> or <button>. */
+body.adf-theme .chip {
+  min-height: 42px;
+  padding: .5rem 1.1rem;
+}
+
+/* Pagination and the search submit sit in the same family. */
+body.adf-theme .adf-pagination .page-numbers {
+  min-inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding-inline: .75rem;
+  padding-block: 0;
+}
