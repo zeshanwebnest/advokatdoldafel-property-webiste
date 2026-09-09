@@ -212,6 +212,15 @@ the UTM, and the *other* page as where you submitted.
 - [ ] View source on /artiklar/page/2/ — it should contain
       `<meta name="robots" content="noindex, follow">`
 - [ ] Open three or four **old** posts — the new design applies, content intact
+- [ ] **An article has the contact form in its sidebar.** Open any post: on
+      desktop the article should be two columns, with a sticky form card on
+      the right carrying Namn, Telefon, E-post, Din motpart, Ämne, Meddelande.
+      One column and no form means an Elementor Single template is rendering
+      instead of single.php — see README §4.
+- [ ] **The form is the same everywhere.** Compare the sidebar form on an
+      article with the one on Kontakta oss. Same six fields, same order, same
+      Begär konsultation button. In the narrow sidebar they stack one per
+      line; that is layout, not a different form.
 - [ ] Category links from the listing work
 - [ ] Search works
 - [ ] Mobile: the drawer opens, the header collapses at 1000px

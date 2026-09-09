@@ -356,7 +356,7 @@ function adf_current_page_title() {
  * it renders the same component the templates use, wired to the same handler.
  *
  * Attributes:
- *   variant  'default' | 'full'  (full adds the "Din motpart" field)
+ *   (no variant attribute: there is one form with one field set, everywhere)
  *   source   free label stored with the entry, e.g. "sidebar"
  *   title    optional heading rendered above the form
  *   card     'yes' (default) wraps it in the dark .form-card; 'no' renders bare
@@ -367,10 +367,9 @@ function adf_current_page_title() {
 function adf_form_shortcode( $atts ) {
 	$atts = shortcode_atts(
 		array(
-			'variant' => 'default',
-			'source'  => 'shortcode',
-			'title'   => '',
-			'card'    => 'yes',
+			'source' => 'shortcode',
+			'title'  => '',
+			'card'   => 'yes',
 		),
 		$atts,
 		'advantage_form'
@@ -391,10 +390,7 @@ function adf_form_shortcode( $atts ) {
 	get_template_part(
 		'template-parts/form',
 		'contact',
-		array(
-			'variant' => ( 'full' === $atts['variant'] ) ? 'full' : 'default',
-			'source'  => sanitize_text_field( $atts['source'] ),
-		)
+		array( 'source' => sanitize_text_field( $atts['source'] ) )
 	);
 
 	if ( $wrap ) {

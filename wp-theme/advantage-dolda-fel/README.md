@@ -301,6 +301,66 @@ No two adjacent sections should report the same colour where they meet.
 
 ---
 
+## 5d. The single post — what it is made of
+
+`single.php` renders every article, the 80+ already in the database included. It
+reads only core WordPress fields, so no post is edited, migrated or re-saved.
+
+Top to bottom:
+
+| Band | What | Notes |
+| --- | --- | --- |
+| `.page-head` | Featured image, breadcrumb, category badge, H1, standfirst, meta | Dark overlay, white text |
+| `.section` | Two columns: `.article-main` and a sticky `.article-aside` | Splits at 1040px |
+| `.section--alt` | **Fler artiklar** — three related posts | Same category, falls back to most recent |
+| `.cta--split` | The closing contact band | The global form again |
+
+### The sidebar renders always
+
+`.article-aside` holds the global form in a `.side-form` card, and it is **not**
+conditional.
+
+It used to be wrapped in `is_active_sidebar( 'adf-blog' )`, which meant that on
+any install where nobody had added a widget — that is, every fresh install — the
+whole column was skipped. `.article-layout` is a two-column grid above 1040px, so
+with the aside gone it collapsed to one column and the article ran the full width
+of the container. That is the single biggest reason a live article looked nothing
+like the local design, and it also left articles as the only pages on the site
+with no enquiry form above the fold.
+
+If you do add widgets to the **Artikelsidor** sidebar, they stack *above* the
+form rather than replacing it.
+
+### The standfirst
+
+The `<p class="lead">` under the H1 renders only when a post has a **hand-written
+excerpt** — `has_excerpt()`, not `get_the_excerpt()`. The latter auto-generates
+from the body when no excerpt is set, which would print the article's own opening
+paragraph twice, once in white on the hero and once in the body.
+
+So: posts with an excerpt get a standfirst; posts without go straight from
+headline to meta. Both look right. To add standfirsts to the existing articles,
+fill in the Excerpt field on each post — nothing else changes.
+
+### Meta line
+
+`date · reading time · author`, with the separators as real elements, matching
+the local design. Reading time is computed from the content by
+`adf_reading_time()`; it is not stored anywhere.
+
+### Checking it against local
+
+`blog-details.html` in the project root is the reference. The two were compared
+by measuring `.article-aside` at 1280, 834 and 390 with the theme's stylesheet
+*and* `elementor-guard.css` loaded, and they match to the pixel: 831 / 617 / 815,
+in a `736px 352px` grid at desktop and a single column below 1040px.
+
+That comparison is worth re-running after any change to the form or the article
+CSS, because it is sensitive to exactly the kind of one-pixel drift that is
+invisible in a screenshot — see section 10, where it caught a real bug.
+
+---
+
 ## 6. Menus
 
 Header and footer fall back to the six built-in Swedish links, so the site is
@@ -359,34 +419,80 @@ bundled `advantage-logo.png`.
 ### One component, used everywhere
 
 Every enquiry form on the site renders from a single file:
-`template-parts/form-contact.php`. The closing band on the practice pages, the
-contact page, the 404 and the shortcode all include it. Change a field there and
-it changes in every place at once.
+`template-parts/form-contact.php`. Change a field there and it changes in every
+place at once.
 
-Two variants:
+**One field set — the Kontakta oss one:**
 
-| Variant | Fields |
+| # | Field | Name | Required |
+| --- | --- | --- | --- |
+| 1 | Namn | `adf_name` | |
+| 2 | Telefon | `adf_phone` | yes |
+| 3 | E-post | `adf_email` | |
+| 4 | Din motpart | `adf_motpart` | |
+| 5 | Ämne | `adf_subject` | |
+| 6 | Meddelande | `adf_message` | |
+
+Fields 1+2 sit on one row, 3+4 on the next, 5 and 6 full width. Submit reads
+**Begär konsultation**.
+
+Where it renders:
+
+| Place | `source` |
 | --- | --- |
-| `default` | Namn, Telefon*, E-post, Ämne, Meddelande |
-| `full` | the same plus **Din motpart** — the contact page's extra field |
+| Kontakta oss page | `kontakta-oss` |
+| Closing band on each practice page | that page's slug |
+| Closing band on the blog, archives, search, 404 | `cta-band` |
+| **Article sidebar, every single post** | `artikel-sidebar` |
+| Anywhere `[advantage_form]` is dropped | `shortcode`, or your own label |
+
+`source` is a free label stored with the entry, so you can tell a submission from
+the article sidebar apart from one on the contact page. It changes **nothing**
+about the form itself.
+
+**There is no `variant` attribute.** There used to be a short five-field version
+for the closing bands and the full six-field one for the contact page. That is
+gone on purpose: two variants meant a future edit could reach one and miss the
+other, which is the exact failure "one global form" is supposed to prevent. If a
+caller still passes `variant`, it is ignored and the one form renders.
 
 From a template:
 
 ```php
 get_template_part( 'template-parts/form', 'contact' );
-get_template_part( 'template-parts/form', 'contact', array( 'variant' => 'full', 'source' => 'kontakta-oss' ) );
+get_template_part( 'template-parts/form', 'contact', array( 'source' => 'artikel-sidebar' ) );
 ```
 
 From the editor, an Elementor Shortcode widget, or a text widget:
 
 ```
 [advantage_form]
-[advantage_form variant="full" title="Skicka ett meddelande" source="sidebar"]
+[advantage_form title="Skicka ett meddelande" source="sidebar"]
 [advantage_form card="no"]
 ```
 
-`source` is a free label stored with the entry, so you can tell a submission from
-the closing band apart from one on the contact page.
+### Narrow columns stack, they do not drop fields
+
+The same six fields render in three quite different widths — the dark closing
+band (~30rem), the article sidebar (a fixed 22rem from 1040px up) and the contact
+page (full width). Only the *layout* changes: inside `.form-card` and
+`.side-form` the paired rows collapse to one field per line. See `styles.css`
+section 28.
+
+This matters more than it looks. If a narrow slot solved its space problem by
+dropping "Din motpart", then "update the form once and it updates everywhere"
+would quietly stop being true, and an enquiry from an article would be missing a
+field that the same enquiry from the contact page would have.
+
+### To change the form
+
+1. Edit `template-parts/form-contact.php` — add, remove or reorder fields.
+2. If you added or removed one, add or remove the matching row in
+   `adf_entry_fields()` in `inc/form-entries.php`, so it appears in the
+   dashboard, the notification e-mail and the CSV export.
+
+That is the whole procedure. Nothing else needs touching, and every location
+picks the change up on the next page load.
 
 ### Entries
 

@@ -327,48 +327,72 @@
       </div>
       </div>
 
-      <!-- Sidebar, as on the live single-post pages: one contact card, sticky. -->
+      <!-- Sidebar, as on the live single-post pages: one contact card, sticky.
+
+           This is THE global form — the same six fields, in the same order, with
+           the same names as the Kontakta oss page and as every closing CTA band
+           on the site. The WordPress theme renders it from one file
+           (template-parts/form-contact.php), so editing it there changes it in
+           every location at once. It is reproduced here so this page stays an
+           accurate reference for what the live single post shows.
+
+           The paired rows collapse to one column inside .side-form from 1040px
+           up, where the column is only 22rem wide. Same fields, one per line —
+           see styles.css section 28. -->
       <aside class="article-aside" aria-labelledby="side-form-title">
         <div class="side-form">
-          <p class="side-form__title" id="side-form-title">Contact us for legal advice</p>
+          <p class="side-form__title" id="side-form-title">Kontakta oss för rådgivning</p>
 
           <!--
             Same endpoint guard as the contact page: with no data-endpoint the script
             validates but never claims a message was sent. See README section 8.
           -->
           <form class="form" data-contact-form novalidate>
-            <div class="field">
-              <label class="visually-hidden" for="b-name">Your name</label>
-              <input class="input" type="text" id="b-name" name="name" placeholder="Your Name"
-                     autocomplete="name" required aria-describedby="b-name-err">
-              <span class="field__error" id="b-name-err">Please enter your name.</span>
+            <div class="form__row form__row--2">
+              <div class="field">
+                <label for="bd-name">Namn</label>
+                <input class="input" type="text" id="bd-name" name="name" placeholder="Ditt namn"
+                       autocomplete="name" aria-describedby="bd-name-err">
+                <span class="field__error" id="bd-name-err">Ange ditt namn.</span>
+              </div>
+
+              <div class="field">
+                <label for="bd-phone">Telefon <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="tel" id="bd-phone" name="phone" placeholder="Din telefon"
+                       autocomplete="tel" required aria-describedby="bd-phone-err">
+                <span class="field__error" id="bd-phone-err">Ange ett giltigt telefonnummer.</span>
+              </div>
             </div>
-            <div class="field">
-              <label class="visually-hidden" for="b-counterparty">Your counterparty</label>
-              <input class="input" type="text" id="b-counterparty" name="counterparty"
-                     placeholder="Your Counterparty">
+
+            <div class="form__row form__row--2">
+              <div class="field">
+                <label for="bd-email">E-post</label>
+                <input class="input" type="email" id="bd-email" name="email" placeholder="Din e-post"
+                       autocomplete="email" aria-describedby="bd-email-err">
+                <span class="field__error" id="bd-email-err">Ange en giltig e-postadress.</span>
+              </div>
+
+              <div class="field">
+                <label for="bd-motpart">Din motpart</label>
+                <input class="input" type="text" id="bd-motpart" name="motpart" placeholder="Din motpart">
+              </div>
             </div>
+
             <div class="field">
-              <label class="visually-hidden" for="b-phone">Your phone number</label>
-              <input class="input" type="tel" id="b-phone" name="phone" placeholder="Your Phone Number"
-                     autocomplete="tel" required aria-describedby="b-phone-err">
-              <span class="field__error" id="b-phone-err">Please enter a valid telephone number.</span>
+              <label for="bd-subject">Ämne</label>
+              <input class="input" type="text" id="bd-subject" name="subject" placeholder="Ämne">
             </div>
+
             <div class="field">
-              <label class="visually-hidden" for="b-email">Your email</label>
-              <input class="input" type="email" id="b-email" name="email" placeholder="Your Email"
-                     autocomplete="email" required aria-describedby="b-email-err">
-              <span class="field__error" id="b-email-err">Please enter a valid e-mail address.</span>
+              <label for="bd-message">Meddelande</label>
+              <textarea class="textarea" id="bd-message" name="message" rows="6" placeholder="Meddelande"></textarea>
             </div>
-            <div class="field">
-              <label class="visually-hidden" for="b-message">Describe your case</label>
-              <textarea class="textarea" id="b-message" name="message" rows="4"
-                        placeholder="Describe Your Case" required
-                        aria-describedby="b-message-err"></textarea>
-              <span class="field__error" id="b-message-err">Please tell us briefly about your matter.</span>
-            </div>
+
             <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-            <button class="btn btn--primary btn--block" type="submit">Send</button>
+
+            <button class="btn btn--gold btn--block u-mt-5" type="submit">
+              Begär konsultation <span class="icon icon--arrow" aria-hidden="true"></span>
+            </button>
           </form>
         </div>
       </aside>

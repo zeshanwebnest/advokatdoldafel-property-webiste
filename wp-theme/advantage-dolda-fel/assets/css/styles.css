@@ -3017,3 +3017,83 @@ body.admin-bar .mobile-nav { top: 32px; }
    legible on both grounds rather than inheriting a colour meant for an image. */
 .brand { color: var(--text); font-family: var(--font-display); font-weight: 700; }
 .brand--inverse { color: var(--slate-800); }
+
+/* ==========================================================================
+   28. THE GLOBAL FORM IN A NARROW COLUMN
+   --------------------------------------------------------------------------
+   There is one enquiry form on this site and one field set: Namn, Telefon,
+   E-post, Din motpart, Ämne, Meddelande — the Kontakta oss form. It renders in
+   three very different widths:
+
+     .form-card   the dark closing band, roughly 30rem
+     .side-form   the article sidebar, a fixed 22rem from 1040px up
+     bare         the contact page, full width of its column
+
+   The fields never change between them. Only the layout does. That is the whole
+   point of a global component: if a narrow spot dropped a field, then "update
+   the form once and it changes everywhere" would quietly stop being true.
+
+   The base .form__row--2 pairs its two fields from 640px, which is right for a
+   full-width form and wrong for a 22rem column. Below 1040px the sidebar is not
+   a sidebar yet — .article-layout is still a single column and the form has the
+   whole container — so the pairing is correct there and is left alone. The
+   override starts exactly where the column narrows.
+   ========================================================================== */
+
+@media (min-width: 1040px) {
+  .side-form .form__row--2 { grid-template-columns: 1fr; }
+}
+
+/* Consistent vertical rhythm. .form is a grid, so spacing is gap, not margin.
+   The legacy .field + .field rule below predates the row wrappers and would add
+   a second gap on top of the grid one; zero it inside rows. */
+.side-form .form { gap: var(--s-4); }
+.side-form .form__row { gap: var(--s-4); }
+.side-form .form__row .field + .field { margin-top: 0; }
+
+/* rows="6" is a content height, so a CSS min-height cannot shrink it. Set the
+   box height outright, and let it grow if the visitor drags the handle. */
+.side-form .textarea { min-height: 0; block-size: 7rem; }
+
+/* The submit already carries .u-mt-5. .side-form .btn out-ranks it, so this is
+   one margin, not two — keep it tighter than the full-width form. */
+.side-form .btn { margin-top: var(--s-2); }
+
+/* The sidebar sits on stone, so the inputs need the plain surface to stay
+   readable. Stated after the base rule rather than relying on source order. */
+.side-form .input,
+.side-form .textarea { background: var(--surface); }
+
+/* Sticky needs a bottom stop, or a sidebar taller than the viewport never
+   scrolls its own last field into view on a short laptop screen. */
+@media (min-width: 1040px) {
+  .article-aside {
+    max-block-size: calc(100vh - var(--header-h) - 3rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Below the two-column breakpoint the aside is a full-width block under the
+   article, so it should not be sticky or height-capped. */
+@media (max-width: 1039.98px) {
+  .article-aside { position: static; max-block-size: none; overflow: visible; }
+}
+
+/* The honeypot. It lives here, in the form's own stylesheet, and NOT only in
+   elementor-guard.css where it started. The guard is a separate file loaded at
+   priority 999 to out-rank Elementor; if it is ever dequeued, deferred by an
+   optimiser, or simply fails to load, a rule that only exists there stops
+   applying — and the failure mode for this particular rule is a "Website" field
+   appearing in the middle of the client's contact form.
+
+   Deliberately not display:none. Some bots skip hidden inputs and fill the rest,
+   which is exactly the signal the trap is looking for. */
+.adf-hp {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+}

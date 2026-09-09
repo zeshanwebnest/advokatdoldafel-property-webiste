@@ -175,7 +175,15 @@ body.adf-theme .form .select:focus,
 body.adf-theme .search-form .input,
 body.adf-theme .search-form .input:focus {
   font-family: var(--font-body);
-  font-size: var(--fs-base);
+  /* --fs-sm (15px), which is what styles.css sets on .input/.select/.textarea.
+     This said --fs-base (16px) until the article sidebar was built, and that
+     was wrong: the guard is supposed to restate the theme's values so the kit
+     cannot win, not introduce values of its own. A 1px difference sounds
+     harmless, but it moved every control on the site 0.8px taller than the
+     design, and 6 of them stacked in a 22rem column made the article sidebar
+     4px taller than the same card on the local build. If you ever change the
+     input size, change it in styles.css and mirror it here. */
+  font-size: var(--fs-sm);
   text-transform: none;
   letter-spacing: normal;
 }
@@ -261,4 +269,54 @@ body.adf-theme .adf-pagination .page-numbers {
   block-size: 2.75rem;
   padding-inline: .75rem;
   padding-block: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. THE ARTICLE SIDEBAR AND THE FORM'S BOX MODEL.
+
+   Two additions, both the same lesson as section 6: restate the theme's own
+   values so a kit shorthand cannot win by being a shorthand.
+
+   The kit styles bare form controls the same way it styles bare buttons:
+
+       .elementor-kit-8 input:not([type="button"]):not([type="submit"]),
+       .elementor-kit-8 textarea { padding: …; border-radius: …; }
+
+   Section 3 above only restored typography, so a kit that sets padding or a
+   border-radius on inputs would still reach every field in the global form —
+   including the six in the article sidebar, where a few extra pixels of inset
+   per field is the difference between the card fitting the column and not.
+
+   .side-form and .article-aside are theme-only classes, so nothing here can
+   touch an Elementor widget.
+   -------------------------------------------------------------------------- */
+
+body.adf-theme .side-form,
+body.adf-theme .article-aside,
+body.adf-theme .article-main {
+  font-family: var(--font-body);
+}
+
+body.adf-theme .form .input,
+body.adf-theme .form .select,
+body.adf-theme .form .textarea,
+body.adf-theme .search-form .input {
+  min-block-size: 54px;
+  padding: .9rem 1.1rem;
+  border-radius: var(--r-xs);
+  border-width: 1px;
+  box-sizing: border-box;
+}
+
+/* The textarea is the one control with a height of its own. Full-width forms
+   keep the tall box; the sidebar gets the shorter one from styles.css §28. */
+body.adf-theme .form .textarea { min-block-size: 10rem; }
+body.adf-theme .side-form .form .textarea { min-block-size: 0; block-size: 7rem; }
+
+/* The sidebar card's own label, which is a <p> and so is not reached by the
+   kit's h1–h6 rules — restated anyway, because it reads as a heading. */
+body.adf-theme .side-form__title {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: .14em;
 }

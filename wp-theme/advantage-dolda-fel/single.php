@@ -63,9 +63,22 @@ if ( ! adf_do_elementor_location( 'single' ) ) :
 
       <h1 class="h1" id="page-title"><?php the_title(); ?></h1>
 
+      <?php
+      // The standfirst under the headline, as on the local design.
+      //
+      // has_excerpt(), not get_the_excerpt(): the latter auto-generates from the
+      // body when no excerpt is set, which would print the article's own opening
+      // paragraph twice. Posts with a hand-written excerpt get a standfirst;
+      // posts without one simply go straight from headline to meta, which is what
+      // the 80+ existing articles will do until someone writes excerpts for them.
+      if ( has_excerpt() ) :
+        ?>
+        <p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>
+      <?php endif; ?>
+
       <div class="article-meta article-meta--inverse u-mt-6">
-        <span><?php echo esc_html( get_the_author() ); ?></span>
         <time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+        <span aria-hidden="true">·</span>
         <span>
           <?php
           printf(
@@ -75,6 +88,8 @@ if ( ! adf_do_elementor_location( 'single' ) ) :
           );
           ?>
         </span>
+        <span aria-hidden="true">·</span>
+        <span><?php echo esc_html( get_the_author() ); ?></span>
       </div>
     </div>
   </section>
@@ -114,11 +129,42 @@ if ( ! adf_do_elementor_location( 'single' ) ) :
           <?php get_template_part( 'template-parts/author', 'card' ); ?>
         </div>
 
-        <?php if ( $adf_has_side ) : ?>
-          <aside class="article-aside">
+        <?php
+        // The sticky sidebar. It renders ALWAYS, which is the fix for the single
+        // post looking nothing like the local design.
+        //
+        // It used to be wrapped in is_active_sidebar( 'adf-blog' ), so on a fresh
+        // install — where no widgets have been added — the whole column was
+        // omitted. .article-layout is a two-column grid above 1040px, so with the
+        // aside gone it collapsed to one column and the prose ran the full width
+        // of the container. That is a very visible difference from local, and it
+        // also meant articles were the only pages on the site with no enquiry
+        // form above the fold.
+        //
+        // Widgets, if any are added later, stack above the form rather than
+        // replacing it.
+        ?>
+        <aside class="article-aside" aria-labelledby="adf-side-form-title">
+          <?php if ( $adf_has_side ) : ?>
             <?php dynamic_sidebar( 'adf-blog' ); ?>
-          </aside>
-        <?php endif; ?>
+          <?php endif; ?>
+
+          <div class="side-form">
+            <p class="side-form__title" id="adf-side-form-title">
+              <?php esc_html_e( 'Kontakta oss för rådgivning', 'advantage-dolda-fel' ); ?>
+            </p>
+            <?php
+            // THE global form component — the same file, and now the same field
+            // set, as the Kontakta oss page. The narrow column is handled in CSS
+            // (styles.css section 28), not by dropping fields here.
+            get_template_part(
+              'template-parts/form',
+              'contact',
+              array( 'source' => 'artikel-sidebar' )
+            );
+            ?>
+          </div>
+        </aside>
       </div>
     </div>
   </section>

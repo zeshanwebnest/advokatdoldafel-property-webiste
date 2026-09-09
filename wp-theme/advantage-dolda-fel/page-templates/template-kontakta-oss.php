@@ -99,16 +99,12 @@ get_header();
 
       <div class="form-card" data-reveal data-reveal-delay="80">
         <?php
-        // THE global form component, in its "full" variant — the live contact
-        // page carries one extra field, "Din motpart", that the closing band on
-        // the practice pages does not.
+        // THE global form component. This page is where its field set comes
+        // from, and every other place on the site now renders the same one.
         get_template_part(
           'template-parts/form',
           'contact',
-          array(
-            'variant' => 'full',
-            'source'  => 'kontakta-oss',
-          )
+          array( 'source' => 'kontakta-oss' )
         );
         ?>
       </div>

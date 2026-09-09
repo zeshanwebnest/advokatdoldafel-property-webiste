@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADF_VERSION', '1.4.0' );
+define( 'ADF_VERSION', '1.5.0' );
 define( 'ADF_DIR', get_template_directory() );
 define( 'ADF_URI', get_template_directory_uri() );
 
